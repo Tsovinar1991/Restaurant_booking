@@ -42,7 +42,7 @@ Route::delete('seat/{id}', 'SeatController@delete');
 
 
 
-Route::get('restaurant_image', 'RestaurantImageController@index');
+Route::get('restaurant_image/{offset}/{limit}', 'RestaurantImageController@index');
 Route::get('restaurant_image/{id}', 'RestaurantImageController@show');
 Route::post('restaurant_image', 'RestaurantImageController@store');
 Route::put('restaurant_image/{id}', 'RestaurantImageController@update');
