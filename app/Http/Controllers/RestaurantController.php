@@ -187,7 +187,7 @@ class RestaurantController extends Controller
             'name' => 'required',
             'type' => 'required',
             'description' => 'required',
-            'avatar' => 'required|mimes:jpeg,jpg,png,gif|max:10000',
+            'avatar' => 'required',
             'address' => 'required',
             'tel' => 'required|numeric',
             'email' => 'required|email'
@@ -244,7 +244,7 @@ class RestaurantController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $restaurant = Restaurant::find($id);
         if ($restaurant == null) {

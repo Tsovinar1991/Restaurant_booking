@@ -64,5 +64,28 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        for ($i = 0; $i < 80; $i++) {
+            DB::table('menu_categories')->insert([
+                'name' => str_random(10),
+            ]);
+        }
+
+        for ($i = 0; $i < 80; $i++) {
+            DB::table('menu_items')->insert([
+                'name' => str_random(10),
+                'description' => str_random(20),
+                'avatar' => str_random(10) . '.jpg',
+                'category_id' => rand(0, 70),
+                'restaurant_id' => rand(0, 310),
+                'price' => rand(20, 1000),
+            ]);
+        }
+
+
+
+
     }
+
+
+
 }
