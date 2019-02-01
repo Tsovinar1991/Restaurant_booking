@@ -57,9 +57,3 @@ Route::put('city/{id}', 'CityController@update');
 Route::delete('city/{id}', 'CityController@delete');
 
 
-//Route::prefix('admin')->group(function () {
-//
-//Route::post('menu_item', 'MenuItemController@store');
-//Route::delete('menu_item/{id}', 'MenuItemController@delete');
-//
-//});
