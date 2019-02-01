@@ -22,7 +22,7 @@ class CreateRestaurantMenusTable extends Migration
             $table->integer('restaurant_id')->unsigned();
             $table->integer('price');
             $table->string('weight');
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(1);//if exist
 
 
             $table->timestamps();
