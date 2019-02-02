@@ -18,7 +18,7 @@ class CreateRestaurantsTable extends Migration
             $table->integer('city_id')->unsigned();;
             $table->string('name');
             $table->string('type');
-            $table->string('description');
+            $table->longText('description');
             $table->string('avatar');
             $table->string('address');
             $table->string('tel');

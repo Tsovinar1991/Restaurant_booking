@@ -16,7 +16,7 @@ class CreateRestaurantMenusTable extends Migration
         Schema::create('restaurant_menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->string('avatar');
             $table->integer('parent_id')->default(0)->nullable();
             $table->integer('restaurant_id')->unsigned();

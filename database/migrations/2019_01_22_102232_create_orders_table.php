@@ -22,6 +22,8 @@ class CreateOrdersTable extends Migration
             $table->dateTime("start");
             $table->dateTime("end");
             $table->string('message');
+            $table->string('name');
+            $table->string('telephone');
             $table->integer('status')->default(0);
             $table->timestamps();
             $table->foreign('restaurant_id')->references('id')->on('restaurants');

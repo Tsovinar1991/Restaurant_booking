@@ -19,9 +19,9 @@ class CreateAboutsTable extends Migration
             $table->string('name_ru');
             $table->string('name_am');
             $table->string('name_en');
-            $table->string('description_ru');
-            $table->string('description_am');
-            $table->string('description_en');
+            $table->longText('description_ru');
+            $table->longText('description_am');
+            $table->longtext('description_en');
 
 
             $table->timestamps();
