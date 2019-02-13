@@ -16,15 +16,17 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('restaurant_id')->unsigned();;
-            $table->integer('seat_id')->unsigned();;
+            $table->integer('restaurant_id')->unsigned();
+            $table->integer('seat_id')->nullable()->default(1)->unsigned();
             $table->integer('guest_count');
             $table->dateTime("start");
-            $table->dateTime("end");
+            $table->dateTime("end")->nullable();
             $table->string('message');
             $table->string('name');
             $table->string('telephone');
-            $table->integer('status')->default(0);
+            $table->integer('payment_type')->default(0)->nullable();
+            $table->integer('payment_status')->default(0)->nullable();
+            $table->string('status')->default(0)->nullable();
             $table->timestamps();
             $table->foreign('restaurant_id')->references('id')->on('restaurants');
             $table->foreign('seat_id')->references('id')->on('seats');

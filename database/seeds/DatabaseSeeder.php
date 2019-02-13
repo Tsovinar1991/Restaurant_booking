@@ -44,6 +44,8 @@ class DatabaseSeeder extends Seeder
 //                'start' => date("Y-m-d H:i:s"),
 //                'end' => date("Y-m-d H:i:s"),
 //                'message' => str_random(30),
+//                'name' => str_random(10),
+//                'tel' => "077 23 60 84",
 //                'status' => 0
 //
 //            ]);

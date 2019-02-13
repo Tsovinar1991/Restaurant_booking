@@ -14,24 +14,39 @@ class SeatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($offset, $limit)
+    public function index(Request $request)
     {
-        $seats = Seat::skip($offset)->take($limit)->get();
-        if ($seats->isEmpty()) {
-            $not_exist = collect(['Seat' => ['Seat table data not exist.']]);
+        if (isset($request->offset) and isset($request->limit)) {
+
+
+            $seats = Seat::skip($request->input('offset'))->take($request->input('limit'))->get();
+            if ($seats->isEmpty()) {
+                $not_exist = collect(['Seat' => ['Seat table data not exist.']]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error',
+                    'data' => null,
+                    'errors' => $not_exist
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Seat table all data.',
+                'data' => $seats,
+                'errors' => false
+            ]);
+
+        } else {
+
+            $not_specified = collect(['Seat' => ['Order is not specified.']]);
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
                 'data' => null,
-                'errors' =>  $not_exist
+                'errors' => $not_specified
             ]);
         }
-        return response()->json([
-            'success' => true,
-            'message' => 'Seat table all data.',
-            'data' => $seats,
-            'errors' => false
-        ]);
     }
 
     /**
@@ -71,15 +86,14 @@ class SeatController extends Controller
         }
 
         $seat = Seat::create($request->all());
-        if($seat) {
+        if ($seat) {
             return response()->json([
                 'success' => true,
                 'message' => 'Created a new seat.',
                 'data' => $seat,
                 'errors' => false
             ]);
-        }
-        else{
+        } else {
             $not_created = collect(['Seat' => ['Seat is not created.']]);
             return response()->json([
                 'success' => false,

@@ -22,4 +22,9 @@ Route::get('/', function(){
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::get('/menu_orders', 'VoyagerOrderController@orders')->middleware('admin.user');
+    Route::get('/getNewOrders', 'VoyagerOrderController@getNewOrders');
+    Route::post('/setStatus', 'VoyagerOrderController@setStatus');
+    Route::get('/test', 'VoyagerOrderController@test');
+
 });
