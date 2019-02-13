@@ -13,14 +13,34 @@
             /*background-color: #0081C9;*/
         }
 
+        .mytable{border-collapse:collapse;}
         .mytable .order_show { cursor: pointer; }
+        .mytable thead{
+            padding:4px !important;
+        }
 
         .ordered_products thead th, .ordered_products tbody td { text-align: center; }
 
-        th { font-weight: bold !important; }
+        /*th { font-weight: bold !important; }*/
+
+
         .important th {
-            background-color: #5f6e6f !important;
-            color:white!important;
+
+         background-color: #d9d9d9 !important;
+            font-weight: bold !important;
+            color: #224143!important;
+
+        }
+
+
+        .important:first-child th:first-child { border-top-left-radius: 10px !important; }
+        .important:first-child th:last-child { border-top-right-radius: 10px !important; }
+
+        .important th{
+            padding-top:10px !important;
+            padding-bottom:10px !important;
+            padding-right:10px !important;
+
         }
 
         .ordered_products{ display:none; }
@@ -30,12 +50,39 @@
 
         .ordered_products thead th {
             padding: 10px;
-            border-bottom:2px dashed #587086;
+            border-bottom:2px solid #587086;
         }
 
         .ordered_products tbody td {
             padding: 10px;
         }
+
+         td{
+            color:#3e5164;
+        }
+
+        select option  {
+            background: rgba(0, 0, 0, 0.3) !important;
+            color: #fff !important;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4) !important;
+        }
+
+        select option[value="in progress"] {
+            background: 	#008080 !important;
+        }
+
+        select option[value="canceled"] {
+            background: 	#FF6347 !important;
+        }
+
+
+
+
+
+
+
+
+
 
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -49,7 +96,7 @@
     <h1 class="page-title">DELIVERY ORDER MANAGEMENT</h1>
     <h4>New Orders</h4>
     <div>
-        <table class="table table-condensed  table-hover mytable" style="border-collapse:collapse;">
+        <table class="table  mytable">
             <thead>
             <tr class="important">
                 <th></th>
@@ -67,7 +114,7 @@
         </table>
     </div>
 
-    <h4>Old Orders</h4>
+    <h4>Update Orders</h4>
     @if(isset($order))
         <table class="table table-hover  no-footer">
             <thead>
@@ -78,7 +125,7 @@
                 <th>ADDRESS</th>
                 <th>TOTAL</th>
                 <th>CREATED AT</th>
-                <th>STATUS</th>
+                <th>CHANGE STATUS</th>
             </tr>
             </thead>
             <tbody>
@@ -90,13 +137,14 @@
                     <td>{{$o->address}}</td>
                     <td>{{$o->total}}</td>
                     <td>{{$o->created_at}}</td>
-                    @if($o->status === "in progress")
-                        <td style="background-color: #69a0b7; color:white; text-align:center">{{$o->status}}</td>
-                    @elseif($o->status === "canceled")
-                        <td style="background-color: #f19c9c; color:white; text-align:center">{{$o->status}}</td>
-                    @else
-                        <td style="background-color: #67c18f; color:white; text-align:center">{{$o->status}}</td>
-                    @endif
+                    <td>
+                        <select class='form-control change_status' id ="{{$o->id}}" >
+                            <option selected="true" disabled="disabled">Change Status</option>
+                            <option value="in progress"{{$o->status =="in progress"?"selected":""}}>in progress</option>
+                            <option value="canceled" {{$o->status=="canceled"?"selected":""}}>canceled</option>
+                            <option value="confirmed" {{$o->status=="confirmed"?"selected":""}}>confirmed</option>
+                        </select>
+                    <td>
                 </tr>
             @endforeach
             </tbody>
@@ -153,8 +201,8 @@
                                 <td>
                                     <select class='form-control choose_status'  id="${row.order_info.id}">
                                     <option selected="true" disabled="disabled">Choose Status</option>
-                                    <option>in progress</option>
-                                    <option>canceled</option>
+                                    <option value="in progress">in progress</option>
+                                    <option value="canceled">canceled</option>
                                     </select>
                                 <td>
                             </tr>
@@ -260,14 +308,18 @@
                         id: id
                     },
                     success: function (resp) {
-                        alert(resp);
+                        // alert(resp);
 
                         if (selected === "in progress") {
-                            option.css("border-color", "#69a0b7");
+                            option.css("border", "2px solid #008080");
+
+                        }
+                        else if(selected === "confirmed"){
+                            option.css("border", "2px solid #009360 ");
 
                         }
                         else {
-                            option.css("border-color", "#f19c9c");
+                            option.css("border", "2px solid #FF6347 ");
 
                         }
                         // option.parent().parent().remove();
@@ -275,6 +327,46 @@
                     }
                 })
             });
+
+
+            $(document).on('change', '.change_status', function () {
+               // alert('test');
+                let selected = $(this).val();
+                let id = $(this).attr('id');
+                console.log(selected, id);
+                var option = $(this);
+
+                $.ajax({
+                    url: "{{ url('admin/setStatus') }}",
+                    type: 'post',
+                    data: {
+                        status: selected,
+                        id: id
+                    },
+                    success: function (resp) {
+                        // alert(resp);
+
+                        if (selected === "in progress") {
+                            option.css("border", "2px solid #008080");
+
+                        }
+                        else if(selected === "confirmed"){
+                            option.css("border", "2px solid #009360 ");
+
+                        }
+                        else {
+                            option.css("border", "2px solid #FF6347 ");
+
+                        }
+                        // option.parent().parent().remove();
+
+                    }
+                })
+
+
+
+            });
+
 
 
 

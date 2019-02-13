@@ -36,6 +36,7 @@ class OrderController extends Controller
                 'data' => $orders,
                 'errors' => false
             ]);
+
         } else {
             $not_specified = collect(['Restaurant' => ['Order  offset and limit are not specified.']]);
             return response()->json([
@@ -48,24 +49,6 @@ class OrderController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-        $restaurants = Restaurant::get()->all();
-        return response()->json([
-            'success' => true,
-            'message' => 'Restaurant table all data.',
-            'data' => $restaurants,
-            'errors' => false
-        ]);
-
-
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -81,7 +64,8 @@ class OrderController extends Controller
             'phone' => 'required',
             'name' => 'required',
             'guest_count' => 'required|numeric',
-            'start' => 'required',
+            'date' => 'required|date_format:"Y-m-d"',
+            'start' => 'required|date_format:"H:i"',
             'message' => 'required|max:255'
         ]);
 
@@ -94,9 +78,70 @@ class OrderController extends Controller
             ], 400);
         }
 
+        $check = explode("-", $request->date);
 
-        $request->date .= " " . $request->start;
-        $request->start = $request->date;
+        if ($check[0] < date("Y")) {
+            $not_correct = collect(['Order' => ['Year must not be less than current year.']]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'data' => null,
+                'errors' => $not_correct
+            ]);
+        }
+
+
+
+
+        if ($this->isWeekend($request->date)) {
+            $not_correct = collect(['Order' => ['Restaurants is not working on weekends.']]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'data' => null,
+                'errors' => $not_correct
+            ]);
+        }
+
+
+        //Checking if order start is later than restaurant open time
+        $restaurant = Restaurant::find($request->restaurant_id);
+        $open_hour = explode(":", $restaurant->open_hour);
+        $close_hour = explode(":",$restaurant->close_hour);
+        $start_reservation = explode(":", $request->start);
+        $end_reservation = explode(":", $request->end);
+
+
+
+        if($start_reservation[0] < $open_hour[0] || $start_reservation[0] >=  $close_hour[0]-1 ){
+            $not_correct = collect(['Order' => ['Restaurants is closed after 23:00 and is open from 9:00 .']]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'data' => null,
+                'errors' => $not_correct
+            ]);
+        }
+
+        if($end_reservation[0] >= $close_hour[0]  ||  $end_reservation[0] < $open_hour[0] + 1){
+            $not_correct = collect(['Order' => ['Restaurants is closed after 23:00 and is open from 9:00 .']]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'data' => null,
+                'errors' => $not_correct
+            ]);
+        }
+
+
+
+
+        $start = $request->date . " " . $request->start;
+        $request->start = $start;
+        $end = $request->date . " " . $request->end;
+        $request->end = $end;
+
+
 
 
         $order = Order::create([
@@ -106,10 +151,12 @@ class OrderController extends Controller
             'name' => $request->name,
             'guest_count' => $request->guest_count,
             'start' => $request->start,
+            'end' => $request->end,
             'message' => $request->message
 
 
         ]);
+
         return response()->json([
             'success' => true,
             'message' => 'Created a new order.',
@@ -190,7 +237,8 @@ class OrderController extends Controller
             'phone' => 'required',
             'name' => 'required',
             'guest_count' => 'required|numeric',
-            'start' => 'required',
+            'date' => 'required|date_format:"Y-m-d"',
+            'start' => 'required|date_format:"H:i"',
             'message' => 'required|max:255'
         ]);
 
@@ -205,8 +253,65 @@ class OrderController extends Controller
 
 
         try {
-            $request->date .= " " . $request->start;
-            $request->start = $request->date;
+
+
+            $check = explode("-", $request->date);
+            if ($check[0] < date("Y")) {
+                $not_correct = collect(['Order' => ['Year must not be less than current year.']]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error',
+                    'data' => null,
+                    'errors' => $not_correct
+                ]);
+            }
+
+
+            if ($this->isWeekend($request->date)) {
+                $not_correct = collect(['Order' => ['Restaurants is not working on weekends.']]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error',
+                    'data' => null,
+                    'errors' => $not_correct
+                ]);
+            }
+
+
+            //Checking if order start is later than restaurant open time
+            $restaurant = Restaurant::find($request->restaurant_id);
+            $open_hour = explode(":", $restaurant->open_hour);
+            $close_hour = explode(":",$restaurant->close_hour);
+            $start_reservation = explode(":", $request->start);
+            $end_reservation = explode(":", $request->end);
+
+
+            if($start_reservation[0] < $open_hour[0] || $start_reservation[0] >=  $close_hour[0]-1 ){
+                $not_correct = collect(['Order' => ['Restaurants is closed after 23:00 and is open from 9:00 .']]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error',
+                    'data' => null,
+                    'errors' => $not_correct
+                ]);
+            }
+
+            if($end_reservation[0] >= $close_hour[0]  ||  $end_reservation[0] < $open_hour[0] + 1){
+                $not_correct = collect(['Order' => ['Restaurants is closed after 23:00 and is open from 9:00 .']]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error',
+                    'data' => null,
+                    'errors' => $not_correct
+                ]);
+            }
+
+
+
+            $start = $request->date . " " . $request->start;
+            $request->start = $start;
+            $end = $request->date . " " . $request->end;
+            $request->end = $end;
 
             $order->update([
                 'restaurant_id' => $request->restaurant_id,
@@ -214,6 +319,7 @@ class OrderController extends Controller
                 'name' => $request->name,
                 'guest_count' => $request->guest_count,
                 'start' => $request->start,
+                'end' => $request->end,
                 'message' => $request->message
 
             ]);

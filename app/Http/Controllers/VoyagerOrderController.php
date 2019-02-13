@@ -15,7 +15,7 @@ class VoyagerOrderController extends VoyagerBaseController
     public function orders()
     {
 
-        $order = OrderInfo::whereStatus('old')->Orwhere('status', 'in progress')->Orwhere('status', 'canceled')->orderBy('id', 'DESC')->paginate(6);
+        $order = OrderInfo::whereStatus('confirmed')->Orwhere('status', 'in progress')->Orwhere('status', 'canceled')->orderBy('id', 'DESC')->paginate(6);
         //return view("voyager::voyager.order", compact('order'));
         return view("admin.order", compact('order'));
     }
@@ -85,7 +85,11 @@ class VoyagerOrderController extends VoyagerBaseController
             }
             if ($order->status === "in progress") {
                 return response()->json("Order is in Progress");
-            } else {
+            }
+            elseif($order->status === "confirmed"){
+                return response()->json("Order is Confirmed");
+            }
+            else {
                 return response()->json("Order is Canceled");
             }
         }
@@ -98,7 +102,6 @@ class VoyagerOrderController extends VoyagerBaseController
             ->join('order_menus', 'order_infos.id', '=', 'order_menus.order_info_id')
             ->join('restaurant_menus', 'restaurant_menus.id', '=', 'order_menus.menu_id')
             ->where('order_infos.id', '=', '1')
-//            ->where('order_infos.status', '=', 'old')
             ->select('restaurant_menus.*', 'order_infos.*')->get();
         echo("<pre>");
         var_dump($test);
