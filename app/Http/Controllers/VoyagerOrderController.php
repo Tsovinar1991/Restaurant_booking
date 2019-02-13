@@ -17,7 +17,7 @@ class VoyagerOrderController extends VoyagerBaseController
 
         $order = OrderInfo::whereStatus('old')->Orwhere('status', 'in progress')->Orwhere('status', 'canceled')->orderBy('id', 'DESC')->paginate(6);
         //return view("voyager::voyager.order", compact('order'));
-        return view("voyager.order", compact('order'));
+        return view("admin.order", compact('order'));
     }
 
 
