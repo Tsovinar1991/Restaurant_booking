@@ -81,12 +81,13 @@
             background: 	#FF6347 !important;
         }
 
+        select option[value="in progress"] {
+            background: 	#008080 !important;
+        }
 
-
-
-
-
-
+        select option[value="confirmed"] {
+            background: #5ac16f !important;
+        }
 
 
 
@@ -120,7 +121,7 @@
         </table>
     </div>
 
-    <h4>Update Orders</h4>
+    <h4>Other Orders</h4>
     @if(isset($order))
         <table class="table table-hover  no-footer">
             <thead>
@@ -141,7 +142,7 @@
                     <td>{{$o->name}}</td>
                     <td>{{$o->telephone}}</td>
                     <td>{{$o->address}}</td>
-                    <td>{{$o->total}}</td>
+                    <td>{{$o->total}}$</td>
                     <td>{{$o->created_at}}</td>
                     <td>
                         <select class='form-control change_status' id ="{{$o->id}}" >
