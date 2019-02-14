@@ -51,6 +51,8 @@
         .ordered_products thead th {
             padding: 10px;
             border-bottom:2px solid #587086;
+            background-color: #587086 !important;
+            color:white !important;
         }
 
         .ordered_products tbody td {
@@ -61,6 +63,10 @@
             color:#3e5164;
         }
 
+
+         select{
+             border-width: 2px !important;
+         }
         select option  {
             background: rgba(0, 0, 0, 0.3) !important;
             color: #fff !important;

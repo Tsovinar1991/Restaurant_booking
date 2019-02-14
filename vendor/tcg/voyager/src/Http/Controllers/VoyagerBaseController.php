@@ -11,7 +11,6 @@ use TCG\Voyager\Events\BreadDataUpdated;
 use TCG\Voyager\Events\BreadImagesDeleted;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
-use App\RestaurantMenu;
 
 class VoyagerBaseController extends Controller
 {
@@ -185,17 +184,13 @@ class VoyagerBaseController extends Controller
     public function edit(Request $request, $id)
     {
         $slug = $this->getSlug($request);
-        //dd($slug);veradarcnum e tabl-i anun@
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-
-
 
         $dataTypeContent = (strlen($dataType->model_name) != 0)
             ? app($dataType->model_name)->findOrFail($id)
             : DB::table($dataType->name)->where('id', $id)->first(); // If Model doest exist, get data from table name
 
-        //dd($dataTypeContent); Table-i columner@
         foreach ($dataType->editRows as $key => $row) {
             $dataType->editRows[$key]['col_width'] = isset($row->details->width) ? $row->details->width : 100;
         }
@@ -271,8 +266,6 @@ class VoyagerBaseController extends Controller
     {
         $slug = $this->getSlug($request);
 
-
-
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
         // Check permission
@@ -281,7 +274,6 @@ class VoyagerBaseController extends Controller
         $dataTypeContent = (strlen($dataType->model_name) != 0)
                             ? new $dataType->model_name()
                             : false;
-
 
         foreach ($dataType->addRows as $key => $row) {
             $dataType->addRows[$key]['col_width'] = isset($row->details->width) ? $row->details->width : 100;
@@ -297,20 +289,6 @@ class VoyagerBaseController extends Controller
 
         if (view()->exists("voyager::$slug.edit-add")) {
             $view = "voyager::$slug.edit-add";
-        }
-
-
-        if($slug == "restaurant-menus"){
-//            $rules = ['1'=> 'Food', '2'=> 'Drinks', '3'=> 'Cake', '4'=> 'Ice Cream', '5'=>'Alcohol'];
-
-            $info = RestaurantMenu::all()->where('parent_id', 0);
-            $rules = [];
-            foreach($info as $i){
-               array_push($rules, ["$i->id" => "$i->name"] );
-
-            }
-
-            return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'rules'));
         }
 
         return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));

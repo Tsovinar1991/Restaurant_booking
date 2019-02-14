@@ -100,7 +100,6 @@
                     </div>
 
                     <!-- ### CONTENT ### -->
-
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">{{ __('voyager::post.content') }}</h3>
