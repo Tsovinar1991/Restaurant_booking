@@ -16,7 +16,7 @@ class CreateRestaurantImagesTable extends Migration
         Schema::create('restaurant_images', function (Blueprint $table) {
             $table->increments('id');
            //$table->integer('restaurant_id')->unsigned();
-            $table->integer('restaurant_id')->default(0)->nullable();
+            $table->integer('restaurant_id')->default(1)->nullable();
             $table->string('title');
             $table->string('name');
             $table->timestamps();
