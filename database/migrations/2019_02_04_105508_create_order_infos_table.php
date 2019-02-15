@@ -21,7 +21,8 @@ class CreateOrderInfosTable extends Migration
             $table->integer('total');
             $table->integer('payment_type')->default(0)->nullable();
             $table->integer('payment_status')->default(0)->nullable();
-            $table->string('status')->default('new')->nullable();
+            //$table->string('status')->default('new')->nullable();
+            $table->enum('status', ['new', 'confirmed', 'in progress', 'canceled'])->default('new')->nullable();
             $table->timestamps();
         });
     }
