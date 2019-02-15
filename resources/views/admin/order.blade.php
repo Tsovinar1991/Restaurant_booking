@@ -86,6 +86,9 @@
             border-right: 6px solid #587086 !important;
         }
 
+
+
+
         #new,
         .heading,
         .noOrders {
@@ -138,7 +141,7 @@
 
     <h3>DELIVERY ORDER MANAGEMENT</h3>
     <h4 class="heading">New orders</h4>
-    <h4 class="noOrders">There were no new orders</h4>
+    <h4 class="noOrders">There are no new orders</h4>
     <div id="new">
         <table class="table  mytable">
             <thead>
@@ -161,7 +164,7 @@
         <button type="button" class="btn btn-info access">Access To Other Orders</button>
     </div>
     <div id="old" style="display:none;">
-        <h4>Other Orders</h4>
+        <h4 class="heading_old">Other Orders</h4>
         @if(isset($order))
             <table class="table table-hover  no-footer">
                 <thead>
@@ -176,7 +179,7 @@
                     <th>CHANGE STATUS</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="old_cont">
                 @foreach($order as $o)
                     {{--order part--}}
                     <tr data-id={{$o->id}}>
@@ -479,22 +482,21 @@
                 $(`#product-info-${id}`).fadeToggle(200);
             });
 
-            $(document).on('click', ".order-other-show", function () {
-                let id = $(this).parent().attr('data-id');
-                $(`#product-other-info-${id}`).fadeToggle(200);
-            });
-
-            $(document).on('click', ".access", function () {
-                $("#old").fadeToggle(200);
-            });
 
 
+                $(document).on('click', ".order-other-show", function () {
+                    let id = $(this).parent().attr('data-id');
+                    $(`#product-other-info-${id}`).fadeToggle(200);
+                });
 
-
-            $(document).on('click', ".pagination", function () {
-                var url= window.location.href;
-                console.log(url);
-            });
+            if ($("#old_cont").children().length != 0) {
+                $(document).on('click', ".access", function () {
+                    $("#old").fadeToggle(200);
+                });
+            }
+            else{
+                $(".access").css("background-color", "#587086 ")
+            }
 
 
 
