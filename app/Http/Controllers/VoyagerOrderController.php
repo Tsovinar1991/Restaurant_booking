@@ -12,29 +12,37 @@ use Illuminate\Support\Facades\DB;
 
 class VoyagerOrderController extends VoyagerBaseController
 {
+
+
     public function orders()
     {
-
         $order = OrderInfo::whereStatus('confirmed')->Orwhere('status', 'in progress')->Orwhere('status', 'canceled')->orderBy('id', 'DESC')->paginate(6);
-        //return view("voyager::voyager.order", compact('order'));
-        return view("admin.order", compact('order'));
+
+        foreach ($order as $key => $o) {
+
+            $orderItem = MenuOrder::select('restaurant_menus.*', 'order_menus.count', 'order_menus.total')
+                ->join('restaurant_menus', 'restaurant_menus.id', '=', 'order_menus.menu_id')
+                ->where('order_menus.order_info_id', '=', $o['id'])
+                ->get();
+            $order_list[$o['id']] = $orderItem;
+        }
+
+        return view("admin.order", compact('order', 'order_list'));
+
     }
 
 
     public function getNewOrders(Request $request)
     {
-
         if (isset($request->o)) {
             $order_list = [];
             $orders = OrderInfo::where('status', '=', 'new')->where('id', '>', "$request->o")->get();
-
 
             foreach ($orders as $key => $order) {
                 $orderItem = MenuOrder::select('restaurant_menus.*', 'order_menus.count', 'order_menus.total')
                     ->join('restaurant_menus', 'restaurant_menus.id', '=', 'order_menus.menu_id')
                     ->where('order_menus.order_info_id', '=', $order['id'])
                     ->get();
-
 
                 $order_list[$order['id']] = [
                     'products' => $orderItem,
@@ -43,10 +51,7 @@ class VoyagerOrderController extends VoyagerBaseController
             }
 
             return json_encode($order_list, true);
-//            $order = OrderInfo::all()->where('status', 'new')->where('id', '>', "$request->o");
-//            return response()->json($order);
         }
-
 
         $order_list = [];
         $orders = OrderInfo::where('status', '=', 'new')->get();
@@ -69,9 +74,6 @@ class VoyagerOrderController extends VoyagerBaseController
         return json_encode($order_list, true);
 
 
-
-//        $order = OrderInfo::all()->where('status', 'new');
-//       return response()->json($order);
     }
 
 
@@ -85,11 +87,9 @@ class VoyagerOrderController extends VoyagerBaseController
             }
             if ($order->status === "in progress") {
                 return response()->json("Order is in Progress");
-            }
-            elseif($order->status === "confirmed"){
+            } elseif ($order->status === "confirmed") {
                 return response()->json("Order is Confirmed");
-            }
-            else {
+            } else {
                 return response()->json("Order is Canceled");
             }
         }
@@ -98,12 +98,32 @@ class VoyagerOrderController extends VoyagerBaseController
 
     public function test()
     {
-        $test = DB::table('order_infos')
-            ->join('order_menus', 'order_infos.id', '=', 'order_menus.order_info_id')
-            ->join('restaurant_menus', 'restaurant_menus.id', '=', 'order_menus.menu_id')
-            ->where('order_infos.id', '=', '1')
-            ->select('restaurant_menus.*', 'order_infos.*')->get();
-        echo("<pre>");
-        var_dump($test);
+        $order_list = [];
+        $orders = OrderInfo::whereStatus('confirmed')->Orwhere('status', 'in progress')->Orwhere('status', 'canceled')->orderBy('id', 'DESC')->get();
+
+        foreach ($orders as $key => $order) {
+
+            $orderItem = MenuOrder::select('restaurant_menus.*', 'order_menus.count', 'order_menus.total')
+                ->join('restaurant_menus', 'restaurant_menus.id', '=', 'order_menus.menu_id')
+                ->where('order_menus.order_info_id', '=', $order['id'])
+                ->get();
+
+
+            $order_list[$order['id']] = $orderItem;
+        }
+
+        // return json_encode($order_list, true);
+
+        foreach ($order_list as $key => $products) {
+            foreach ($products as $prod) {
+                echo "<pre>";
+                print_r($key . "   " . $prod['id'] . "<br>");
+            }
+
+//            var_dump($o['products']);
+        }
+        die();
+
+        return json_encode($order_list, true);
     }
 }
