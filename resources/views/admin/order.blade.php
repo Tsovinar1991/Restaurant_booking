@@ -488,6 +488,16 @@
                 $("#old").fadeToggle(200);
             });
 
+
+
+
+            $(document).on('click', ".pagination", function () {
+                var url= window.location.href;
+                console.log(url);
+            });
+           
+
+
         });
 
     </script>
