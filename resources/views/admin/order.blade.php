@@ -31,44 +31,16 @@
             text-align: center;
         }
 
-        /*th { font-weight: bold !important; }*/
-
-        .important th {
-
-            background-color: #d9d9d9 !important;
-            font-weight: bold !important;
-            color: #224143 !important;
-
-        }
-
-        .important:first-child th:first-child {
-            border-top-left-radius: 10px !important;
-        }
-
-        .important:first-child th:last-child {
-            border-top-right-radius: 10px !important;
-        }
-
-        #eye {
-            border-right: 6px solid #587086 !important;
-        }
-
-        .important th {
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
-            padding-right: 10px !important;
-
-        }
-        .access{
-            margin:25px;
-        }
-
         .ordered_products {
             display: none;
         }
 
         .ordered_products table {
             border: 3px solid #587086;
+            margin-left: 10%;
+            background-color: #e8e6e6;
+            padding: 5px;
+            width: 80%;
         }
 
         .ordered_products thead th {
@@ -80,6 +52,53 @@
 
         .ordered_products tbody td {
             padding: 10px;
+        }
+
+        .order_show i {
+            color: greenyellow;
+        }
+
+        .order-other-show i {
+            color: greenyellow;
+        }
+
+        .important th {
+            background-color: #d9d9d9 !important;
+            font-weight: bold !important;
+            color: #224143 !important;
+        }
+
+        .important:first-child th:first-child {
+            border-top-left-radius: 10px !important;
+        }
+
+        .important:first-child th:last-child {
+            border-top-right-radius: 10px !important;
+        }
+
+        .important th {
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+            padding-right: 10px !important;
+        }
+
+        #eye {
+            border-right: 6px solid #587086 !important;
+        }
+
+        #new,
+        .heading,
+        .noOrders {
+            display: none;
+        }
+
+        .access {
+            margin: 25px;
+        }
+
+        .prod {
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         td {
@@ -116,9 +135,11 @@
 
 @section('content')
 
+
     <h3>DELIVERY ORDER MANAGEMENT</h3>
-    <h4>New Orders</h4>
-    <div>
+    <h4 class="heading">New orders</h4>
+    <h4 class="noOrders">There were no new orders</h4>
+    <div id="new">
         <table class="table  mytable">
             <thead>
             <tr class="important">
@@ -136,101 +157,100 @@
             </tbody>
         </table>
     </div>
-    <div><button type="button" class="btn btn-info access">Access To Other Orders</button></div>
+    <div>
+        <button type="button" class="btn btn-info access">Access To Other Orders</button>
+    </div>
     <div id="old" style="display:none;">
-    <h4>Other Orders</h4>
-    @if(isset($order))
-        <table class="table table-hover  no-footer">
-            <thead>
-            <tr class="important">
-                <th></th>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PHONE</th>
-                <th>ADDRESS</th>
-                <th>TOTAL</th>
-                <th>CREATED AT</th>
-                <th>CHANGE STATUS</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($order as $o)
-                <tr data-id={{$o->id}}>
-                    <td class="order-other-show"><i class="fa fa-plus fa-lg" style="color:greenyellow"></i></td>
-                    <td>{{$o->id}}</td>
-                    <td>{{$o->name}}</td>
-                    <td>{{$o->telephone}}</td>
-                    <td>{{$o->address}}</td>
-                    <td>{{$o->total}} AMD</td>
-                    <td>{{$o->created_at}}</td>
-                    <td>
-                        <select class='form-control change_status' id="{{$o->id}}">
-                            <option selected="true" disabled="disabled">Change Status</option>
-                            <option value="in progress"{{$o->status =="in progress"?"selected":""}}>in progress</option>
-                            <option value="canceled" {{$o->status=="canceled"?"selected":""}}>canceled</option>
-                            <option value="confirmed" {{$o->status=="confirmed"?"selected":""}}>confirmed</option>
-                        </select>
-                    <td>
+        <h4>Other Orders</h4>
+        @if(isset($order))
+            <table class="table table-hover  no-footer">
+                <thead>
+                <tr class="important">
+                    <th></th>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>PHONE</th>
+                    <th>ADDRESS</th>
+                    <th>TOTAL</th>
+                    <th>CREATED AT</th>
+                    <th>CHANGE STATUS</th>
                 </tr>
+                </thead>
+                <tbody>
+                @foreach($order as $o)
+                    {{--order part--}}
+                    <tr data-id={{$o->id}}>
+                        <td class="order-other-show"><i class="fa fa-plus fa-lg"></i></td>
+                        <td>{{$o->id}}</td>
+                        <td>{{$o->name}}</td>
+                        <td>{{$o->telephone}}</td>
+                        <td>{{$o->address}}</td>
+                        <td>{{$o->total}} AMD</td>
+                        <td>{{$o->created_at}}</td>
+                        <td>
+                            <select class='form-control change_status' id="{{$o->id}}">
+                                <option selected="true" disabled="disabled">Change Status</option>
+                                <option value="in progress"{{$o->status =="in progress"?"selected":""}}>in progress
+                                </option>
+                                <option value="canceled" {{$o->status=="canceled"?"selected":""}}>canceled</option>
+                                <option value="confirmed" {{$o->status=="confirmed"?"selected":""}}>confirmed</option>
+                            </select>
+                        <td>
+                    </tr>
+                    {{--product part--}}
+                    <tr id='product-other-info-{{$o->id}}' class="ordered_products">
+                        <td colspan="12">
+                            <div>
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>Product Id</th>
+                                        <th>Product Avatar</th>
+                                        <th>Product Name</th>
+                                        <th>Product Price</th>
+                                        <th>Product Count</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                {{--test--}}
+                                    @foreach ($order_list as $key => $products)
+                                        @foreach( $products as $prod)
+                                            @if($o->id === $key)
 
+                                                <tr class="prod">
+                                                    <td>{{$prod['id']}}</td>
+                                                    <td>
+                                                        <div style="margin-top:5px;">
+                                                            <img src="/storage/{{$prod['avatar']}}"
+                                                                 style="width:150px;height:auto;">
+                                                        </div>
+                                                    </td>
+                                                    <td>{{$prod['name']}}</td>
+                                                    <td>{{$prod['price']}} AMD</td>
+                                                    <td>{{$prod['count']}}</td>
+                                                    <td>{{$prod['total']}} AMD</td>
+                                                </tr>
 
-                <tr id='product-other-info-{{$o->id}}' class="ordered_products">
-                    <td colspan="12">
-                        <div>
-                            <table width="80%" style="margin-left:10%; background-color: #e8e6e6;padding:5px;">
-                                <thead>
-                                <tr>
-                                    <th>Product Id</th>
-                                    <th>Product Avatar</th>
-                                    <th>Product Name</th>
-                                    <th>Product Price</th>
-                                    <th>Product Count</th>
-                                    <th>Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                @foreach ($order_list as $key => $products)
-                                    @foreach( $products as $prod)
-                                        @if($o->id === $key)
-
-                                            <tr style="margin-top:10px; margin-bottom:10px;">
-                                                <td>{{$prod['id']}}</td>
-                                                <td>
-                                                    <div style="margin-top:5px;"><img src="/storage/{{$prod['avatar']}}"
-                                                                                      style="width:150px;height:auto;">
-                                                    </div>
-                                                </td>
-                                                <td>{{$prod['name']}}</td>
-                                                <td>{{$prod['price']}} AMD</td>
-                                                <td>{{$prod['count']}}</td>
-                                                <td>{{$prod['total']}} AMD</td>
-                                            </tr>
-
-                                        @endif
+                                            @endif
+                                        @endforeach
                                     @endforeach
-                                @endforeach
 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-
-                {{--test--}}
-            @endforeach
-            </tbody>
-        </table>
+                @endforeach
+                </tbody>
+            </table>
             {{ $order->links() }}
     </div>
 
-        <audio id="pop" preload="auto">
-            <source src="{{asset('audio/sound.wav')}}" type="audio/mpeg">
-        </audio>
-
+    <audio id="pop" preload="auto">
+        <source src="{{asset('audio/sound.wav')}}" type="audio/mpeg">
+    </audio>
     @endif
 @endsection
 
@@ -248,13 +268,12 @@
                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                 },
                 success: (result) => {
-                    console.log(result);
+                    //console.log(result);
 
                     $.each(result, (i, row) => {
-
                         let products = row.products.reduce((acc, product) => {
 
-                            acc += `<tr style="margin-top:10px; margin-bottom:10px;">`;
+                            acc += `<tr class="prod">`;
                             acc += `<td>${product.id}</td>`;
                             acc += `<td> <div style="margin-top:5px;"><img src="/storage/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
                             acc += `<td>${product.name}</td>`;
@@ -268,7 +287,7 @@
 
                         $("#cont").append(
                             `<tr  class="order_info"  data-id="${row.order_info.id}">
-                                <td class="order_show"><i class="fa fa-plus fa-lg" style="color:greenyellow"></i></td>
+                                <td class="order_show"><i class="fa fa-plus fa-lg"></i></td>
                                 <td class="new" >${row.order_info.id}</td>
                                 <td class="">${row.order_info.name}</td>
                                 <td class="">${row.order_info.telephone}</td>
@@ -287,7 +306,7 @@
                             <tr id='product-info-${row.order_info.id}'  class="ordered_products">
                                 <td colspan="12">
                                 <div>
-                                 <table width="80%" style="margin-left:10%; background-color: #e8e6e6;padding:5px;">
+                                 <table>
                                    <thead>
                                        <tr><th>Product Id</th><th>Product Avatar</th><th>Product Name</th><th>Product Price</th><th>Product Count</th><th>Total</th></tr>
                                    </thead>
@@ -299,6 +318,14 @@
                         );
                         $("#pop")[0].play();
                     });
+
+                    if ($("#cont").children().length != 0) {
+                        $('.noOrders').css("display", "none");
+                        $('.heading').css("display", "block");
+                        $("#new").css("display", "block");
+                    } else {
+                        $('.noOrders').css("display", "block");
+                    }
                 }
             });
 
@@ -316,16 +343,12 @@
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                     },
                     success: (result) => {
-                        console.log(result);
-                        // if(result.length > 0){
-                        //     $("#no_order").remove();
-                        // }
+                        //console.log(result);
 
                         $.each(result, (i, row) => {
-
                             let products = row.products.reduce((acc, product) => {
 
-                                acc += `<tr style="margin-top:10px; margin-bottom:10px;">`;
+                                acc += `<tr class="prod">`;
                                 acc += `<td>${product.id}</td>`;
                                 acc += `<td> <div style="margin-top:5px;"><img src="/storage/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
                                 acc += `<td>${product.name}</td>`;
@@ -334,12 +357,13 @@
                                 acc += `<td>${product.total} AMD</td>`;
                                 acc += `</tr>`;
                                 return acc;
-                            }, '')
+
+                            }, '');
 
 
                             $("#cont").append(
                                 `<tr  class="order_info"  data-id="${row.order_info.id}">
-                                <td class="order_show"><i class="fa fa-plus fa-lg" style="color:greenyellow"></td>
+                                <td class="order_show"><i class="fa fa-plus fa-lg"></td>
                                 <td class="new" >${row.order_info.id}</td>
                                 <td class="">${row.order_info.name}</td>
                                 <td class="">${row.order_info.telephone}</td>
@@ -358,7 +382,7 @@
                             <tr id='product-info-${row.order_info.id}'  class="ordered_products">
                                 <td colspan="12">
                                 <div>
-                                 <table width="80%" style="margin-left:10%; background-color: #e8e6e6;padding:5px;">
+                                 <table>
                                    <thead>
                                        <tr><th>Product Id</th><th>Product Avatar</th><th>Product Name</th><th>Product Price</th><th>Product Count</th><th>Total</th></tr>
                                    </thead>
@@ -370,6 +394,15 @@
                             );
                             $("#pop")[0].play();
                         });
+
+
+                        if ($("#cont").children().length != 0) {
+                            $('.noOrders').css("display", "none");
+                            $('.heading').css("display", "block");
+                            $("#new").css("display", "block");
+                        } else {
+                            $('.noOrders').css("display", "block");
+                        }
                     }
                 });
             };
@@ -393,15 +426,12 @@
 
                         if (selected === "in progress") {
                             option.css("border", "2px solid #008080");
-
                         }
                         else if (selected === "confirmed") {
                             option.css("border", "2px solid #009360 ");
-
                         }
                         else {
                             option.css("border", "2px solid #FF6347 ");
-
                         }
                         // option.parent().parent().remove();
                     }
@@ -456,14 +486,10 @@
 
             $(document).on('click', ".access", function () {
                 $("#old").fadeToggle(200);
-
             });
-
-
 
         });
 
     </script>
-
 
 @endsection
