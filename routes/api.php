@@ -17,7 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::get('restaurant', 'RestaurantController@index');
 Route::get('restaurant/{id}', 'RestaurantController@show');
 Route::post('restaurant', 'RestaurantController@store');
@@ -58,5 +57,11 @@ Route::delete('city/{id}', 'CityController@delete');
 
 
 Route::post('/create_order', 'GetOrdersController@store');
+
+
+
+
+
+
 
 

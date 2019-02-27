@@ -20,7 +20,7 @@ class CreateRestaurantImagesTable extends Migration
             $table->string('title');
             $table->string('name');
             $table->timestamps();
-//            $table->foreign('restaurant_id')->references('id')->on('restaurants');
+//           $table->foreign('restaurant_id')->references('id')->on('restaurants');
             });
 
 

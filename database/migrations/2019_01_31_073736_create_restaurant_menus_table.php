@@ -19,7 +19,7 @@ class CreateRestaurantMenusTable extends Migration
             $table->longText('description');
             $table->string('avatar');
             $table->integer('parent_id')->default(0)->nullable();
-            $table->integer('restaurant_id')->unsigned();
+            $table->integer('restaurant_id')->unsigned()->nullable();
             $table->integer('price');
             $table->string('weight');
             $table->integer('status')->default(1);//if exist
@@ -27,7 +27,8 @@ class CreateRestaurantMenusTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('set null');
+
         });
     }
 

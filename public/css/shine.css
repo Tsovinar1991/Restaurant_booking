@@ -1,0 +1,176 @@
+
+/*custom*/
+
+body {
+    user-select: none;
+}
+
+#wrapper a.nav-link:hover i:before {
+    color: #65a9c3;
+}
+
+#wrapper a.nav-link i:before {
+    color: #167888;
+}
+
+.hidden{display:none;}
+
+
+.message_del{
+    margin-bottom:10px;
+}
+
+.message_cursor{
+    cursor:pointer;
+}
+
+
+.difference{
+    border-bottom:1px solid #bbcbb9;
+}
+
+.difference p img{
+    width:300px;
+    height:auto;
+}
+
+.message_icon{
+    color: #2237ff;
+}
+.message_icon:hover{
+    color: #7276ff;
+}
+
+.mytable .order_show {
+    cursor: pointer;
+}
+
+.mytable thead {
+    padding: 4px !important;
+}
+
+
+.ordered_products thead th, .ordered_products tbody td {
+    text-align: center;
+}
+
+.ordered_products {
+    display: none;
+}
+
+.ordered_products table {
+    border: 3px solid #587086;
+    margin-left: 10%;
+    background-color: #e8e6e6;
+    padding: 5px;
+    width: 80%;
+}
+
+.ordered_products thead th {
+    padding: 10px;
+    border-bottom: 2px solid #587086;
+    background-color: #587086 !important;
+    color: white !important;
+}
+
+.ordered_products tbody td {
+    padding: 10px;
+}
+
+.order_show i {
+    color: greenyellow;
+}
+
+.order-other-show i {
+    color: greenyellow;
+}
+
+
+
+
+
+
+
+
+
+.important th {
+    background-color: #d9d9d9 !important;
+    font-weight: bold !important;
+    color: #224143 !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-right: 10px !important;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+.important:first-child th:first-child {
+    border-top-left-radius: 10px !important;
+}
+
+.important:first-child th:last-child {
+    border-top-right-radius: 10px !important;
+}
+
+
+
+#im tr td {
+    padding: 5px 25px;
+}
+
+#im tr td span {
+    margin: 2px;
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+
+}
+
+#im tr td form button {
+    margin: 2px;
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+    padding: 0px;
+}
+
+
+
+.pagination li {
+    padding: 5px 10px !important;
+}
+
+.create {
+    padding-bottom: 20px;
+}
+
+
+
+.access {
+    margin: 25px;
+}
+
+.prod {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+#eye {
+    border-right: 6px solid #587086 !important;
+}
+
+#new,
+.heading,
+.noOrders {
+    display: none;
+}
+
+
+
+
+
+
+
+/*custom*/
