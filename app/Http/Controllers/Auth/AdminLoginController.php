@@ -41,10 +41,9 @@ class AdminLoginController extends Controller
     {
         $contact_id = Session::get('contact_id');
         Auth::guard('admin')->logout();
+        config(['session.lifetime'=> 1*(60 *24 *365)]);
         session()->put('contact_id', $contact_id);
         return redirect('/');
-
-
-
+        
     }
 }
