@@ -156,7 +156,9 @@
             </table>
         </div>
     @else
-        <h5>No Page Data Yet</h5>
+        <div class="alert alert-info col-md-12" role="alert">
+            No page yet.
+        </div>
     @endif
 
 @endsection
