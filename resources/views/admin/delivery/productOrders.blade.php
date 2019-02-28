@@ -31,7 +31,6 @@
         }
 
 
-
     </style>
 @endsection
 
@@ -66,9 +65,11 @@
         <button type="button" class="btn btn-outline-info access">Close/Open Other Orders</button>
     </div>
     {{--<div id="old" style="display:none;">--}}
-    <div id="old">
-        <h5 class="heading_old">Other Orders</h5>
-        @if(isset($order))
+
+    @if(isset($order) && count($order)>0)
+        <div id="old">
+            <h5 class="heading_old">Other Orders</h5>
+
             <table class="no-footer" width="100%">
                 <thead>
                 <tr class="important">
@@ -129,7 +130,7 @@
                                                     <td>{{$prod['id']}}</td>
                                                     <td>
                                                         <div style="margin-top:5px;">
-                                                            <img src="/storage/{{$prod['avatar']}}"
+                                                            <img src="/storage/products{{$prod['avatar']}}"
                                                                  style="width:150px;height:auto;">
                                                         </div>
                                                     </td>
@@ -153,12 +154,14 @@
                 </tbody>
             </table>
             <div>{{$order->links()}}</div>
-    </div>
+        </div>
+        
+    @endif
 
     <audio id="pop" preload="auto">
         <source src="{{asset('audio/sound.mp3')}}" type="audio/mpeg">
     </audio>
-    @endif
+
 
 @endsection
 
@@ -179,7 +182,7 @@
                         let products = row.products.reduce((acc, product) => {
                             acc += `<tr class="prod">`;
                             acc += `<td>${product.id}</td>`;
-                            acc += `<td> <div style="margin-top:5px;"><img src="/storage/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
+                            acc += `<td> <div style="margin-top:5px;"><img src="/storage/products/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
                             acc += `<td>${product.name}</td>`;
                             acc += `<td>${product.price} AMD</td>`;
                             acc += `<td>${product.count}</td>`;
@@ -245,7 +248,7 @@
                             let products = row.products.reduce((acc, product) => {
                                 acc += `<tr class="prod">`;
                                 acc += `<td>${product.id}</td>`;
-                                acc += `<td> <div style="margin-top:5px;"><img src="/storage/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
+                                acc += `<td> <div style="margin-top:5px;"><img src="/storage/products/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
                                 acc += `<td>${product.name}</td>`;
                                 acc += `<td>${product.price} AMD</td>`;
                                 acc += `<td>${product.count}</td>`;
@@ -366,10 +369,9 @@
                 });
             }
             else {
+                // $("#old").hide();
                 $('.access').prop('disabled', true);
                 $(".access").css("cursor", "not-allowed");
-                $("#old").hide();
-
             }
         });
     </script>

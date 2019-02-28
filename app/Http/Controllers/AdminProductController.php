@@ -13,6 +13,9 @@ class AdminProductController extends Controller
     {
         $this->middleware('auth:admin');
 
+        //tests
+//        $this->middleware('role:delivery');  //access to product contrller will be given only to delivery role for example.
+
     }
 
     public function index(Request $request)
@@ -27,6 +30,8 @@ class AdminProductController extends Controller
 //
 //            return redirect(url('admin'))->withErrors(['Unauthorized!']);
 //        }
+
+//        $request->user()->authorizeRoles(['admin', 'manager']); //give access to admin and manager
 
         $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
               return view('admin.product.products', compact('products'));
@@ -55,7 +60,7 @@ class AdminProductController extends Controller
             //Filename to store
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
-            $path = $request->file('avatar')->storeAs('public', $fileNameToStore);
+            $path = $request->file('avatar')->storeAs('public/products', $fileNameToStore);
 
 
         } else {
@@ -134,7 +139,7 @@ class AdminProductController extends Controller
             //Filename to store
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
-            $path = $request->file('avatar')->storeAs('public', $fileNameToStore);
+            $path = $request->file('avatar')->storeAs('public/products', $fileNameToStore);
 
 
         } else {

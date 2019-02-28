@@ -20,62 +20,65 @@
     </form>
 
 
-<!-- Navbar -->
-<ul class="navbar-nav ml-auto ml-md-0">
-    <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
 
-                    {{--<span class="badge badge-danger">9+</span>--}}
+                {{--<span class="badge badge-danger">9+</span>--}}
 
-            {{--<span class="badge badge-danger">9+</span>--}}
-        </a>
-
-
-
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="">Action</a>
-            <a class="dropdown-item" href="#">Another Action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-    </li>
-    <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
+                {{--<span class="badge badge-danger">9+</span>--}}
+            </a>
 
 
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                <a class="dropdown-item" href="">Action</a>
+                <a class="dropdown-item" href="#">Another Action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
 
 
-            <i class="fas fa-envelope fa-fw"></i>
+                <i class="fas fa-envelope fa-fw"></i>
 
-            @if(Session::has('contact_id'))
-                <span class="badge badge-danger">{{count(session()->get('contact_id'))}}</span>
-            @else
-            @endif
+                @if(Session::has('contact_id'))
+                    <span class="badge badge-danger">
+                        @if(count(session()->get('contact_id'))>9)
+                            9+
+                            @else
+                            {{count(session()->get('contact_id'))}}
+                        @endif
+                </span>
+                @else
+                @endif
 
 
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="{{url("/admin/read_message")}}">Read Message</a>
-            {{--<a class="dropdown-item" href="#">Another action</a>--}}
-            {{--<div class="dropdown-divider"></div>--}}
-            {{--<a class="dropdown-item" href="#">Something else here</a>--}}
-        </div>
-    </li>
-    <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-circle fa-fw"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Activity Log</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-        </div>
-    </li>
-</ul>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+                <a class="dropdown-item" href="{{url("/admin/read_message")}}">Read Message</a>
+                {{--<a class="dropdown-item" href="#">Another action</a>--}}
+                {{--<div class="dropdown-divider"></div>--}}
+                {{--<a class="dropdown-item" href="#">Something else here</a>--}}
+            </div>
+        </li>
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle fa-fw"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="#">Activity Log</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            </div>
+        </li>
+    </ul>
 
 </nav>

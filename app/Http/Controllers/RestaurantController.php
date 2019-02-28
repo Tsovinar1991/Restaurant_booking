@@ -35,7 +35,7 @@ class RestaurantController extends Controller
                 'data' => $restaurants,
                 'errors' => false
             ]);
-        }else{
+        } else {
             $not_specified = collect(['Restaurant' => ['Restaurant  offset and limit are not specified.']]);
             return response()->json([
                 'success' => false,
@@ -229,7 +229,16 @@ class RestaurantController extends Controller
 
         try {
             $request->avatar = $fileNameToStore;
-            $restaurant->update($request->all());
+            $restaurant->update([
+                'city_id' => $request->city_id,
+                'name' => $request->name,
+                'type' => $request->type,
+                'description' => $request->description,
+                'address' => $request->address,
+                'tel' => $request->tel,
+                'email' => $request->email,
+                'avatar' => $fileNameToStore
+            ]);
         } catch (\Exception $err) {
             var_dump($err->getMessage());
             die;

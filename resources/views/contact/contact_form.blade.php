@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel 5.4 Cloudways Contact US Form Example</title>
+    <title>Contact Us</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <style>
@@ -43,11 +43,7 @@
         </div>
         {!! Form::close() !!}
     </div>
-    {{--@if(Session::has('contact_id'))--}}
-        {{--<div class="alert alert-danger">--}}
-            {{--{{ Session::get('contact_id')}}--}}
-        {{--</div>--}}
-    {{--@endif--}}
+
 </div>
 </body>
 </html>
