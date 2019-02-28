@@ -102,7 +102,7 @@
                     <tr>
                         <td>{{$p->id}}</td>
                         <td>{{$p->name}}</td>
-                        <td><img src="/storage/{{$p->avatar}}" style="width:100px;height:auto;"></td>
+                        <td><img src="/storage/products/{{$p->avatar}}" style="width:100px;height:auto;"></td>
                         <td>{{$p->price}} AMD</td>
                         <td>{{$p->weight}} gram</td>
                         <td>{{$p->status}}</td>
