@@ -146,7 +146,7 @@
                             <form action="{{url('admin/page/'.$p->id)}}" method="POST">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash-alt"></i> Delete</button>
                             </form>
 
                         </td>
