@@ -25,10 +25,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-//        echo("<pre>");
-//        var_dump(session()->all());
-//        die();
-        $message_count = count(session()->get('contact_id'));
+
         return view('admin.admin');
     }
 
