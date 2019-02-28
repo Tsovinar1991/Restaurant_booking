@@ -12,14 +12,25 @@ class AdminProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+
     }
 
     public function index(Request $request)
     {
 
+//        if ($request->user()->hasRole('admin')) {
+//            {
+//                $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
+//                return view('admin.product.products', compact('products'));
+//            }
+//        } else {
+//
+//            return redirect(url('admin'))->withErrors(['Unauthorized!']);
+//        }
 
         $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
-        return view('admin.product.products', compact('products'));
+              return view('admin.product.products', compact('products'));
+
     }
 
     public function create()
@@ -161,7 +172,7 @@ class AdminProductController extends Controller
 
         ]);
 
-        if(!$request->avatar){
+        if (!$request->avatar) {
             $product->update(['avatar' => $product_image]);
         }
         return redirect(url('admin/insert/products'))->with('success', "Product Updated Successfully");

@@ -34,22 +34,30 @@ class ContactMailController extends Controller
         ]);
         $mail = ContactUS::create($request->all());
 
-        Mail::send('contact.email',
-            array(
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
-                'user_message' => $request->get('message')
-            ), function ($message) {
-                $message->from('tsovinar.nemesida.grigoryan@gmail.com');
-                $message->to('tsovinar.nemesida.grigoryan@gmail.com', 'Admin')->subject('Contact Us');
-            });
+
+        try {
+            Mail::send('contact.email',
+                array(
+                    'name' => $request->get('name'),
+                    'email' => $request->get('email'),
+                    'user_message' => $request->get('message')
+                ), function ($message) {
+                    $message->from('tsovinar.nemesida.grigoryan@gmail.com');
+                    $message->to('tsovinar.nemesida.grigoryan@gmail.com', 'Admin')->subject('Contact Us');
+                });
+
+        }catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
 
 
-           config(['session.lifetime'=> 1*(60 *24 *365)]);
+
         if (!Session::has('contact_id')){
+            config(['session.lifetime'=> 1*(60 *24 *365)]);
         Session::put('contact_id', [$mail->id]);
         return back()->with('success', 'Thanks for contacting us!');
         }else{
+            config(['session.lifetime'=> 1*(60 *24 *365)]);
             Session::push('contact_id', $mail->id);
             return back()->with('success', 'Thanks for contacting us!');
         }

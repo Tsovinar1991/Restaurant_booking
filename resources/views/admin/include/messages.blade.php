@@ -1,19 +1,19 @@
 <div class="container">
 
-    {{--@if(count($errors)>0)--}}
-        {{--@foreach($errors->all() as $error)--}}
-            {{--<div class="alert alert-danger">--}}
-                {{--{{$error}}--}}
-            {{--</div>--}}
-        {{--@endforeach--}}
-    {{--@endif--}}
-
-
     @if(count($errors)>0)
-        <div class="alert alert-danger">
-            <span><i class="far fa-times-circle" style="color:red;"></i></i></span> Invalid fields!
-        </div>
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger">
+                {{$error}}
+            </div>
+        @endforeach
     @endif
+
+
+    {{--@if(count($errors)>0)--}}
+        {{--<div class="alert alert-danger">--}}
+            {{--<span><i class="far fa-times-circle" style="color:red;"></i></span> Invalid fields!--}}
+        {{--</div>--}}
+    {{--@endif--}}
 
 
     @if(session('success'))
@@ -22,10 +22,10 @@
         </div>
     @endif
 
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{session('error')}}
-        </div>
-    @endif
+    {{--@if(session('error'))--}}
+        {{--<div class="alert alert-danger">--}}
+            {{--{{session('error')}}--}}
+        {{--</div>--}}
+    {{--@endif--}}
 
 </div>

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\AdminResetPasswordNotification;
-use App\AdminRoles;
+
 
 class Admin extends Authenticatable
 {
@@ -40,12 +40,11 @@ class Admin extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(AdminRoles::class);
+        return $this
+            ->belongsToMany('App\Role')
+            ->withTimestamps();
     }
 
-
-
-/////////
     public function authorizeRoles($roles)
     {
         if (is_array($roles)) {
@@ -55,12 +54,18 @@ class Admin extends Authenticatable
         return $this->hasRole($roles) ||
             abort(401, 'This action is unauthorized.');
     }
-
+    /**
+     * Check multiple roles
+     * @param array $roles
+     */
     public function hasAnyRole($roles)
     {
         return null !== $this->roles()->whereIn('name', $roles)->first();
     }
-
+    /**
+     * Check one role
+     * @param string $role
+     */
     public function hasRole($role)
     {
         return null !== $this->roles()->where('name', $role)->first();
