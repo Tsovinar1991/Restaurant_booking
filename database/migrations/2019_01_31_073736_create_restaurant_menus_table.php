@@ -16,18 +16,19 @@ class CreateRestaurantMenusTable extends Migration
         Schema::create('restaurant_menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->string('avatar');
             $table->integer('parent_id')->default(0)->nullable();
-            $table->integer('restaurant_id')->unsigned();
+            $table->integer('restaurant_id')->unsigned()->nullable();
             $table->integer('price');
             $table->string('weight');
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(1);//if exist
 
 
             $table->timestamps();
 
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('set null');
+
         });
     }
 

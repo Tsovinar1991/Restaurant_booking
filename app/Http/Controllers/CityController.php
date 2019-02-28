@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\City;
 use Validator;
 
+
 class CityController extends Controller
 {
 
@@ -14,22 +15,34 @@ class CityController extends Controller
      * @param $limit
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index($offset, $limit){
-        $cities = City::skip($offset)->take($limit)->get();
-        if ($cities->isEmpty()) {
+    public function index(Request $request)
+    {
+
+        if (isset($request->offset) and isset($request->limit)) {
+            $cities = City::skip($request->input('offset'))->take($request->input('limit'))->get();
+            if ($cities->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'City table data not exist.',
+                    'data' => $cities,
+                    'errors' => true
+                ]);
+            }
+            return response()->json([
+                'success' => true,
+                'message' => 'City table all data.',
+                'data' => $cities,
+                'errors' => false
+            ]);
+        } else {
+            $not_specified = collect(['City' => ['City is not specified.']]);
             return response()->json([
                 'success' => false,
-                'message' => 'City table data not exist.',
-                'data' => $cities,
-                'errors' => true
+                'message' => 'Error',
+                'data' => null,
+                'errors' => $not_specified
             ]);
         }
-        return response()->json([
-            'success' => true,
-            'message' => 'City table all data.',
-            'data' => $cities,
-            'errors' => false
-        ]);
 
     }
 
@@ -38,7 +51,10 @@ class CityController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id){
+    public function show($id)
+    {
+
+
         $city = City::find($id);
         if ($city == null) {
             return response()->json([
@@ -57,7 +73,8 @@ class CityController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
@@ -86,7 +103,8 @@ class CityController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
         $city = City::find($id);
         if ($city == null) {
@@ -127,7 +145,8 @@ class CityController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete($id){
+    public function delete($id)
+    {
         $city = City::find($id);
         if ($city == null) {
             return response()->json([

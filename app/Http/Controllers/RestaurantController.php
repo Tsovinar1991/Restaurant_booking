@@ -8,8 +8,6 @@ use Validator;
 use Illuminate\Support\Facades\Storage;
 
 
-
-
 class RestaurantController extends Controller
 {
     /**
@@ -17,25 +15,35 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($offset, $limit)
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::skip($offset)->take($limit)->with('images', 'seats')->get();
-        if ($restaurants->isEmpty()) {
+        if (isset($request->offset) and isset($request->limit)) {
+            $restaurants = Restaurant::skip($request->input('offset'))->take($request->input('limit'))->with('images', 'seats')->get();
+            if ($restaurants->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Restaurants table data not exist.',
+                    'data' => null,
+                    'errors' => true
+                ]);
+
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'All restaurant table data.',
+                'data' => $restaurants,
+                'errors' => false
+            ]);
+        }else{
+            $not_specified = collect(['Restaurant' => ['Restaurant  offset and limit are not specified.']]);
             return response()->json([
                 'success' => false,
-                'message' => 'Restaurants table data not exist.',
+                'message' => 'Error',
                 'data' => null,
-                'errors' => true
+                'errors' => $not_specified
             ]);
-
         }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'All restaurant table data.',
-            'data' => $restaurants,
-            'errors' => false
-        ]);
 
     }
 
@@ -73,7 +81,7 @@ class RestaurantController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'city_id'=> 'required',
+            'city_id' => 'required',
             'name' => 'required',
             'type' => 'required',
             'description' => 'required',
@@ -120,15 +128,15 @@ class RestaurantController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show( $id){
+    public function show($id)
+    {
 
 
-       $restaurant = Restaurant::with('images', 'seats')->find($id);
+        $restaurant = Restaurant::with('images', 'seats')->find($id);
 
 //       echo "<pre>";
 //       var_dump($restaurant);
 //       die();
-
 
 
         if ($restaurant == null) {
@@ -145,7 +153,6 @@ class RestaurantController extends Controller
             'data' => $restaurant,
             'errors' => false
         ]);
-
 
 
     }
@@ -183,7 +190,7 @@ class RestaurantController extends Controller
         }
         $validator = Validator::make($request->all(), [
 
-            'city_id'=> 'required',
+            'city_id' => 'required',
             'name' => 'required',
             'type' => 'required',
             'description' => 'required',
@@ -198,9 +205,9 @@ class RestaurantController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' =>'Error',
+                'message' => 'Error',
                 'data' => null,
-                'errors' =>  $validator->errors()
+                'errors' => $validator->errors()
             ]);
         }
 

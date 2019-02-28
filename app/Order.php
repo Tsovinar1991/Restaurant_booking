@@ -10,7 +10,7 @@ class Order extends Model
 {
     protected $table = 'orders';
 
-    protected $fillable = ['restaurant_id', 'seat_id', 'guest_count', 'start', 'end', 'message', 'status'];
+    protected $fillable = ['restaurant_id', 'seat_id', 'name', 'tel', 'guest_count', 'start', 'end', 'message', 'status'];
 
 
     public function restaurant(){

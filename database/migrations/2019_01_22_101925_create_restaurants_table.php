@@ -18,11 +18,13 @@ class CreateRestaurantsTable extends Migration
             $table->integer('city_id')->unsigned();;
             $table->string('name');
             $table->string('type');
-            $table->string('description');
+            $table->longText('description');
             $table->string('avatar');
             $table->string('address');
             $table->string('tel');
             $table->string('email');
+            $table->string('open_hour')->default('09:00')->nullable();
+            $table->string('close_hour')->default('23:00')->nullable();
             $table->timestamps();
 
 
