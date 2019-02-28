@@ -55,7 +55,7 @@ class AdminProductController extends Controller
             //Filename to store
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
-            $path = $request->file('avatar')->storeAs('public', $fileNameToStore);
+            $path = $request->file('avatar')->storeAs('public/products', $fileNameToStore);
 
 
         } else {
@@ -134,7 +134,7 @@ class AdminProductController extends Controller
             //Filename to store
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
-            $path = $request->file('avatar')->storeAs('public', $fileNameToStore);
+            $path = $request->file('avatar')->storeAs('public/products', $fileNameToStore);
 
 
         } else {
