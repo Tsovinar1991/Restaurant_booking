@@ -62,8 +62,6 @@
         }
 
 
-
-
     </style>
 @endsection
 
@@ -114,16 +112,15 @@
                             <a href="{{url('/admin/product/'.$p->id.'/edit')}}"> <span class="btn btn-primary"><i
                                             class="fas fa-pen"></i> Edit</span></a>
 
-                            <form action="{{url('admin/product/'. $p->id)}}" method="POST">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
-                            </form>
 
+                            <form action="{{url('admin/product/'. $p->id)}}" method="POST">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash-alt"></i> Delete</button>
+                            </form>
 
                         </td>
                     </tr>
-
                 @endforeach
 
             </table>

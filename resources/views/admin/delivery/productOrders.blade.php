@@ -367,7 +367,7 @@
             }
             else {
                 $('.access').prop('disabled', true);
-                $(".access").css("background-color", "#587086");
+                $(".access").css("cursor", "not-allowed");
                 $("#old").hide();
 
             }
