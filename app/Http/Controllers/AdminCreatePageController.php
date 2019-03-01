@@ -19,6 +19,9 @@ class AdminCreatePageController extends Controller
     public function index(Request $request, $p)
     {
         $page = Page::where('id', $p)->first();
+       if(!$page){
+           return redirect()->route('admin.error')->withErrors('Page item not found!')->with('status_cod', 404);
+       }
 
         return view('admin.pages.page')->with('page', $page);
     }

@@ -44,12 +44,13 @@ class GetOrdersController extends Controller
         //die();
 
 
-        $total = "";
+        $total = 0;
         $totalItem = [];
         for ($i = 0; $i < count(request('products')); $i++) {
             for ($i = 0; $i < count($products); $i++) {
                 $totalItem[$products[$i]->id] = $products[$i]->price * $request->products[$i]['count'];
                 $total += $products[$i]->price * $request->products[$i]['count'];
+
             }
         }
 
@@ -66,7 +67,7 @@ class GetOrdersController extends Controller
 
         for ($i = 0; $i < count(request('products')); $i++) {
             $counter = $request->products[$i]['menu_id']; //6,7
-            var_dump($totalItem[$counter]);
+//            var_dump($totalItem[$counter]);
             $order_menu = MenuOrder::create([
                 'order_info_id' => $order->id,
                 'menu_id' => $request->products[$i]['menu_id'],
