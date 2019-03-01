@@ -55,6 +55,7 @@ class AdminCreatePageController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
+
         }
 
         $page = Page::create($request->all());
@@ -72,7 +73,11 @@ class AdminCreatePageController extends Controller
     {
         $pages = Page::find($id);
         if (!$pages) {
-            return view('admin.404');
+
+            return redirect()
+                ->route('admin.error')
+                ->withErrors('Page item not found!')
+                ->with('status_cod', 404);
         }
         return view('admin.pages.updatePage')->with('pages', $pages);
 
@@ -83,7 +88,7 @@ class AdminCreatePageController extends Controller
 
         $page = Page::find($id);
         if ($page == null) {
-            return view('admin.404');
+            return redirect()->route('admin.error')->withErrors('Page item not found!')->with('status_cod', 404);
         }
 
         $validator = Validator::make($request->all(), [
