@@ -15,7 +15,7 @@
 
 @section('content')
 
-    <form class="form-horizontal" role="form" method="POST" action="{{ action('AdminProductController@store')}}" enctype="multipart/form-data">
+    <form class="form-horizontal alert alert-dark" role="form" method="POST" action="{{ action('AdminProductController@store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('name_en') ? ' has-error' : '' }}">

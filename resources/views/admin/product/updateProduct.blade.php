@@ -15,7 +15,7 @@
 
 
 
-    <form class="form-horizontal" role="form" method="POST" action="{{url('admin/product/'.$product->id)}}"
+    <form class="form-horizontal alert alert-dark" role="form" method="POST" action="{{url('admin/product/'.$product->id)}}"
           enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PUT">
