@@ -22,7 +22,7 @@ class AdminLoginController extends Controller
     public function login(Request $request)
     {
       // Validate the form data
-      $this->validate($request, [
+      $validator = $this->validate($request, [
         'email'   => 'required|email',
         'password' => 'required|min:6'
       ]);
@@ -30,19 +30,19 @@ class AdminLoginController extends Controller
       // Attempt to log the user in
       if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location
-        return redirect()->intended(route('admin.dashboard'));
+       return redirect()->intended(route('admin.dashboard'));
+
       }
 
       // if unsuccessful, then redirect back to the login with the form data
-      return redirect()->back()->withInput($request->only('email', 'remember'));
+        return redirect()->back()->withErrors($validator)->withInput($request->only('email', 'remember'));
+      //return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors($validator);
     }
 
     public function logout()
     {
-        $contact_id = Session::get('contact_id');
+
         Auth::guard('admin')->logout();
-        config(['session.lifetime'=> 1*(60 *24 *365)]);
-        session()->put('contact_id', $contact_id);
         return redirect('/');
         
     }
