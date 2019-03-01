@@ -8,6 +8,14 @@ use App\Role;
 
 class AdminUserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+        $this->middleware('role:superadmin');
+
+    }
+
     public function registerForm(){
 
         $roles = Role::select('id', 'name')->get();

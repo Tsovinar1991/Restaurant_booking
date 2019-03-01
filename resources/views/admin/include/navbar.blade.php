@@ -47,16 +47,8 @@
 
                 <i class="fas fa-envelope fa-fw"></i>
 
-                @if(Session::has('contact_id'))
-                    <span class="badge badge-danger">
-                        @if(count(session()->get('contact_id'))>9)
-                            9+
-                            @else
-                            {{count(session()->get('contact_id'))}}
-                        @endif
-                </span>
-                @else
-                @endif
+                <span class="badge badge-danger">1</span>
+
 
 
             </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\RestaurantMenu;
 use App\Restaurant;
@@ -105,16 +106,16 @@ class AdminProductController extends Controller
 
     public function edit($id)
     {
+        $product = RestaurantMenu::find($id);
+        if (!$product) {
+            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);;
+        }
         $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name')->get();
-        $product = RestaurantMenu::find($id);
         $restaurant_id = $product->restaurant_id;
         $restaurantName = Restaurant::where('id', $restaurant_id)->get(['name'])->first();
         $r_name = $restaurantName->name;
 
-        if (!$product) {
-            return view('admin.404');
-        }
         return view('admin.product.updateProduct', compact(['product', 'restaurants', 'parents', 'r_name']));
     }
 
@@ -123,11 +124,10 @@ class AdminProductController extends Controller
     {
 
         $product = RestaurantMenu::find($id);
-        $product_image = $product->avatar;
-
         if ($product == null) {
-            return view('admin.404');
+            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);;
         }
+        $product_image = $product->avatar;
 
 
         if ($request->hasFile('avatar')) {
@@ -188,8 +188,9 @@ class AdminProductController extends Controller
     public function delete($id)
     {
         $product = RestaurantMenu::find($id);
+        $file_path = 'public/products/';
+        Storage::delete($file_path . $product->avatar);
         $delete = $product->delete();
-
 
         return redirect(url('admin/insert/products'))->with('success', 'Product Deleted Successfully');
 

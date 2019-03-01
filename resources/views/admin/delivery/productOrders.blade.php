@@ -31,6 +31,7 @@
         }
 
 
+
     </style>
 @endsection
 
@@ -64,11 +65,10 @@
     <div>
         <button type="button" class="btn btn-outline-info access">Close/Open Other Orders</button>
     </div>
-    {{--<div id="old" style="display:none;">--}}
 
     @if(isset($order) && count($order)>0)
-        <div id="old">
-            <h5 class="heading_old">Other Orders</h5>
+    <div id="old">
+        <h5 class="heading_old">Other Orders</h5>
 
             <table class="no-footer" width="100%">
                 <thead>
@@ -130,7 +130,7 @@
                                                     <td>{{$prod['id']}}</td>
                                                     <td>
                                                         <div style="margin-top:5px;">
-                                                            <img src="/storage/products{{$prod['avatar']}}"
+                                                            <img src="/storage/{{$prod['avatar']}}"
                                                                  style="width:150px;height:auto;">
                                                         </div>
                                                     </td>
@@ -154,10 +154,8 @@
                 </tbody>
             </table>
             <div>{{$order->links()}}</div>
-        </div>
-        
+    </div>
     @endif
-
     <audio id="pop" preload="auto">
         <source src="{{asset('audio/sound.mp3')}}" type="audio/mpeg">
     </audio>
@@ -369,9 +367,10 @@
                 });
             }
             else {
-                // $("#old").hide();
                 $('.access').prop('disabled', true);
                 $(".access").css("cursor", "not-allowed");
+                $("#old").hide();
+
             }
         });
     </script>

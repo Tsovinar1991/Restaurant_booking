@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\RestaurantImage;
 use App\Restaurant;
@@ -10,6 +11,15 @@ use App\Restaurant;
 
 class AdminRestaurantImageController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+
+    }
+
+
     public function all()
     {
         $images = RestaurantImage::sortable()->orderBy('id', 'DESC')->paginate(5);
@@ -18,6 +28,7 @@ class AdminRestaurantImageController extends Controller
 
     public function create()
     {
+
         $restaurants = Restaurant::select('id', 'name')->get();
         return view('admin.restaurant_images.imageCreate', compact('restaurants'));
     }
@@ -75,15 +86,18 @@ class AdminRestaurantImageController extends Controller
     public function edit($id)
     {
 
-        $restaurants = Restaurant::select('id', 'name')->get();
+
         $image = RestaurantImage::find($id);
+        if (!$image) {
+            return redirect()->route('admin.error')->withErrors('Restaurant image not found!')->with('status_cod', 404);
+        }
+
+        $restaurants = Restaurant::select('id', 'name')->get();
         $restaurant_id = $image->restaurant_id;
         $restaurantName = Restaurant::where('id', $restaurant_id)->get(['name'])->first();
         $r_name = $restaurantName->name;
 
-        if (!$image) {
-            return view('admin.404');
-        }
+
         return view('admin.restaurant_images.updateImage', compact(['image', 'r_name', 'restaurants']));
 
 
@@ -93,6 +107,11 @@ class AdminRestaurantImageController extends Controller
     public function update(Request $request, $id)
     {
         $image = RestaurantImage::find($id);
+
+        if (!$image) {
+            return redirect()->route('admin.error')->withErrors('Restaurant image not found!')->with('status_cod', 404);;
+        }
+
         $oldImage = $image->name;
 
         if ($request->hasFile('name')) {
@@ -144,6 +163,8 @@ class AdminRestaurantImageController extends Controller
     public function delete($id)
     {
         $image = RestaurantImage::find($id);
+        $file_path = 'public/restaurant_images/';
+        Storage::delete($file_path . $image->name);
         $delete = $image->delete();
 
 

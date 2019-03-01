@@ -5,13 +5,22 @@
 
 @endsection
 
-@section('page', '404 Error')
+@section('page', 'Error')
 
 @section('content')
 
 
         <!-- Page Content -->
-        <h1 class="display-1">404</h1>
+        <h1 class="display-1">
+            @if(session('status_cod'))
+               {{ session('status_cod')}}
+                @else
+                Error
+            @endif
+
+
+
+        </h1>
         <p class="lead">Page not found. You can
             <a href="javascript:history.back()">go back</a>
             to the previous page, or

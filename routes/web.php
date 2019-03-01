@@ -72,6 +72,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/register_user', 'AdminUserController@registerForm');
 
 
+    Route::get('/error', function(){
+        return view('admin.error');
+    })->name('admin.error');
 
 
     // Password reset routes
