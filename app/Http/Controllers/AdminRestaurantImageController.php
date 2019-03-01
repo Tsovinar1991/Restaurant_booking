@@ -10,6 +10,15 @@ use App\Restaurant;
 
 class AdminRestaurantImageController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+
+    }
+
+
     public function all()
     {
         $images = RestaurantImage::sortable()->orderBy('id', 'DESC')->paginate(5);
@@ -18,6 +27,7 @@ class AdminRestaurantImageController extends Controller
 
     public function create()
     {
+
         $restaurants = Restaurant::select('id', 'name')->get();
         return view('admin.restaurant_images.imageCreate', compact('restaurants'));
     }
