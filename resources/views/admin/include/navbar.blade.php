@@ -50,10 +50,8 @@
 
             <i class="fas fa-envelope fa-fw"></i>
 
-            @if(Session::has('contact_id'))
-                <span class="badge badge-danger">{{count(session()->get('contact_id'))}}</span>
-            @else
-            @endif
+                <span class="badge badge-danger">1</span>
+
 
 
         </a>

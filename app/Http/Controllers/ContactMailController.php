@@ -51,16 +51,16 @@ class ContactMailController extends Controller
         }
 
 
-
-        if (!Session::has('contact_id')){
-            config(['session.lifetime'=> 1*(60 *24 *365)]);
-        Session::put('contact_id', [$mail->id]);
-        return back()->with('success', 'Thanks for contacting us!');
-        }else{
-            config(['session.lifetime'=> 1*(60 *24 *365)]);
-            Session::push('contact_id', $mail->id);
-            return back()->with('success', 'Thanks for contacting us!');
-        }
+//
+//        if (!Session::has('contact_id')){
+//            config(['session.lifetime'=> 1*(60 *24 *365)]);
+//        Session::put('contact_id', [$mail->id]);
+//        return back()->with('success', 'Thanks for contacting us!');
+//        }else{
+//            config(['session.lifetime'=> 1*(60 *24 *365)]);
+//            Session::push('contact_id', $mail->id);
+//            return back()->with('success', 'Thanks for contacting us!');
+//        }
 
 
     }
