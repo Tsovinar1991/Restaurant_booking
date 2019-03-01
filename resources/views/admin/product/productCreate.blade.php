@@ -18,31 +18,86 @@
     <form class="form-horizontal" role="form" method="POST" action="{{ action('AdminProductController@store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name" class="col-md-4 control-label">Name</label>
+        <div class="form-group{{ $errors->has('name_en') ? ' has-error' : '' }}">
+            <label for="name_en" class="col-md-4 control-label">Name En</label>
             <div class="col-md-10">
-                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required
+                <input id="name_en" type="text" class="form-control" name="name_en" value="{{ old('name_en') }}" required
                        autofocus>
-                @if ($errors->has('name'))
+                @if ($errors->has('name_en'))
                     <span class="help-block text-danger">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('name_en') }}</strong>
                                     </span>
                 @endif
             </div>
         </div>
 
-        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-            <label for="description" class="col-md-4 control-label">Description</label>
+        <div class="form-group{{ $errors->has('name_ru') ? ' has-error' : '' }}">
+            <label for="name_ru" class="col-md-4 control-label">Name Ru</label>
             <div class="col-md-10">
-                <input id="description" type="text" class="form-control" name="description"
-                       value="{{ old('description') }}" required autofocus>
-                @if ($errors->has('description'))
+                <input id="name_ru" type="text" class="form-control" name="name_ru" value="{{ old('name_ru') }}" required
+                       autofocus>
+                @if ($errors->has('name_ru'))
                     <span class="help-block text-danger">
-                                        <strong>{{ $errors->first('description') }}</strong>
+                                        <strong>{{ $errors->first('name_ru') }}</strong>
                                     </span>
                 @endif
             </div>
         </div>
+
+        <div class="form-group{{ $errors->has('name_am') ? ' has-error' : '' }}">
+            <label for="name_am" class="col-md-4 control-label">Name Am</label>
+            <div class="col-md-10">
+                <input id="name_am" type="text" class="form-control" name="name_am" value="{{ old('name_am') }}" required
+                       autofocus>
+                @if ($errors->has('name_am'))
+                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('name_am') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+
+
+        <div class="form-group{{ $errors->has('description_en') ? ' has-error' : '' }}">
+            <label for="description_en" class="col-md-4 control-label">Description En</label>
+            <div class="col-md-10">
+                <textarea id="description_en"  class="form-control" name="description_en" required autofocus>{{ old('description_en') }}</textarea>
+                @if ($errors->has('description_en'))
+                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('description_en') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+
+        <div class="form-group{{ $errors->has('description_ru') ? ' has-error' : '' }}">
+            <label for="description_ru" class="col-md-4 control-label">Description Ru</label>
+            <div class="col-md-10">
+                <textarea id="description_ru"  class="form-control" name="description_ru" required autofocus>{{ old('description_ru') }}</textarea>
+                @if ($errors->has('description_ru'))
+                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('description_ru') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+
+        <div class="form-group{{ $errors->has('description_am') ? ' has-error' : '' }}">
+            <label for="description_am" class="col-md-4 control-label">Description Am</label>
+            <div class="col-md-10">
+                <textarea id="description_am"  class="form-control" name="description_am" required autofocus>{{ old('description_am') }}</textarea>
+                @if ($errors->has('description_am'))
+                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('description_am') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+
 
         <div class="form-group">
                 <label for="avatar" class="col-md-4 control-label">Avatar</label>
@@ -63,7 +118,7 @@
                     <option selected="true" value="{{0}}">No Category</option>
 
                     @foreach($parents as $k=> $p)
-                        <option value='{{$p->id}}'>{{$p->name}}</option>
+                        <option value='{{$p->id}}'>{{$p->name_en}}</option>
                     @endforeach
 
                 </select>
@@ -125,8 +180,8 @@
             <label for="status" class="col-md-4 control-label">Status</label>
             <div class="col-md-10">
                 <select name="status" id="status" class="form-control">
-                    <option value="1">1</option>
-                    <option value="0">0</option>
+                    <option value="1">active</option>
+                    <option value="0">passive</option>
                 </select>
                 @if ($errors->has('status'))
                     <span class="help-block text-danger">

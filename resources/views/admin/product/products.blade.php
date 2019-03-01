@@ -101,11 +101,11 @@
                 @foreach($products as $p)
                     <tr>
                         <td>{{$p->id}}</td>
-                        <td>{{$p->name}}</td>
+                        <td>{{$p->name_en}}</td>
                         <td><img src="/storage/products/{{$p->avatar}}" style="width:100px;height:auto;"></td>
                         <td>{{$p->price}} AMD</td>
                         <td>{{$p->weight}} gram</td>
-                        <td>{{$p->status}}</td>
+                        <td>{{$p->status == 0?"passive":"active"}}</td>
                         <td>{{$p->restaurant_id}}</td>
                         <td>{{$p->parent_id}}</td>
                         <td>

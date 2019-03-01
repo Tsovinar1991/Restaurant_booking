@@ -130,11 +130,11 @@
                                                     <td>{{$prod['id']}}</td>
                                                     <td>
                                                         <div style="margin-top:5px;">
-                                                            <img src="/storage/{{$prod['avatar']}}"
+                                                            <img src="/storage/products/{{$prod['avatar']}}"
                                                                  style="width:150px;height:auto;">
                                                         </div>
                                                     </td>
-                                                    <td>{{$prod['name']}}</td>
+                                                    <td>{{$prod['name_en']}}</td>
                                                     <td>{{$prod['price']}} AMD</td>
                                                     <td>{{$prod['count']}}</td>
                                                     <td>{{$prod['total']}} AMD</td>
@@ -181,7 +181,7 @@
                             acc += `<tr class="prod">`;
                             acc += `<td>${product.id}</td>`;
                             acc += `<td> <div style="margin-top:5px;"><img src="/storage/products/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
-                            acc += `<td>${product.name}</td>`;
+                            acc += `<td>${product.name_en}</td>`;
                             acc += `<td>${product.price} AMD</td>`;
                             acc += `<td>${product.count}</td>`;
                             acc += `<td>${product.total} AMD</td>`;
@@ -247,7 +247,7 @@
                                 acc += `<tr class="prod">`;
                                 acc += `<td>${product.id}</td>`;
                                 acc += `<td> <div style="margin-top:5px;"><img src="/storage/products/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
-                                acc += `<td>${product.name}</td>`;
+                                acc += `<td>${product.name_en}</td>`;
                                 acc += `<td>${product.price} AMD</td>`;
                                 acc += `<td>${product.count}</td>`;
                                 acc += `<td>${product.total} AMD</td>`;

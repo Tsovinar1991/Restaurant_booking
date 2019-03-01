@@ -42,7 +42,7 @@ class AdminProductController extends Controller
     public function create()
     {
         $restaurants = Restaurant::select('id', 'name')->get();
-        $parents = RestaurantMenu::select('id', 'name')->get();
+        $parents = RestaurantMenu::select('id', 'name_en')->get();
 //        echo "<pre>";
 //        var_dump($restaurant);
 //        die();
@@ -69,8 +69,12 @@ class AdminProductController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'description' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required',
+            'name_am' => 'required',
+            'description_en' => 'required',
+            'description_ru' => 'required',
+            'description_am' => 'required',
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'parent_id' => 'required|numeric',
             'restaurant_id' => 'required|numeric',
@@ -86,14 +90,19 @@ class AdminProductController extends Controller
 
         $product = RestaurantMenu::create(
             [
-                'name' => request('name'),
-                'description' => request('description'),
+                'name_en' => request('name_en'),
+                'name_ru' => request('name_ru'),
+                'name_am' => request('name_am'),
+                'description_en' => request('description_en'),
+                'description_ru' => request('description_ru'),
+                'description_am' => request('description_am'),
                 'type' => request('type'),
                 'avatar' => $fileNameToStore,
                 'parent_id' => request('parent_id'),
                 'restaurant_id' => request('restaurant_id'),
                 'price' => request('price'),
-                'weight' => request('weight')
+                'weight' => request('weight'),
+                'status' => request('status')
             ]
         );
 
@@ -111,7 +120,7 @@ class AdminProductController extends Controller
             return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);;
         }
         $restaurants = Restaurant::select('id', 'name')->get();
-        $parents = RestaurantMenu::select('id', 'name')->get();
+        $parents = RestaurantMenu::select('id', 'name_en')->get();
         $restaurant_id = $product->restaurant_id;
         $restaurantName = Restaurant::where('id', $restaurant_id)->get(['name'])->first();
         $r_name = $restaurantName->name;
@@ -148,13 +157,18 @@ class AdminProductController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'description' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required',
+            'name_am' => 'required',
+            'description_en' => 'required',
+            'description_ru' => 'required',
+            'description_am' => 'required',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'parent_id' => 'required|numeric',
             'restaurant_id' => 'required|numeric',
             'price' => 'required|numeric',
-            'weight' => 'required'
+            'weight' => 'required',
+
         ]);
 
 
@@ -167,13 +181,18 @@ class AdminProductController extends Controller
 //        var_dump($request->all());
 //        die();
         $product->update([
-            'name' => $request->name,
-            'description' => $request->description,
+            'name_en' => $request->name_en,
+            'name_ru' => $request->name_ru,
+            'name_am' => $request->name_am,
+            'description_en' => $request->description_en,
+            'description_ru' => $request->description_ru,
+            'description_am' => $request->description_am,
             'avatar' => $fileNameToStore,
             'parent_id' => $request->parent_id,
             'restaurant_id' => $request->restaurant_id,
             'price' => $request->price,
-            'weight' => $request->weight
+            'weight' => $request->weight,
+            'status' => $request->status
 
         ]);
 
