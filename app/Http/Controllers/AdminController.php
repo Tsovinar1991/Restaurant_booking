@@ -33,21 +33,16 @@ class AdminController extends Controller
     public function read_message()
     {
 
-        if (session()->has('contact_id')) {
-            $messages = ContactUs::all()->whereIn('id', session()->get('contact_id'));
-//            dd($messages);
-            return view('admin.contact.messages')->with('messages', $messages);
-        } else
-            return view('admin.contact.messages');
+        return view('admin.contact.messages');
 
     }
 
-
-    public function clear_messages()
-    {
-        session()->forget('contact_id');
-        return redirect()->back()->with('success', 'Message list is empty, until new messages appear!');
-    }
+//
+//    public function clear_messages()
+//    {
+//        session()->forget('contact_id');
+//        return redirect()->back()->with('success', 'Message list is empty, until new messages appear!');
+//    }
 
 
 }
