@@ -9,7 +9,8 @@
 @section('content')
 
     <div class="modal-body">
-        <form id="registerForm" method="POST">
+        <form id="registerForm" method="POST" action="{{action('AdminUserController@register')}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <!---form--->
             <div class="form-group">
                 <!---input width--->

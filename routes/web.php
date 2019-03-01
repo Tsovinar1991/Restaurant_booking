@@ -70,8 +70,11 @@ Route::prefix('admin')->group(function () {
 
     //user setting routes
     Route::get('/register_user', 'AdminUserController@registerForm');
+    Route::post('/register_user', 'AdminUserController@register');
 
 
+
+    //error route
     Route::get('/error', function(){
         return view('admin.error');
     })->name('admin.error');

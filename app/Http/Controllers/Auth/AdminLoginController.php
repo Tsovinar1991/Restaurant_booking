@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AdminLoginController extends Controller
 {
+///avelacrac
+    use AuthenticatesUsers;
+
     public function __construct()
     {
       $this->middleware('guest:admin', ['except' => ['logout']]);
