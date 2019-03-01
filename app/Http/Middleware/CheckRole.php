@@ -17,7 +17,9 @@ class CheckRole
     {
 
         if (!$request->user()->hasRole($role)) {
-            abort(401, 'This action is unauthorized.');
+           //abort(401, 'This action is unauthorized.');
+//            return view('admin.404');
+            return redirect()->route('admin.404')->withErrors('Unauthorized action!');
         }
         return $next($request);
     }
