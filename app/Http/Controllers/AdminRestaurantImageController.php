@@ -23,7 +23,9 @@ class AdminRestaurantImageController extends Controller
     public function all()
     {
         $images = RestaurantImage::sortable()->orderBy('id', 'DESC')->paginate(5);
-        return view('admin.restaurant_images.images', compact('images'));
+        $categories = RestaurantImage::distinct()->get(['title']);
+        //dd($categories);
+        return view('admin.restaurant_images.images', compact(['images', 'categories']));
     }
 
     public function create()
@@ -171,6 +173,12 @@ class AdminRestaurantImageController extends Controller
         return redirect(url('admin/insert/images'))->with('success', 'Restaurant Image Deleted Successfully');
 
 
+    }
+
+    public function gallery(Request $request, $category){
+       $images = RestaurantImage::all()->where('title', $category);
+//       dd($images);
+        return view('admin.restaurant_images.gallery', compact(['category', 'images']));
     }
 
 

@@ -50,6 +50,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/restaurant_image/{id}/edit', 'AdminRestaurantImageController@edit');
     Route::put('/restaurant_image/{id}', 'AdminRestaurantImageController@update');
     Route::delete('/restaurant_image/{id}', 'AdminRestaurantImageController@delete');
+    Route::get('/restaurant_images/gallery/{category}', 'AdminRestaurantImageController@gallery');
 
 
     //Page routes
