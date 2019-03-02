@@ -19,7 +19,7 @@
 @section('page', 'Restaurant Images')
 @section('content')
 
-
+@if(isset($categories) && count($categories)>0)
     <div class="col-md-12">
 
         <div class="col-md-12 d-flex justify-content-around flex-wrap ">
@@ -34,7 +34,7 @@
 
         </div>
     </div>
-
+@endif
 
         <div class="create"><a class="btn btn-outline-success"
                                href="{{url('admin/restaurant_image/create')}}">Create</a>
