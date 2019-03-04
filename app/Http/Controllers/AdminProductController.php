@@ -35,7 +35,7 @@ class AdminProductController extends Controller
 //        $request->user()->authorizeRoles(['admin', 'manager']); //give access to admin and manager
 
         $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
-              return view('admin.product.products', compact('products'));
+        return view('admin.product.products', compact('products'));
 
     }
 
@@ -177,28 +177,46 @@ class AdminProductController extends Controller
         }
 
 
-//        echo "<pre>";
-//        var_dump($request->all());
-//        die();
-        $product->update([
-            'name_en' => $request->name_en,
-            'name_ru' => $request->name_ru,
-            'name_am' => $request->name_am,
-            'description_en' => $request->description_en,
-            'description_ru' => $request->description_ru,
-            'description_am' => $request->description_am,
-            'avatar' => $fileNameToStore,
-            'parent_id' => $request->parent_id,
-            'restaurant_id' => $request->restaurant_id,
-            'price' => $request->price,
-            'weight' => $request->weight,
-            'status' => $request->status
-
-        ]);
 
         if (!$request->avatar) {
             $product->update(['avatar' => $product_image]);
+        } else {
+            if ($request->avatar != $product_image) {
+                Storage::delete('public/products/' . $product_image);
+                $product->update([
+                    'name_en' => $request->name_en,
+                    'name_ru' => $request->name_ru,
+                    'name_am' => $request->name_am,
+                    'description_en' => $request->description_en,
+                    'description_ru' => $request->description_ru,
+                    'description_am' => $request->description_am,
+                    'avatar' => $fileNameToStore,
+                    'parent_id' => $request->parent_id,
+                    'restaurant_id' => $request->restaurant_id,
+                    'price' => $request->price,
+                    'weight' => $request->weight,
+                    'status' => $request->status
+                ]);
+            }
+            else{
+                $product->update([
+                    'name_en' => $request->name_en,
+                    'name_ru' => $request->name_ru,
+                    'name_am' => $request->name_am,
+                    'description_en' => $request->description_en,
+                    'description_ru' => $request->description_ru,
+                    'description_am' => $request->description_am,
+                    'avatar' => $fileNameToStore,
+                    'parent_id' => $request->parent_id,
+                    'restaurant_id' => $request->restaurant_id,
+                    'price' => $request->price,
+                    'weight' => $request->weight,
+                    'status' => $request->status
+                ]);
+            }
         }
+
+
         return redirect(url('admin/insert/products'))->with('success', "Product Updated Successfully");
 
     }

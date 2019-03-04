@@ -14,7 +14,7 @@
 
 @section('content')
 
-    <form class="form-horizontal alert alert-dark" role="form" method="POST" action="{{url('admin/pages')}}">
+    <form class="form-horizontal alert my_form_color" role="form" method="POST" action="{{url('admin/pages')}}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('name_ru') ? ' has-error' : '' }}">

@@ -8,9 +8,6 @@
             text-align: center;
         }
 
-       a  i:hover{
-            color:green;
-        }
 
     </style>
 @endsection
@@ -25,7 +22,7 @@
         <div class="col-md-12 d-flex justify-content-around flex-wrap ">
             @foreach($categories as $category)
             <div  id="category_container" class="alert alert-info col-md-1 d-flex justify-content-center">
-                <a href="{{url('admin/restaurant_images/gallery/'.$category->title)}}"><i class="fas fa-folder fa-2x" style="color:#20d6c5;"></i>{{$category->title}}</a>
+                <a class="nounderline"  href="{{url('admin/restaurant_images/gallery/'.$category->title)}}"><i class="fas fa-folder fa-2x gallery-folder"></i><span class="image_class">{{$category->title}}</span></a>
             </div>
             @endforeach
             {{--<div class="alert alert-dark col-md-1">--}}
@@ -58,7 +55,7 @@
                             <td>{{$i->id}}</td>
                             <td>{{$i->restaurant_id}}</td>
                             <td>{{$i->title}}</td>
-                            <td><img src="/storage/restaurant_images/{{$i->name}}" style="width:100px;height:auto;">
+                            <td><img src="/storage/restaurant_images/{{$i->name}}" style="width:100px;height:100px;object-fit:cover;">
                             </td>
                             <td>
                                 <a href="{{url("admin/restaurant_image/$i->id/edit")}}"> <span class="btn btn-primary">

@@ -12,7 +12,7 @@
     </div>
 
 
-    <form class="form-horizontal alert alert-dark" role="form" method="POST" action="{{action('AdminRestaurantImageController@update', $image->id)}}" enctype="multipart/form-data">
+    <form class="form-horizontal alert my_form_color" role="form" method="POST" action="{{action('AdminRestaurantImageController@update', $image->id)}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PUT">
 

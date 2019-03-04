@@ -85,7 +85,7 @@
                 <thead>
                 <tr class="important">
                     <th>@sortablelink('id', 'ID')</th>
-                    <th>@sortablelink('name', 'NAME')</th>
+                    <th>NAME</th>
                     <th>AVATAR</th>
                     <th>@sortablelink('price', 'PRICE')</th>
                     <th>@sortablelink('weight', 'WEIGHT')</th>

@@ -8,7 +8,7 @@
 @section('page', 'Register User')
 @section('content')
 
-    <div class="modal-body alert alert-dark">
+    <div class="modal-body alert my_form_color">
         <form id="registerForm" method="POST" action="{{action('AdminUserController@register')}}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <!---form--->

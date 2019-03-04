@@ -5,69 +5,61 @@
         img {
             width: 300px;
         }
+
     </style>
 @endsection
 
 
 @section('page', 'Gallery '.$category)
 @section('content')
-    {{--@if(isset($images) && count($images)>0)--}}
-    {{--<div class="row container d-flex align-content-around">--}}
-    {{--@foreach($images as $i)--}}
-    {{--<img src="/storage/restaurant_images/{{$i->name}}" alt="">--}}
-
-    {{--<div class="mb-2 mr-2">--}}
-    {{--<img style="width:300px;" class="image-fluid" src="/storage/restaurant_images/{{$i->name}}" alt="">--}}
-    {{--</div>--}}
-
-    {{--@endforeach--}}
-    {{--</div>--}}
-    {{--@endif--}}
-
-
-
-
-
-
-
-    {{--<div class="col-md-12 d-flex justify-content-around flex-wrap ">--}}
-    {{--@foreach($images as $i)--}}
-    {{--<div class="">--}}
-    {{--<img style="width:300px; padding:3px; border:1px solid black;" class="image-fluid mb-4" src="/storage/restaurant_images/{{$i->name}}" alt="">--}}
-    {{--</div>--}}
-    {{--@endforeach--}}
-    {{--<div class="alert alert-dark col-md-1">--}}
-    {{--<a href=""><i class="fas fa-folder fa-2x" style="color:#ffea46"></i>HALL</a>--}}
-    {{--</div>--}}
-
-    {{--</div>--}}
-
-
 
 
     @if(isset($images) && count($images)>0)
-
         <div class="col-md-12 d-flex justify-content-around mb-5 flex-wrap ">
-        @foreach($images as $i)
+         @foreach($images as $i)
             <!-- Grid column -->
                 <div class="mb-3 pics animation all 2">
-                    <img class="img-fluid" src="/storage/restaurant_images/{{$i->name}}" alt="Card image cap">
+                    <div>
+                        <img data-toggle="modal" data-target=".myModal"
+                             style="width:150px;height:150px;object-fit:cover;" class="img-thumbnail"
+                             src="/storage/restaurant_images/{{$i->name}}" alt="Gallery Image">
+                    </div>
                 </div>
                 <!-- Grid column -->
 
             @endforeach
-
         </div>
         <!-- Grid column -->
     @endif
 
 
-
+    {{--gallery modal--}}
+    <div class="myModal modal fade col-md-12" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="img-responsive w-100 gallery_modal_image"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
 @endsection
 
 @section('js')
-
+    <script>
+        $(document).ready(function () {
+            $('img').on('click', function () {
+                var image = $(this).attr('src');
+                $('.myModal').on('show.bs.modal', function () {
+                    $(".img-responsive").attr("src", image);
+                });
+            });
+        });
+    </script>
 @endsection

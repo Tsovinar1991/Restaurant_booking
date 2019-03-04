@@ -168,6 +168,30 @@ body {
 }
 
 
+.my_form_color{
+    background-color:#e9ecef;
+}
+
+.image_class{
+    color:#12292d;
+}
+
+.image_class:hover{
+    color:#286873;
+}
+
+.gallery-folder{
+    color:#20d6c5;
+}
+
+.gallery_modal_image{
+    height:500px;
+    object-fit:contain !important;
+}
+
+.nounderline{
+    text-decoration:none !important;
+}
 
 
 
