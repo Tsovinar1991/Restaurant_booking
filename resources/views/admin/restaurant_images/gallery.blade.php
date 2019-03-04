@@ -2,9 +2,7 @@
 
 @section('css')
     <style>
-        img {
-            width: 300px;
-        }
+
 
     </style>
 @endsection
@@ -20,14 +18,16 @@
             <!-- Grid column -->
                 <div class="mb-3 pics animation all 2">
                     <div>
-                        <img data-toggle="modal" data-target=".myModal"
-                             style="width:150px;height:150px;object-fit:cover;" class="img-thumbnail"
+                        <img data-toggle="modal" data-target=".myModal" class="img-thumbnail gallery-image"
                              src="/storage/restaurant_images/{{$i->name}}" alt="Gallery Image">
                     </div>
                 </div>
                 <!-- Grid column -->
 
             @endforeach
+        </div>
+        <div>
+        {{ $images->links() }}
         </div>
         <!-- Grid column -->
     @endif

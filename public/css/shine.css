@@ -184,9 +184,17 @@ body {
     color:#20d6c5;
 }
 
+.gallery-image{
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    cursor:pointer;
+}
+
 .gallery_modal_image{
     height:500px;
     object-fit:contain !important;
+
 }
 
 .nounderline{

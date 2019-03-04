@@ -44,7 +44,7 @@
                         <th>@sortablelink('id', 'ID')</th>
                         <th>@sortablelink('restaurant_id', 'Restaurant')</th>
                         <th>@sortablelink('title', 'Title')</th>
-                        <th>@sortablelink('name', 'Image')</th>
+                        <th>Image</th>
                         <th>ACTION</th>
                     </tr>
                     </thead>

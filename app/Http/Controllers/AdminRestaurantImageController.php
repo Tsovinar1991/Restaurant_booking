@@ -144,25 +144,15 @@ class AdminRestaurantImageController extends Controller
         }
 
 
+        $image->update([
+            'restaurant_id' => $request->restaurant_id,
+            'name' => $fileNameToStore,
+            'title' => $request->title,
+        ]);
+
+
         if (!$request->name) {
             $image->update(['name' => $oldImage]);
-        } else {
-            if ($request->name != $oldImage) {
-                Storage::delete('public/restaurant_images/' . $image->name);
-                $image->update([
-                    'restaurant_id' => $request->restaurant_id,
-                    'name' => $fileNameToStore,
-                    'title' => $request->title,
-                ]);
-            }
-            else{
-                $image->update([
-                    'restaurant_id' => $request->restaurant_id,
-                    'name' => $fileNameToStore,
-                    'title' => $request->title,
-                ]);
-
-            }
         }
 
 
@@ -189,7 +179,7 @@ class AdminRestaurantImageController extends Controller
 
     public function gallery(Request $request, $category)
     {
-        $images = RestaurantImage::all()->where('title', $category);
+        $images = RestaurantImage::where('title', $category)->paginate(21);
 //       dd($images);
         return view('admin.restaurant_images.gallery', compact(['category', 'images']));
     }
