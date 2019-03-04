@@ -198,8 +198,6 @@ class AdminProductController extends Controller
             $product->update(['avatar' => $product_image]);
         }
         
-
-
         return redirect(url('admin/insert/products'))->with('success', "Product Updated Successfully");
 
     }
