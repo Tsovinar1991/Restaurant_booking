@@ -17,7 +17,8 @@ class GetOrdersController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'total' => 'required|numeric'
+            'total' => 'required|numeric',
+            'products' => 'required'
 
 
         ]);
@@ -37,11 +38,21 @@ class GetOrdersController extends Controller
         for ($i = 0; $i < count(request('products')); $i++) {
             array_push($menu_id, $request->products[$i]['menu_id']);
             $products = RestaurantMenu::whereIn('id', $menu_id)->get();
-        }
-        //var_dump($menu_id);
 
-        //var_dump($products);
-        //die();
+        }
+//        var_dump( count(request('products')));
+//        var_dump(count($products));
+
+
+        if (count($products) != count(request('products'))) {
+            $not_exist = collect(['Order' => ['Product does not exist.']]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'data' => null,
+                'errors' => $not_exist
+            ]);
+        }
 
 
         $total = 0;
@@ -50,7 +61,6 @@ class GetOrdersController extends Controller
             for ($i = 0; $i < count($products); $i++) {
                 $totalItem[$products[$i]->id] = $products[$i]->price * $request->products[$i]['count'];
                 $total += $products[$i]->price * $request->products[$i]['count'];
-
             }
         }
 
@@ -67,7 +77,8 @@ class GetOrdersController extends Controller
 
         for ($i = 0; $i < count(request('products')); $i++) {
             $counter = $request->products[$i]['menu_id']; //6,7
-//            var_dump($totalItem[$counter]);
+            //var_dump($totalItem[$counter]);
+
             $order_menu = MenuOrder::create([
                 'order_info_id' => $order->id,
                 'menu_id' => $request->products[$i]['menu_id'],
