@@ -27,6 +27,10 @@
         {{--</div>--}}
     {{--@endif--}}
 
+
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://restaurant2.brainfors.am&display=popup"> share this </a>
+
+
 @endsection
 
 @section('js')
