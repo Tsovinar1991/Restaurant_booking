@@ -13,4 +13,9 @@ class RestaurantMenu extends Model
 
     protected $fillable = ['name_en', 'name_ru', 'name_am', 'description_en',  'description_ru', 'description_am','weight', 'avatar', 'parent_id', 'restaurant_id', 'price', 'status'];
 
+    public function restaurant(){
+        return $this->hasOne(Restaurant::class, 'id', 'restaurant_id');
+    }
+
+
 }

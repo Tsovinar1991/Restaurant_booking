@@ -1,0 +1,26 @@
+{
+  "header": {
+    "home": "Տուն",
+    "about": "մեր մասին",
+    "contact": "Կապ",
+    "blog": "Օրագիր",
+    "gallery": "Պատկերասրահ"
+  },
+  "home": {
+    "title": "Ռեստորաններ"
+  },
+  "not_found": {
+    "text": "Oops, The Page you are looking for can't be found!",
+    "text2": "Return To Homepage"
+  },
+  "order" : {
+    "not_order": "Պատվերներ չկան",
+    "image": "նկար",
+    "name": "անուն",
+    "count": "քանակ",
+    "price": "գին",
+    "total": "Ընդհանուր",
+    "total_price": "Ընդհանուր գին",
+    "btn": "պատվիրել"
+  }
+}

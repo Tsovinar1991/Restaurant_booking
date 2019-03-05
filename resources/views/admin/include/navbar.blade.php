@@ -25,32 +25,40 @@
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
+                <i class="fas fa-shopping-cart"></i>
+                {{--<i class="fas fa-utensils"></i>--}}
 
-                {{--<span class="badge badge-danger">9+</span>--}}
+                <?php  $orders = App\OrderInfo::all()->where('status', 'new');?>
+                @if(isset($orders) && count($orders)>0)
+                    @if(count($orders)>9)
+                        <span class="badge badge-danger">9+</span>
+                    @else
+                        <span class="badge badge-danger">{{count($orders)}}</span>
+                    @endif
+                @endif
+
 
                 {{--<span class="badge badge-danger">9+</span>--}}
             </a>
-
-
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-                <a class="dropdown-item" href="">Action</a>
-                <a class="dropdown-item" href="#">Another Action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="{{url('admin/productOrders')}}">Delivery Orders</a>
+                {{--<a class="dropdown-item" href="#">Another Action</a>--}}
+                {{--<div class="dropdown-divider"></div>--}}
+                {{--<a class="dropdown-item" href="#">Something else here</a>--}}
             </div>
         </li>
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-
-
                 <i class="fas fa-envelope fa-fw"></i>
-
-                <span class="badge badge-danger">1</span>
-
-
-
+                <?php  $mails = App\ContactUs::all()->where('status', 0);?>
+                @if(isset($mails) && count($mails)>0)
+                    @if(count($mails)>9)
+                        <span class="badge badge-danger">9+</span>
+                    @else
+                        <span class="badge badge-danger">{{count($mails)}}</span>
+                    @endif
+                @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
                 <a class="dropdown-item" href="{{url("/admin/read_message")}}">Read Message</a>

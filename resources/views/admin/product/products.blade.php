@@ -23,10 +23,6 @@
             text-align: center;
         }
 
-        td {
-            color: #3e5164;
-            text-align: center;
-        }
 
         #pr tr td {
             padding: 5px 25px;
@@ -102,22 +98,26 @@
                     <tr>
                         <td>{{$p->id}}</td>
                         <td>{{$p->name_en}}</td>
-                        <td><img src="/storage/products/{{$p->avatar}}" style="width:100px;height:auto;"></td>
+                        <td><img src="/storage/products/{{$p->avatar}}" style="width:100px;height:100px;object-fit:cover;"></td>
                         <td>{{$p->price}} AMD</td>
                         <td>{{$p->weight}} gram</td>
-                        <td>{{$p->status == 0?"passive":"active"}}</td>
+                        <td>
+                            <select name="" class="status form-control" id="{{$p->id}}">
+                                <option value="0" {{$p->status == 0?"selected":""}}>Passive</option>
+                                <option value="1" {{$p->status == 1?"selected":""}} >Active</option>
+                            </select>
+                        {{--{{$p->status == 0?"passive":"active"}}</td>--}}
                         <td>{{$p->restaurant_id}}</td>
                         <td>{{$p->parent_id}}</td>
                         <td>
-                            <a href="{{url('/admin/product/'.$p->id.'/edit')}}"> <span class="btn btn-primary"><i
-                                            class="fas fa-pen"></i> Edit</span></a>
+                            <div><a href="{{url('/admin/product/'.$p->id.'/edit')}}">
+                                    <span class="btn btn-primary"><i class="fas fa-pen"></i>Edit</span></a>
+
+                            </div>
 
 
-                            <form action="{{url('admin/product/'. $p->id)}}" method="POST">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash-alt"></i> Delete</button>
-                            </form>
+                            <a href="{{url('admin/product/'.$p->id)}}"><span class="btn btn-info"><i class="fas fa-eye"></i> View</span></a>
+
 
                         </td>
                     </tr>
@@ -137,6 +137,28 @@
 @endsection
 
 @section('js')
+<script>
+    $(document).ready(function () {
+        $(document).on('change', '.status', function () {
+            // alert('test');
+            let selected = $(this).val();
+            let id = $(this).attr('id');
+            //console.log(selected, id);
+            $.ajax({
+                url: "{{ url('admin/product/change_status') }}",
+                type: 'get',
+                data: {
+                    status: selected,
+                    id: id
+                },
+                success: function (resp) {
+                    console.log(resp);
 
+                }
+            })
+        });
+
+    });
+</script>
 
 @endsection

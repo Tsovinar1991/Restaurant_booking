@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\City;
 use App\RestaurantImage;
+use App\RestaurantMenu;
 
 
 class Restaurant extends Model
@@ -23,5 +24,9 @@ class Restaurant extends Model
     public function seats(){
 
         return $this->hasMany(Seat::class);
+    }
+
+    public function products(){
+        return $this->hasMany(RestaurantMenu::class);
     }
 }

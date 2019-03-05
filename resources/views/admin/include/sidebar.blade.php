@@ -16,7 +16,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Table</h6>
-            <a class="dropdown-item" href="{{url('/admin/insert/products')}}"><i class="fas fa-coffee"></i>
+            <a class="dropdown-item" href="{{url('/admin/insert/products')}}"> <i class="fas fa-utensils"></i>
                 Products</a>
             {{--<div class="dropdown-divider"></div>--}}
             <a class="dropdown-item" href="{{url('/admin/insert/images')}}"><i class="fas fa-image"></i>
@@ -55,11 +55,11 @@
 
 
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{url('admin/productOrders')}}">
-            <i class="fas fa-utensils"></i>
-            <span>Delivery Products</span></a>
-    </li>
+    {{--<li class="nav-item">--}}
+        {{--<a class="nav-link" href="{{url('admin/productOrders')}}">--}}
+            {{--<i class="fas fa-utensils"></i>--}}
+            {{--<span>Delivery Products</span></a>--}}
+    {{--</li>--}}
     {{--<li class="nav-item">--}}
         {{--<a class="nav-link" href="">--}}
             {{--<i class="fas fa-fw fa-table"></i>--}}

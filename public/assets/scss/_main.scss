@@ -1,0 +1,87 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~src/assets/scss/core/variables";
+@import "~src/assets/scss/core/_elements.scss";
+
+/* Mobile Nav body classes */
+body.mobile-nav-active {
+  overflow: hidden;
+}
+
+body.mobile-nav-active #mobile-nav {
+  left: 0;
+}
+
+body.mobile-nav-active #mobile-nav-toggle {
+  color: #fff;
+}
+
+a, .pointer {
+  cursor: pointer;
+}
+
+.section-gap {
+  padding: 120px 0;
+}
+
+small {
+  color: red
+}
+
+.bg-danger {
+  background-color: #ff8403;
+}
+
+.primary-btn {
+  background: $primary-color;
+  line-height: 42px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: none;
+  color: $white;
+  display: inline-block;
+  font-size:14px;
+  font-weight: 500;
+  position: relative;
+  text-transform:uppercase;
+  @include transition();
+  cursor: pointer;
+  position: relative;
+  &:focus {
+    outline: none;
+  }
+  span {
+    color: $white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    right: 30px;
+    @include transition();
+  }
+  &:hover {
+    color: $white;
+    span {
+      color: $white;
+      right: 20px;
+    }
+  }
+  &.white {
+    border: 1px solid $white;
+    color: $white;
+    span {
+      color: $white;
+    }
+    &:hover {
+      background: $white;
+      color: $primary-color;
+      span {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+
+lightbox {
+  margin: auto;
+  top: 0
+}

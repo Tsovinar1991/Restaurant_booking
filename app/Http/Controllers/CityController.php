@@ -26,14 +26,14 @@ class CityController extends Controller
                     'message' => 'City table data not exist.',
                     'data' => $cities,
                     'errors' => true
-                ]);
+                ],404);
             }
             return response()->json([
                 'success' => true,
                 'message' => 'City table all data.',
                 'data' => $cities,
                 'errors' => false
-            ]);
+            ],200);
         } else {
             $not_specified = collect(['City' => ['City is not specified.']]);
             return response()->json([
@@ -41,7 +41,7 @@ class CityController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_specified
-            ]);
+            ],404);
         }
 
     }
@@ -62,7 +62,7 @@ class CityController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => $city,
                 'errors' => true
-            ]);
+            ],404);
         }
 
         return response()->json([
@@ -70,7 +70,7 @@ class CityController extends Controller
             'message' => 'Single City data.',
             'data' => $city,
             'errors' => false
-        ]);
+        ],200);
     }
 
     public function store(Request $request)
@@ -85,7 +85,7 @@ class CityController extends Controller
                 'message' => "Error",
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ], 401);
         }
 
         $city = City::create($request->all());
@@ -94,7 +94,7 @@ class CityController extends Controller
             'message' => 'Created a new city.',
             'data' => $city,
             'errors' => false
-        ]);
+        ],201);
     }
 
 
@@ -113,7 +113,7 @@ class CityController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => null,
                 'errors' => true
-            ]);
+            ],404);
         }
 
         $validator = Validator::make($request->all(), [
@@ -127,7 +127,7 @@ class CityController extends Controller
                 'message' => "Error",
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ],401);
         }
 
 
@@ -137,7 +137,7 @@ class CityController extends Controller
             'message' => 'City data updated.',
             'data' => $city,
             'errors' => false
-        ]);
+        ],200);
     }
 
 
@@ -154,7 +154,7 @@ class CityController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => null,
                 'errors' => true
-            ]);
+            ],404);
         }
 
         $city->delete();
@@ -163,6 +163,6 @@ class CityController extends Controller
             'message' => 'Deleted city data.',
             'data' => $city,
             'errors' => false
-        ]);
+        ],204);
     }
 }

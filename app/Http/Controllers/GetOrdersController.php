@@ -19,8 +19,6 @@ class GetOrdersController extends Controller
             'address' => 'required',
             'total' => 'required|numeric',
             'products' => 'required'
-
-
         ]);
 
         if ($validator->fails()) {
@@ -29,7 +27,7 @@ class GetOrdersController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ],401);
         }
 
         //Calculation
@@ -51,7 +49,7 @@ class GetOrdersController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_exist
-            ]);
+            ], 404);
         }
 
 
@@ -95,7 +93,7 @@ class GetOrdersController extends Controller
                 'message' => 'Order is Send',
                 'data' => $order,
                 'errors' => false
-            ]);
+            ],201);
         }
 
     }

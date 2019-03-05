@@ -25,24 +25,19 @@ class AdminController extends Controller
      */
     public function index()
     {
-
         return view('admin.admin');
     }
 
 
     public function read_message()
     {
-
-        return view('admin.contact.messages');
-
+        $mails = ContactUs::all()->where('status', 0);
+        if ($mails) {
+            return view('admin.contact_us.messages', compact('mails'));
+        } else {
+            return view('admin.contact_us.messages');
+        }
     }
-
-//
-//    public function clear_messages()
-//    {
-//        session()->forget('contact_id');
-//        return redirect()->back()->with('success', 'Message list is empty, until new messages appear!');
-//    }
 
 
 }

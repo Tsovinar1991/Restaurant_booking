@@ -3,59 +3,9 @@
 @section('css')
     <style>
 
-        #pages tr td {
-            padding: 5px 25px;
-        }
-
-        .important th {
-            background-color: #d9d9d9 !important;
-            font-weight: bold !important;
-            color: #224143 !important;
-        }
-
-        .important:first-child th:first-child {
-            border-top-left-radius: 10px !important;
-        }
-
-        .important:first-child th:last-child {
-            border-top-right-radius: 10px !important;
-        }
-
-        .important th {
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
-            padding-right: 10px !important;
-            font-size: 14px;
-            text-align: center;
-        }
-
         td {
             color: #3e5164;
             text-align: center;
-        }
-
-        .pagination li {
-            padding: 5px 10px !important;
-        }
-
-        .create {
-            padding-bottom: 20px;
-        }
-
-        #pages tr td span {
-            margin: 2px;
-            width: 60px;
-            height: 30px;
-            font-size: 12px;
-
-        }
-
-        #pages tr td form button {
-            margin: 2px;
-            width: 60px;
-            height: 30px;
-            font-size: 12px;
-            padding: 0px;
         }
 
         td img {
@@ -67,9 +17,7 @@
             width: 100px;
         }
 
-        .create {
-            padding-bottom: 20px;
-        }
+
     </style>
 
 

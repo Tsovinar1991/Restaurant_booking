@@ -21,7 +21,7 @@
                 {{ Session::get('success') }}
             </div>
         @endif
-        {!! Form::open(['route'=>'contact.store', 'method'=> 'POST',  'enctype'=>'multipart/form-data' ]) !!}
+        {!! Form::open(['route'=>'contact_us', 'method'=> 'POST',  'enctype'=>'multipart/form-data' ]) !!}
             {{ csrf_field() }}
         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
             {!! Form::label('Name:') !!}
@@ -47,3 +47,6 @@
 </div>
 </body>
 </html>
+
+
+

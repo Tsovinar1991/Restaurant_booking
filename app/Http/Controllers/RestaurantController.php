@@ -18,14 +18,14 @@ class RestaurantController extends Controller
     public function index(Request $request)
     {
         if (isset($request->offset) and isset($request->limit)) {
-            $restaurants = Restaurant::skip($request->input('offset'))->take($request->input('limit'))->with('images', 'seats')->get();
+            $restaurants = Restaurant::skip($request->input('offset'))->take($request->input('limit'))->get();
             if ($restaurants->isEmpty()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Restaurants table data not exist.',
                     'data' => null,
                     'errors' => true
-                ]);
+                ],404);
 
             }
 
@@ -34,7 +34,7 @@ class RestaurantController extends Controller
                 'message' => 'All restaurant table data.',
                 'data' => $restaurants,
                 'errors' => false
-            ]);
+            ],200);
         } else {
             $not_specified = collect(['Restaurant' => ['Restaurant  offset and limit are not specified.']]);
             return response()->json([
@@ -42,7 +42,7 @@ class RestaurantController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_specified
-            ]);
+            ],404);
         }
 
     }
@@ -98,7 +98,7 @@ class RestaurantController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ],401);
         }
 
         $restaurant = Restaurant::create(
@@ -119,7 +119,7 @@ class RestaurantController extends Controller
             'message' => 'Created a new restaurant.',
             'data' => $restaurant,
             'errors' => false
-        ]);
+        ],201);
     }
 
     /**
@@ -132,7 +132,7 @@ class RestaurantController extends Controller
     {
 
 
-        $restaurant = Restaurant::with('images', 'seats')->find($id);
+        $restaurant = Restaurant::with('images', 'seats', 'products')->find($id);
 
 //       echo "<pre>";
 //       var_dump($restaurant);
@@ -145,14 +145,14 @@ class RestaurantController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => null,
                 'errors' => true
-            ]);
+            ],404);
         }
         return response()->json([
             'success' => true,
             'message' => 'A single restaurant data.',
             'data' => $restaurant,
             'errors' => false
-        ]);
+        ],200);
 
 
     }
@@ -186,7 +186,7 @@ class RestaurantController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => null,
                 'errors' => true
-            ]);
+            ],404);
         }
         $validator = Validator::make($request->all(), [
 
@@ -208,7 +208,7 @@ class RestaurantController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ],401);
         }
 
 
@@ -249,7 +249,7 @@ class RestaurantController extends Controller
             'message' => 'Restaurant data updated.',
             'data' => $restaurant,
             'errors' => false
-        ]);
+        ],200);
 
 
     }
@@ -269,7 +269,7 @@ class RestaurantController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => null,
                 'errors' => true
-            ]);
+            ],404);
         }
 
         $restaurant->delete();
@@ -281,7 +281,7 @@ class RestaurantController extends Controller
             'message' => 'Deleted restaurant data.',
             'data' => $restaurant,
             'errors' => false
-        ]);
+        ],204);
 
     }
 }

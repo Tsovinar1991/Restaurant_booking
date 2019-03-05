@@ -40,7 +40,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/product', 'AdminProductController@store');
     Route::get('/product/{id}/edit', 'AdminProductController@edit');
     Route::put('/product/{id}', 'AdminProductController@update');
-    Route::delete('/product/{id}', 'AdminProductController@delete');
+    Route::get('/product/{id}', 'AdminProductController@show');
+    Route::get('/product/change_status', 'AdminProductController@change_status');
 
 
     //restaurant image routes
@@ -66,7 +67,7 @@ Route::prefix('admin')->group(function () {
 
     //mail message notification
     Route::get('/read_message', 'AdminController@read_message');
-    Route::post('/clear_messages', 'AdminController@clear_messages');
+    Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');
 
 
     //user setting routes
@@ -88,8 +89,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 });
 
-Route::get('/contact_us', 'ContactMailController@index');
-Route::post('contact_us', ['as' => 'contact.store', 'uses' => 'ContactMailController@store']);
+Route::get('/contact_us', 'ContactMailController@index')->name('contact_us');
+Route::post('contact_us', ['as' => 'contact_us.store', 'uses' => 'ContactMailController@store']);
 
 
 

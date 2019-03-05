@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\RestaurantImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -21,6 +22,9 @@ class AdminProductController extends Controller
 
     public function index(Request $request)
     {
+
+
+//        dd($request->user());
 
 //        if ($request->user()->hasRole('admin')) {
 //            {
@@ -48,6 +52,24 @@ class AdminProductController extends Controller
 //        die();
         return view('admin.product.productCreate', compact(['restaurants', 'parents']));
     }
+
+
+
+
+
+
+    public function show($id){
+        $product = RestaurantMenu::find($id);
+
+        if(!$product){
+            return redirect()->route('admin.error')->withErrors('Product  not found!')->with('status_cod', 404);
+        }
+
+        return view('admin.product.product')->with('product', $product);
+    }
+
+
+
 
     public function store(Request $request)
     {
@@ -205,14 +227,18 @@ class AdminProductController extends Controller
     }
 
 
-    public function delete($id)
-    {
-        $product = RestaurantMenu::find($id);
-        $file_path = 'public/products/';
-        Storage::delete($file_path . $product->avatar);
-        $delete = $product->delete();
 
-        return redirect(url('admin/insert/products'))->with('success', 'Product Deleted Successfully');
+
+
+
+    public function change_status( Request $request)
+    {
+        $product = RestaurantMenu::find($request->id);
+        $product->update(['status'=> $request->status]);
+
+        return response(['Product status is' . $request->status]);
+
+//        return redirect(url('admin/insert/products'))->with('success', 'Product doesn`t exist at the moment');
 
 
     }

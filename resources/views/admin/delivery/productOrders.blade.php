@@ -187,8 +187,9 @@
                             acc += `<td>${product.total} AMD</td>`;
                             acc += `</tr>`;
                             return acc;
-                        }, '')
+                        }, '');
                         $("#cont").append(
+
                             `<tr  class="order_info"  data-id="${row.order_info.id}">
                                 <td class="order_show"><i class="fa fa-plus fa-lg"></i></td>
                                 <td class="new" >${row.order_info.id}</td>
@@ -372,7 +373,15 @@
                 $("#old").hide();
 
             }
+
         });
+
+
+
+
+
+
+
     </script>
 
 @endsection

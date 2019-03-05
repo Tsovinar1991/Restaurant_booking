@@ -1,0 +1,58 @@
+[
+  {
+    "id": "sdfdhksjhfskhf",
+    "category": "breakfast",
+    "title": "Cappuccion",
+    "description": "Usage of the Internet is becoming more common due to rapid advance.",
+    "price": "500 դրամ",
+    "img": "prod_1.jpeg"
+  },
+  {
+    "id": "lkvjsdkljskd",
+    "category": "dinner",
+    "title": "Americano",
+    "description": "Usage of the Internet is becoming more common due to rapid advance.",
+    "price": "390 դրամ",
+    "img": "prod_2.jpeg"
+  },
+  {
+    "id": "dgsdfgdfgfdg",
+    "category": "dinner",
+    "title": "Evropano",
+    "description": "Usage of the Internet is becoming more common due to rapid advance.",
+    "price": "450 դրամ",
+    "img": "prod_5.jpeg"
+  },
+  {
+    "id": "dfgfdgdgdfg",
+    "category": "budget-meal",
+    "title": "Macchiato",
+    "description": "Usage of the Internet is becoming more common due to rapid advance.",
+    "price": "600 դրամ",
+    "img": "prod_3.jpeg"
+  },
+  {
+    "id": "dgdgdfgdg",
+    "category": "breakfast",
+    "title": "Mocha",
+    "description": "Usage of the Internet is becoming more common due to rapid advance.",
+    "price": "780 դրամ",
+    "img": "prod_4.jpeg"
+  },
+  {
+    "id": "dgdgdfd",
+    "category": "lunch",
+    "title": "Piccolo Latte",
+    "description": "Usage of the Internet is becoming more common due to rapid advance.",
+    "price": "100 դրամ",
+    "img": "prod_5.jpeg"
+  },
+  {
+    "id": "dfgdfgdgdgd",
+    "category": "buffet",
+    "title": "Ristretto",
+    "description": "Usage of the Internet is becoming more common due to rapid advance.",
+    "price": "250 դրամ",
+    "img": "prod_6.jpeg"
+  }
+]

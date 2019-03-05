@@ -49,6 +49,10 @@ body {
     padding: 4px !important;
 }
 
+.my_form_color{
+    background-color:#e9ecef;
+}
+
 
 .ordered_products thead th, .ordered_products tbody td {
     text-align: center;
@@ -86,13 +90,6 @@ body {
 }
 
 
-
-
-
-
-
-
-
 .important th {
     background-color: #d9d9d9 !important;
     font-weight: bold !important;
@@ -105,6 +102,7 @@ body {
 }
 
 
+
 .important:first-child th:first-child {
     border-top-left-radius: 10px !important;
 }
@@ -112,8 +110,6 @@ body {
 .important:first-child th:last-child {
     border-top-right-radius: 10px !important;
 }
-
-
 
 #im tr td {
     padding: 5px 25px;
@@ -141,19 +137,18 @@ body {
     padding: 5px 10px !important;
 }
 
+.prod {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .create {
     padding-bottom: 20px;
 }
 
 
-
 .access {
     margin: 25px;
-}
-
-.prod {
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 
@@ -168,9 +163,7 @@ body {
 }
 
 
-.my_form_color{
-    background-color:#e9ecef;
-}
+
 
 .image_class{
     color:#12292d;
@@ -199,6 +192,27 @@ body {
 
 .nounderline{
     text-decoration:none !important;
+}
+
+
+#pages tr td {
+    padding: 5px 25px;
+}
+
+#pages tr td span {
+    margin: 2px;
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+
+}
+
+#pages tr td form button {
+    margin: 2px;
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+    padding: 0px;
 }
 
 

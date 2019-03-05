@@ -27,7 +27,7 @@ class OrderController extends Controller
                     'message' => 'Order table data not exist.',
                     'data' => null,
                     'errors' => true
-                ]);
+                ], 404);
             }
 
             return response()->json([
@@ -35,7 +35,7 @@ class OrderController extends Controller
                 'message' => 'Order table all data.',
                 'data' => $orders,
                 'errors' => false
-            ]);
+            ],200);
 
         } else {
             $not_specified = collect(['Restaurant' => ['Order  offset and limit are not specified.']]);
@@ -44,7 +44,7 @@ class OrderController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_specified
-            ]);
+            ],404);
         }
 
     }
@@ -75,7 +75,7 @@ class OrderController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ], 400);
+            ], 401);
         }
 
         $check = explode("-", $request->date);
@@ -87,7 +87,7 @@ class OrderController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_correct
-            ]);
+            ], 422);
         }
 
 
@@ -100,7 +100,7 @@ class OrderController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_correct
-            ]);
+            ],422);
         }
 
 
@@ -120,7 +120,7 @@ class OrderController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_correct
-            ]);
+            ], 422);
         }
 
         if($end_reservation[0] >= $close_hour[0]  ||  $end_reservation[0] < $open_hour[0] + 1){
@@ -130,7 +130,7 @@ class OrderController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_correct
-            ]);
+            ], 422);
         }
 
 
@@ -189,7 +189,7 @@ class OrderController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => $order,
                 'errors' => true
-            ]);
+            ],404);
         }
 
         return response()->json([
@@ -197,7 +197,7 @@ class OrderController extends Controller
             'message' => 'Single order data.',
             'data' => $order,
             'errors' => false
-        ]);
+        ],200);
 
     }
 
@@ -228,7 +228,7 @@ class OrderController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => null,
                 'errors' => true
-            ]);
+            ],404);
         }
 
 
@@ -248,7 +248,7 @@ class OrderController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ], 400);
+            ], 401);
         }
 
 
@@ -263,7 +263,7 @@ class OrderController extends Controller
                     'message' => 'Error',
                     'data' => null,
                     'errors' => $not_correct
-                ]);
+                ],422);
             }
 
 
@@ -274,7 +274,7 @@ class OrderController extends Controller
                     'message' => 'Error',
                     'data' => null,
                     'errors' => $not_correct
-                ]);
+                ],422);
             }
 
 
@@ -293,7 +293,7 @@ class OrderController extends Controller
                     'message' => 'Error',
                     'data' => null,
                     'errors' => $not_correct
-                ]);
+                ],422);
             }
 
             if($end_reservation[0] >= $close_hour[0]  ||  $end_reservation[0] < $open_hour[0] + 1){
@@ -303,7 +303,7 @@ class OrderController extends Controller
                     'message' => 'Error',
                     'data' => null,
                     'errors' => $not_correct
-                ]);
+                ],422);
             }
 
 
@@ -321,7 +321,6 @@ class OrderController extends Controller
                 'start' => $request->start,
                 'end' => $request->end,
                 'message' => $request->message
-
             ]);
         } catch (\Exception $err) {
             var_dump($err->getMessage());
@@ -333,7 +332,7 @@ class OrderController extends Controller
             'message' => 'Order data updated.',
             'data' => $order,
             'errors' => false
-        ]);
+        ],200);
 
     }
 
@@ -353,7 +352,7 @@ class OrderController extends Controller
                 'message' => 'Data not found or not exists.',
                 'data' => $order,
                 'errors' => true
-            ]);
+            ],404);
         }
 
         $order->delete();
@@ -363,6 +362,6 @@ class OrderController extends Controller
             'message' => 'Deleted order data.',
             'data' => $order,
             'errors' => false
-        ]);
+        ],204);
     }
 }

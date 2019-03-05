@@ -8,7 +8,7 @@
  * @version     1.10.19
  * @file        jquery.dataTables.js
  * @author      SpryMedia Ltd
- * @contact     www.datatables.net
+ * @contact_us     www.datatables.net
  * @copyright   Copyright 2008-2018 SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:

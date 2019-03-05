@@ -24,7 +24,7 @@ class RestaurantImageController extends Controller
                     'message' => 'Image table data not exist.',
                     'data' => null,
                     'errors' => true
-                ]);
+                ],404);
             }
 
             return response()->json([
@@ -32,7 +32,7 @@ class RestaurantImageController extends Controller
                 'message' => 'Restaurant images table all data.',
                 'data' => $images,
                 'errors' => false
-            ]);
+            ],200);
         }else{
             $not_specified = collect(['Restaurant Image' => ['Restaurant images offset and limit are not specified.']]);
             return response()->json([
@@ -40,7 +40,7 @@ class RestaurantImageController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_specified
-            ]);
+            ],404);
         }
     }
 
@@ -53,7 +53,7 @@ class RestaurantImageController extends Controller
                 'message' => 'Data not found or not exist.',
                 'data' => null,
                 'error' => true
-            ]);
+            ],404);
         }
 
         return response()->json([
@@ -61,7 +61,7 @@ class RestaurantImageController extends Controller
             'message' => 'Restaurant images single data.',
             'data' => $image,
             'errors' => false
-        ]);
+        ],200);
     }
 
 }

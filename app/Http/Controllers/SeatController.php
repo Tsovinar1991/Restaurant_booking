@@ -27,7 +27,7 @@ class SeatController extends Controller
                     'message' => 'Error',
                     'data' => null,
                     'errors' => $not_exist
-                ]);
+                ],404);
             }
 
             return response()->json([
@@ -35,7 +35,7 @@ class SeatController extends Controller
                 'message' => 'Seat table all data.',
                 'data' => $seats,
                 'errors' => false
-            ]);
+            ],200);
 
         } else {
 
@@ -45,7 +45,7 @@ class SeatController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_specified
-            ]);
+            ],404);
         }
     }
 
@@ -82,7 +82,7 @@ class SeatController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ],401);
         }
 
         $seat = Seat::create($request->all());
@@ -92,7 +92,7 @@ class SeatController extends Controller
                 'message' => 'Created a new seat.',
                 'data' => $seat,
                 'errors' => false
-            ]);
+            ],201);
         } else {
             $not_created = collect(['Seat' => ['Seat is not created.']]);
             return response()->json([
@@ -100,7 +100,7 @@ class SeatController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_created
-            ]);
+            ],404);
 
         }
 
@@ -123,7 +123,7 @@ class SeatController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_found
-            ]);
+            ],404);
         }
 
         //if we need seat data wrapped into array
@@ -133,7 +133,7 @@ class SeatController extends Controller
             'message' => 'Single seat data.',
             'data' => $seat,
             'errors' => false
-        ]);
+        ],200);
     }
 
     /**
@@ -164,7 +164,7 @@ class SeatController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_found
-            ]);
+            ],404);
         }
 
         $validator = Validator::make($request->all(), [
@@ -181,7 +181,7 @@ class SeatController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ],401);
         }
 
         $seat->update($request->all());
@@ -190,7 +190,7 @@ class SeatController extends Controller
             'message' => 'Seat data updated.',
             'data' => $seat,
             'errors' => false
-        ]);
+        ],200);
     }
 
     /**
@@ -209,7 +209,7 @@ class SeatController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_found
-            ]);
+            ],404);
         }
 
         $seat->delete();
@@ -218,6 +218,6 @@ class SeatController extends Controller
             'message' => 'Deleted seat data.',
             'data' => $seat,
             'errors' => false
-        ]);
+        ],204);
     }
 }

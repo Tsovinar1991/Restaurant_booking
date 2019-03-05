@@ -27,8 +27,6 @@ class CreateRestaurantMenusTable extends Migration
             $table->integer('price');
             $table->string('weight');
             $table->integer('status')->default(1);//if exist
-
-
             $table->timestamps();
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('set null');
