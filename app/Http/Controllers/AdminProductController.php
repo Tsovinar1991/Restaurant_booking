@@ -54,21 +54,16 @@ class AdminProductController extends Controller
     }
 
 
-
-
-
-
-    public function show($id){
+    public function show($id)
+    {
         $product = RestaurantMenu::find($id);
 
-        if(!$product){
+        if (!$product) {
             return redirect()->route('admin.error')->withErrors('Product  not found!')->with('status_cod', 404);
         }
 
         return view('admin.product.product')->with('product', $product);
     }
-
-
 
 
     public function store(Request $request)
@@ -198,8 +193,6 @@ class AdminProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
-
         $product->update([
             'name_en' => $request->name_en,
             'name_ru' => $request->name_ru,
@@ -215,31 +208,20 @@ class AdminProductController extends Controller
             'status' => $request->status
         ]);
 
-
         if (!$request->avatar) {
             $product->update(['avatar' => $product_image]);
         }
-
-
 
         return redirect(url('admin/insert/products'))->with('success', "Product Updated Successfully");
 
     }
 
 
-
-
-
-
-    public function change_status( Request $request)
+    public function productStatus(Request $request)
     {
         $product = RestaurantMenu::find($request->id);
-        $product->update(['status'=> $request->status]);
-
-        return response(['Product status is' . $request->status]);
-
-//        return redirect(url('admin/insert/products'))->with('success', 'Product doesn`t exist at the moment');
-
-
+        $product->update(['status' => $request->status]);
+        return response($product);
+//        return response(['Product status is' . $request->status]);
     }
 }

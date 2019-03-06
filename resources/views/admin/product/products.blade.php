@@ -141,11 +141,11 @@
     $(document).ready(function () {
         $(document).on('change', '.status', function () {
             // alert('test');
-            let selected = $(this).val();
-            let id = $(this).attr('id');
-            //console.log(selected, id);
+            var selected = $(this).val();
+            var id = $(this).attr('id');
+            console.log(selected, id);
             $.ajax({
-                url: "{{ url('admin/product/change_status') }}",
+                url: "{{ url('admin/products/change_status') }}",
                 type: 'get',
                 data: {
                     status: selected,

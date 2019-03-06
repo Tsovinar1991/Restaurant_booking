@@ -3,35 +3,26 @@
 @section('css')
     <style>
         @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
-
         td {
             color: #3e5164;
         }
-
         select {
             border-width: 2px !important;
         }
-
         select option {
             background: rgba(0, 0, 0, 0.3) !important;
             color: #fff !important;
             text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4) !important;
         }
-
         select option[value="in progress"] {
             background: #008080 !important;
         }
-
         select option[value="canceled"] {
             background: #FF6347 !important;
         }
-
         select option[value="confirmed"] {
             background: #5ac16f !important;
         }
-
-
-
     </style>
 @endsection
 
@@ -67,8 +58,8 @@
     </div>
 
     @if(isset($order) && count($order)>0)
-    <div id="old">
-        <h5 class="heading_old">Other Orders</h5>
+        <div id="old">
+            <h5 class="heading_old">Other Orders</h5>
 
             <table class="no-footer" width="100%">
                 <thead>
@@ -154,7 +145,7 @@
                 </tbody>
             </table>
             <div>{{$order->links()}}</div>
-    </div>
+        </div>
     @endif
     <audio id="pop" preload="auto">
         <source src="{{asset('audio/sound.mp3')}}" type="audio/mpeg">
@@ -189,7 +180,6 @@
                             return acc;
                         }, '');
                         $("#cont").append(
-
                             `<tr  class="order_info"  data-id="${row.order_info.id}">
                                 <td class="order_show"><i class="fa fa-plus fa-lg"></i></td>
                                 <td class="new" >${row.order_info.id}</td>
@@ -371,17 +361,8 @@
                 $('.access').prop('disabled', true);
                 $(".access").css("cursor", "not-allowed");
                 $("#old").hide();
-
             }
-
         });
-
-
-
-
-
-
-
     </script>
 
 @endsection

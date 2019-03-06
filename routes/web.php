@@ -41,7 +41,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/{id}/edit', 'AdminProductController@edit');
     Route::put('/product/{id}', 'AdminProductController@update');
     Route::get('/product/{id}', 'AdminProductController@show');
-    Route::get('/product/change_status', 'AdminProductController@change_status');
+    Route::get('/products/change_status', 'AdminProductController@productStatus');
 
 
     //restaurant image routes

@@ -7,6 +7,7 @@ use App\OrderInfo;
 use App\MenuOrder;
 use Validator;
 use App\RestaurantMenu;
+use DB;
 
 class GetOrdersController extends Controller
 {
@@ -17,8 +18,7 @@ class GetOrdersController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'total' => 'required|numeric',
-            'products' => 'required'
+            'total' => 'required|numeric'
         ]);
 
         if ($validator->fails()) {
@@ -27,21 +27,35 @@ class GetOrdersController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ],401);
+            ]);
         }
 
-        //Calculation
-        //Check order total price correct or not
+        //filling results into products array
         $menu_id = [];
         for ($i = 0; $i < count(request('products')); $i++) {
-            array_push($menu_id, $request->products[$i]['menu_id']);
-            $products = RestaurantMenu::whereIn('id', $menu_id)->get();
+            $menu_id[] .= $request->products[$i]['menu_id'];
+            $tempStr = implode(',', $menu_id);
+            $products = RestaurantMenu::whereIn('id', $menu_id)->orderByRaw(DB::raw("FIELD(id, $tempStr)"))->get();
+        }
+
+
+        //checking if product is active, if not error massage
+        foreach ($products as $p) {
+            if ($p->status != 1) {
+                $not_active = collect(['Order' => [$p->name_en . ' not active at the moment.']]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error',
+                    'data' => null,
+                    'errors' => $not_active
+                ], 404);
+
+            }
 
         }
-//        var_dump( count(request('products')));
-//        var_dump(count($products));
 
 
+        //check if resuls count is equal request products count, if not return error
         if (count($products) != count(request('products'))) {
             $not_exist = collect(['Order' => ['Product does not exist.']]);
             return response()->json([
@@ -53,17 +67,13 @@ class GetOrdersController extends Controller
         }
 
 
-        $total = 0;
+        //calculation part
+        $total = "";
         $totalItem = [];
-        for ($i = 0; $i < count(request('products')); $i++) {
-            for ($i = 0; $i < count($products); $i++) {
-                $totalItem[$products[$i]->id] = $products[$i]->price * $request->products[$i]['count'];
-                $total += $products[$i]->price * $request->products[$i]['count'];
-            }
+        for ($i = 0; $i < count($products); $i++) {
+            $totalItem[$products[$i]->id] = $products[$i]->price * $request->products[$i]['count'];
+            $total += $products[$i]->price * $request->products[$i]['count'];
         }
-
-
-        //var_dump($totalItem);
 
         $order = OrderInfo::create([
             'name' => request('name'),
@@ -74,17 +84,12 @@ class GetOrdersController extends Controller
 
 
         for ($i = 0; $i < count(request('products')); $i++) {
-            $counter = $request->products[$i]['menu_id']; //6,7
-            //var_dump($totalItem[$counter]);
-
             $order_menu = MenuOrder::create([
                 'order_info_id' => $order->id,
                 'menu_id' => $request->products[$i]['menu_id'],
                 'count' => $request->products[$i]['count'],
-                'total' => $totalItem[$counter]
+                'total' => $totalItem[$request->products[$i]['menu_id']]
             ]);
-
-
         }
 
         if ($order && $order_menu) {
@@ -93,9 +98,8 @@ class GetOrdersController extends Controller
                 'message' => 'Order is Send',
                 'data' => $order,
                 'errors' => false
-            ],201);
+            ]);
         }
-
     }
 
 
@@ -104,4 +108,3 @@ class GetOrdersController extends Controller
 
     }
 }
-
