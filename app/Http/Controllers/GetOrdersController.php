@@ -68,7 +68,7 @@ class GetOrdersController extends Controller
 
 
         //calculation part
-        $total = "";
+        $total = 0;
         $totalItem = [];
         for ($i = 0; $i < count($products); $i++) {
             $totalItem[$products[$i]->id] = $products[$i]->price * $request->products[$i]['count'];
