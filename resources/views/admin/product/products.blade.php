@@ -33,7 +33,6 @@
             width: 60px;
             height: 30px;
             font-size: 12px;
-
         }
 
         #pr tr td form button {
@@ -115,9 +114,9 @@
 
                             </div>
 
-
-                            <a href="{{url('admin/product/'.$p->id)}}"><span class="btn btn-info"><i class="fas fa-eye"></i> View</span></a>
-
+                            <div><a href="{{url('admin/product/'.$p->id)}}">
+                                    <span class="btn btn-info"><i class="fas fa-eye"></i>View</span></a>
+                            </div>
 
                         </td>
                     </tr>

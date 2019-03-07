@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Admin;
 use App\AdminRole;
@@ -12,17 +13,20 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminUserController extends Controller
 {
-
+    /**
+     * AdminUserController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth:admin');
         $this->middleware('role:superadmin');
-
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function registerForm()
     {
-
         $roles = Role::select('id', 'name')->where('name', '!=', 'superadmin')->get();
         if (count($roles) > 0) {
             return view('admin.users.userRegisterForm', compact('roles'));
@@ -30,37 +34,37 @@ class AdminUserController extends Controller
         return view('admin.users.userRegisterForm');
     }
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function register(Request $request)
     {
-
-        //Validates data
         $this->validator($request->all())->validate();
-
-        //Create seller
-        $admin = $this->create($request->all());
-
-
-         //giving role to admin
-        Validator::make($request->all(), [
-            'role' => 'required|num',
+        $admin = $this->create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'job_title' => $request['job_title']
         ]);
 
-        AdminRole::create([
-            'role_id'=> $request->role,
+        $id = $request->role;
+
+        $role = AdminRole::create([
+            'role_id' => $request->role,
             'admin_id' => $admin->id
-
         ]);
-
-
-
-
-
-        //Redirects sellers
-        return redirect(url('admin'))->with('success', 'Admin User is Created Successfully!');
+        //Redirects
+        if ($id && $role) {
+            return redirect(route('admin.user.settings'))->with('success', 'Admin User Created Successfully!');
+        }
     }
 
-    //Validates user's Input
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -68,10 +72,12 @@ class AdminUserController extends Controller
             'email' => 'required|email|max:255|unique:admins',
             'password' => 'required|min:6',
             'job_title' => 'required',
+            'role' => 'required'
         ]);
     }
 
-    //Create a new seller instance after a validation.
+
+    //Create a new admininstance after a validation.
     protected function create(array $data)
     {
         return Admin::create([
@@ -86,6 +92,73 @@ class AdminUserController extends Controller
     protected function guard()
     {
         return Auth::guard('admin');
+    }
+
+
+    public function settings()
+    {
+        $users = Admin::with('roles')->paginate(8);
+        return view('admin.users.settings', compact('users'));
+    }
+
+
+    public function editUser($id)
+    {
+
+        $adminUser = Admin::with('roles')->where('id', $id)->first();
+        $roles = Role::select('id', 'name')->where('name', '!=', 'superadmin')->get();
+        if (!$adminUser) {
+            return redirect()->route('admin.error')->withErrors('Admin User not found!')->with('status_cod', 404);
+        }
+
+        return view('admin.users.updateRegisterForm', compact(['adminUser', 'roles']));
+    }
+
+
+    public function updateUser(Request $request, $id)
+    {
+        $admin = Admin::where('id', $id)->with('roles')->first();
+        $validation = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|max:255|unique:admins,email,' . $admin->id,
+            'password' => 'required|min:6',
+            'job_title' => 'required',
+            'role' => 'required'
+        ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
+        $admin->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'job_title' => $request['job_title']
+        ]);
+
+        $id = $request->role;
+        $role = AdminRole::where('admin_id', $admin->id)->first();
+
+        $role->update([
+            'role_id' => $id,
+            'admin_id' => $admin->id
+        ]);
+
+        if ($admin && $role) {
+            return redirect(route('admin.user.settings'))->with('success', 'Admin User Updated Successfully!');
+        }
+
+    }
+
+
+    public function deleteUser($id)
+    {
+        $adminuser = Admin::find($id);
+        $delete = $adminuser->delete();
+        if ($delete) {
+            return redirect(route('admin.user.settings'))->with('success', 'Admin user is deleted succesffully.');
+        }
     }
 
 

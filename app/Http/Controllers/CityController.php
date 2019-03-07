@@ -17,7 +17,6 @@ class CityController extends Controller
      */
     public function index(Request $request)
     {
-
         if (isset($request->offset) and isset($request->limit)) {
             $cities = City::skip($request->input('offset'))->take($request->input('limit'))->get();
             if ($cities->isEmpty()) {
@@ -53,8 +52,6 @@ class CityController extends Controller
      */
     public function show($id)
     {
-
-
         $city = City::find($id);
         if ($city == null) {
             return response()->json([

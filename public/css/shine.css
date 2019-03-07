@@ -111,27 +111,6 @@ body {
     border-top-right-radius: 10px !important;
 }
 
-#im tr td {
-    padding: 5px 25px;
-}
-
-#im tr td span {
-    margin: 2px;
-    width: 60px;
-    height: 30px;
-    font-size: 12px;
-
-}
-
-#im tr td form button {
-    margin: 2px;
-    width: 60px;
-    height: 30px;
-    font-size: 12px;
-    padding: 0px;
-}
-
-
 
 .pagination li {
     padding: 5px 10px !important;
@@ -214,6 +193,18 @@ body {
     font-size: 12px;
     padding: 0px;
 }
+
+
+.white{
+    color:white;
+}
+
+.black{
+    color:black !important;
+}
+
+
+
 
 
 

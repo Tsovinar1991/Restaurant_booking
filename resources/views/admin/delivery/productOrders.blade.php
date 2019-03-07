@@ -23,6 +23,11 @@
         select option[value="confirmed"] {
             background: #5ac16f !important;
         }
+
+         table tbody tr td{
+             text-align:center !important;
+         }
+
     </style>
 @endsection
 
@@ -210,6 +215,7 @@
                             </tr >`
                         );
                         $("#pop")[0].play();
+
                     });
                     if ($("#cont").children().length != 0) {
                         $('.noOrders').css("display", "none");
@@ -313,6 +319,7 @@
                         // option.parent().parent().remove();
                     }
                 })
+                location.reload();
             });
             $(document).on('change', '.change_status', function () {
                 // alert('test');
@@ -345,8 +352,10 @@
             var interval = 1000 * 60 * 0.2; // where X is your every X minutes
             setInterval(ajax_call, interval);
             $(document).on('click', ".order_show", function () {
+
                 let id = $(this).parent().attr('data-id');
                 $(`#product-info-${id}`).fadeToggle(200);
+
             });
             $(document).on('click', ".order-other-show", function () {
                 let id = $(this).parent().attr('data-id');

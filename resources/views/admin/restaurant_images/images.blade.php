@@ -3,10 +3,11 @@
 @section('css')
     <style>
 
-        td {
-            color: #3e5164;
-            text-align: center;
+
+        #images tr td {
+            vertical-align: middle;
         }
+
 
 
     </style>
@@ -21,7 +22,7 @@
 
             <div class="col-md-12 d-flex justify-content-around flex-wrap ">
                 @foreach($categories as $category)
-                    <div id="category_container" class="alert alert-info d-flex justify-content-center">
+                    <div id="category_container" class="alert alert-secondary d-flex justify-content-center">
                         <a class="nounderline" href="{{url('admin/restaurant_images/gallery/'.$category->title)}}">
                             <i class="fas fa-folder fa-2x gallery-folder"></i>
                             <span class="image_class">{{$category->title}}</span>
@@ -36,54 +37,76 @@
         </div>
     @endif
 
-    <div class="create"><a class="btn btn-outline-success"
-                           href="{{url('admin/restaurant_image/create')}}">Create</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-1">
+                <div class="panel panel-default panel-table">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col col-xs-6">
+                                <div class="create"><a class="btn btn-outline-success" href="{{route('admin.restaurant_image.create')}}">Create</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if(isset($images) && count($images)>0)
+                        <div class="panel-body">
+                            <table class="table table-striped table-bordered table-list">
+                                <thead>
+                                <tr>
+                                    <th><i class="fa fa-cog"></i></th>
+                                    <th class="hidden-xs">@sortablelink('id', 'ID')</th>
+                                    <th>@sortablelink('restaurant_id', 'Restaurant')</th>
+                                    <th>@sortablelink('title', 'Title')</th>
+                                    <th>Image</th>
+                                </tr>
+                                </thead>
+                                <tbody id="images">
+                                @foreach($images as $i)
+
+                                    <tr>
+                                        <td>
+                                            <div class="row d-flex justify-content-center align-items-middle">
+                                                <a href="{{url("admin/restaurant_image/$i->id/edit")}}"
+                                                   class="btn btn-default black"><i
+                                                            class="fas fa-pencil-alt "></i></a>
+                                                {{--<a href="{{route('delete.user', ['id'=> $user->id])}}" class="btn btn-danger btn_small  btn-sm"><i--}}
+                                                {{--class="fa fa-trash white"></i></a>--}}
+
+                                                <form action="{{url('admin/restaurant_image/' . $i->id)}}"
+                                                      method="POST">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button class="btn btn-danger"
+                                                            onclick="return confirm('Are you sure you want to delete this item?');">
+                                                        <i class="fa fa-trash white"></i>
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </td>
+                                        <td class="hidden-xs">{{$i->id}}</td>
+                                        <td>{{$i->restaurant_id}}</td>
+                                        <td>{{$i->title}}</td>
+                                        <td><img src="/storage/restaurant_images/{{$i->name}}"
+                                                 style="width:100px;height:100px;object-fit:cover;">
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        {!! $images->appends(\Request::except('page'))->render() !!}
+                    @else
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
-    @if(isset($images) && count($images)>0)
-        <div id="im">
-            <table class="no-footer" width="100%">
-                <thead>
-                <tr class="important">
-                    <th>@sortablelink('id', 'ID')</th>
-                    <th>@sortablelink('restaurant_id', 'Restaurant')</th>
-                    <th>@sortablelink('title', 'Title')</th>
-                    <th>Image</th>
-                    <th>ACTION</th>
-                </tr>
-                </thead>
-                <tbody>
 
-                @foreach($images as $i)
-                    <tr>
-                        <td>{{$i->id}}</td>
-                        <td>{{$i->restaurant_id}}</td>
-                        <td>{{$i->title}}</td>
-                        <td><img src="/storage/restaurant_images/{{$i->name}}"
-                                 style="width:100px;height:100px;object-fit:cover;">
-                        </td>
-                        <td>
-                            <a href="{{url("admin/restaurant_image/$i->id/edit")}}"> <span class="btn btn-primary">
-                                        <i class="fas fa-pen"></i> Edit</span></a>
-                            <form action="{{url('admin/restaurant_image/' . $i->id)}}" method="POST">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button class="btn btn-danger"
-                                        onclick="return confirm('Are you sure you want to delete this item?');"><i
-                                            class="fas fa-trash-alt"></i> Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </table>
-            {!! $images->appends(\Request::except('page'))->render() !!}
-        </div>
 
-    @else
-        <div class="alert alert-info col-md-12" role="alert">
-            No image yet.
-        </div>
-    @endif
+
+
 
 
 

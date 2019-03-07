@@ -41,7 +41,7 @@
                 {{--<span class="badge badge-danger">9+</span>--}}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-                <a class="dropdown-item" href="{{url('admin/productOrders')}}">Delivery Orders</a>
+                <a class="dropdown-item" href="{{route('admin.product_orders')}}">Delivery Orders</a>
                 {{--<a class="dropdown-item" href="#">Another Action</a>--}}
                 {{--<div class="dropdown-divider"></div>--}}
                 {{--<a class="dropdown-item" href="#">Something else here</a>--}}
@@ -61,10 +61,7 @@
                 @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-                <a class="dropdown-item" href="{{url("/admin/read_message")}}">Read Message</a>
-                {{--<a class="dropdown-item" href="#">Another action</a>--}}
-                {{--<div class="dropdown-divider"></div>--}}
-                {{--<a class="dropdown-item" href="#">Something else here</a>--}}
+                <a class="dropdown-item" href="{{route('admin.message.read')}}">Read Message</a>
             </div>
         </li>
         <li class="nav-item dropdown no-arrow">

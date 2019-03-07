@@ -179,7 +179,7 @@ class AdminRestaurantImageController extends Controller
 
     public function gallery(Request $request, $category)
     {
-        $images = RestaurantImage::where('title', $category)->paginate(21);
+        $images = RestaurantImage::where('title', $category)->paginate(5);
 //       dd($images);
         return view('admin.restaurant_images.gallery', compact(['category', 'images']));
     }

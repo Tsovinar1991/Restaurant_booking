@@ -81,6 +81,12 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
+            @if(session()->has('errors'))
+                <div class="alert alert-danger">
+                    Incorrect Login Or Password
+                </div>
+            @endif
+
             <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.login.submit') }}">
                 {{ csrf_field() }}
                 <div class="form-group">

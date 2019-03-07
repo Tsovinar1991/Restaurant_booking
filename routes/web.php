@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::any('{query}',
+    function() { return redirect('/'); })
+    ->where('query', '.*');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -35,7 +40,7 @@ Route::prefix('admin')->group(function () {
 
 
     //Product routes
-    Route::get('/insert/products', 'AdminProductController@index');
+    Route::get('/insert/products', 'AdminProductController@index')->name('admin.products');
     Route::get('/product/create', 'AdminProductController@create');
     Route::post('/product', 'AdminProductController@store');
     Route::get('/product/{id}/edit', 'AdminProductController@edit');
@@ -45,8 +50,8 @@ Route::prefix('admin')->group(function () {
 
 
     //restaurant image routes
-    Route::get('/insert/images', 'AdminRestaurantImageController@all');
-    Route::get('/restaurant_image/create', 'AdminRestaurantImageController@create');
+    Route::get('/insert/images', 'AdminRestaurantImageController@all')->name('admin.images');
+    Route::get('/restaurant_image/create', 'AdminRestaurantImageController@create')->name('admin.restaurant_image.create');
     Route::post('/restaurant_image', 'AdminRestaurantImageController@store');
     Route::get('/restaurant_image/{id}/edit', 'AdminRestaurantImageController@edit');
     Route::put('/restaurant_image/{id}', 'AdminRestaurantImageController@update');
@@ -66,13 +71,17 @@ Route::prefix('admin')->group(function () {
 
 
     //mail message notification
-    Route::get('/read_message', 'AdminController@read_message');
+    Route::get('/read_message', 'AdminController@read_message')->name('admin.message.read');
     Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');
 
 
     //user setting routes
-    Route::get('/register_user', 'AdminUserController@registerForm');
+    Route::get('/register_form', 'AdminUserController@registerForm')->name('admin.user.register.form');
     Route::post('/register_user', 'AdminUserController@register');
+    Route::get('/user/settings', 'AdminUserController@settings')->name('admin.user.settings');
+    Route::delete('/users/delete/{id}', 'AdminUserController@deleteUser')->name('delete.admin.user');
+    Route::get('/users/edit/{id}', 'AdminUserController@editUser')->name('edit.admin.user');
+    Route::put('/users/update/{id}', 'AdminUserController@updateUser')->name('update.admin.user');
 
 
 

@@ -33,7 +33,7 @@
         <div class="col-md-12 row">
             <div class="col-md-6">
                 <img src="/storage/products/{{$product->avatar}}" alt="" class="d-flex justify-content-center"
-                     style="width:500px;height:auto; border-radius: 10px;">
+                     style="width:100%; border-radius: 10px;">
             </div>
             <div class="col-md-6">
                 <h5>Category</h5>
