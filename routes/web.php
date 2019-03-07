@@ -13,12 +13,9 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 
-Route::any('{query}',
-    function() { return redirect('/'); })
-    ->where('query', '.*');
 
 Auth::routes();
 
@@ -102,4 +99,7 @@ Route::get('/contact_us', 'ContactMailController@index')->name('contact_us');
 Route::post('contact_us', ['as' => 'contact_us.store', 'uses' => 'ContactMailController@store']);
 
 
+Route::any('{query}',
+    function() { return redirect(route('welcome')); })
+    ->where('query', '.*');
 
