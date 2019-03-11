@@ -23,7 +23,6 @@
             text-align: center;
         }
 
-
         #pr tr td {
             padding: 5px 25px;
         }
@@ -88,6 +87,8 @@
                     <th>@sortablelink('restaurant_id', 'RESTAURANT')</th>
                     <th>@sortablelink('parent_id', 'PARENT')</th>
                     <th>ACTION</th>
+                    <th>CREATED BY</th>
+                    <th>UPDATED BY</th>
 
                 </tr>
                 </thead>
@@ -119,6 +120,14 @@
                             </div>
 
                         </td>
+                        <td>{{$p->created_by}}</td>
+                        <td>
+                            @if($p->updated_by == null)
+                               No One
+                        @else
+                                {{$p->updated_by}}
+                        @endif
+                        </td>
                     </tr>
                 @endforeach
 
@@ -136,28 +145,28 @@
 @endsection
 
 @section('js')
-<script>
-    $(document).ready(function () {
-        $(document).on('change', '.status', function () {
-            // alert('test');
-            var selected = $(this).val();
-            var id = $(this).attr('id');
-            console.log(selected, id);
-            $.ajax({
-                url: "{{ url('admin/products/change_status') }}",
-                type: 'get',
-                data: {
-                    status: selected,
-                    id: id
-                },
-                success: function (resp) {
-                    console.log(resp);
+    <script>
+        $(document).ready(function () {
+            $(document).on('change', '.status', function () {
+                // alert('test');
+                var selected = $(this).val();
+                var id = $(this).attr('id');
+                console.log(selected, id);
+                $.ajax({
+                    url: "{{ url('admin/products/change_status') }}",
+                    type: 'get',
+                    data: {
+                        status: selected,
+                        id: id
+                    },
+                    success: function (resp) {
+                        console.log(resp);
 
-                }
-            })
+                    }
+                })
+            });
+
         });
-
-    });
-</script>
+    </script>
 
 @endsection

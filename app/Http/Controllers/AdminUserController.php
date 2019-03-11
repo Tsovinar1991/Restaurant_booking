@@ -27,7 +27,7 @@ class AdminUserController extends Controller
      */
     public function registerForm()
     {
-        $roles = Role::select('id', 'name')->where('name', '!=', 'superadmin')->get();
+        $roles = Role::select('id', 'name')->get();
         if (count($roles) > 0) {
             return view('admin.users.userRegisterForm', compact('roles'));
         }
@@ -106,7 +106,7 @@ class AdminUserController extends Controller
     {
 
         $adminUser = Admin::with('roles')->where('id', $id)->first();
-        $roles = Role::select('id', 'name')->where('name', '!=', 'superadmin')->get();
+        $roles = Role::select('id', 'name')->get();
         if (!$adminUser) {
             return redirect()->route('admin.error')->withErrors('Admin User not found!')->with('status_cod', 404);
         }

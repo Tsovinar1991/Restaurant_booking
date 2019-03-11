@@ -136,8 +136,7 @@ class RestaurantController extends Controller
 
 
 
-
-        if ($restaurant == null) {
+       if ($restaurant == null) {
             return response()->json([
                 'success' => false,
                 'message' => 'Data not found or not exist.',

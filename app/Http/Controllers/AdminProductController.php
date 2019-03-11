@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\RestaurantMenu;
 use App\Restaurant;
+use Illuminate\Support\Facades\Auth;
 
 class AdminProductController extends Controller
 {
@@ -105,24 +106,23 @@ class AdminProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $product = RestaurantMenu::create(
-            [
-                'name_en' => request('name_en'),
-                'name_ru' => request('name_ru'),
-                'name_am' => request('name_am'),
-                'description_en' => request('description_en'),
-                'description_ru' => request('description_ru'),
-                'description_am' => request('description_am'),
-                'type' => request('type'),
-                'avatar' => '/storage/products/' . $fileNameToStore,
-                'parent_id' => request('parent_id'),
-                'restaurant_id' => request('restaurant_id'),
-                'price' => request('price'),
-                'weight' => request('weight'),
-                'status' => request('status')
-            ]
-        );
 
+        $id = Auth::guard('admin')->user()->id;
+        $product = new RestaurantMenu;
+        $product->name_en = $request->name_en;
+        $product->name_ru = $request->name_ru;
+        $product->name_am = $request->name_am;
+        $product->description_en = $request->description_en;
+        $product->description_ru = $request->description_ru;
+        $product->description_am = $request->description_am;
+        $product->avatar = '/storage/products/' . $fileNameToStore;
+        $product->parent_id = $request->parent_id;
+        $product->restaurant_id = $request->restaurant_id;
+        $product->price = $request->price;
+        $product->weight  = $request->weight;
+        $product->status = $request->status;
+        $product->created_by = $id;
+        $product->save();
         if ($product) {
             return redirect(url('admin/insert/products'))->with('success', "Product Created Successfully");
         }
@@ -193,20 +193,40 @@ class AdminProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $product->update([
-            'name_en' => $request->name_en,
-            'name_ru' => $request->name_ru,
-            'name_am' => $request->name_am,
-            'description_en' => $request->description_en,
-            'description_ru' => $request->description_ru,
-            'description_am' => $request->description_am,
-            'avatar' => '/storage/products/' . $fileNameToStore,
-            'parent_id' => $request->parent_id,
-            'restaurant_id' => $request->restaurant_id,
-            'price' => $request->price,
-            'weight' => $request->weight,
-            'status' => $request->status
-        ]);
+        $admin_id = Auth::guard('admin')->user()->id;
+        $product = RestaurantMenu::where('id', $id)->first();
+        $product->name_en = $request->name_en;
+        $product->name_ru = $request->name_ru;
+        $product->name_am = $request->name_am;
+        $product->description_en = $request->description_en;
+        $product->description_ru = $request->description_ru;
+        $product->description_am = $request->description_am;
+        $product->avatar = '/storage/products/' . $fileNameToStore;
+        $product->parent_id = $request->parent_id;
+        $product->restaurant_id = $request->restaurant_id;
+        $product->price = $request->price;
+        $product->weight  = $request->weight;
+        $product->status = $request->status;
+        $product->updated_by = $admin_id;
+        $product->save();
+
+
+
+
+//        $product->update([
+//            'name_en' => $request->name_en,
+//            'name_ru' => $request->name_ru,
+//            'name_am' => $request->name_am,
+//            'description_en' => $request->description_en,
+//            'description_ru' => $request->description_ru,
+//            'description_am' => $request->description_am,
+//            'avatar' => '/storage/products/' . $fileNameToStore,
+//            'parent_id' => $request->parent_id,
+//            'restaurant_id' => $request->restaurant_id,
+//            'price' => $request->price,
+//            'weight' => $request->weight,
+//            'status' => $request->status
+//        ]);
 
         if (!$request->avatar) {
             $product->update(['avatar' => $product_image]);

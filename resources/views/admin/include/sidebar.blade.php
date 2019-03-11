@@ -79,6 +79,8 @@
                 Registration</a>
             <a class="dropdown-item" href="{{route('admin.user.settings')}}"><i class="fas fa-users-cog"></i>
                 Settings</a>
+            <a class="dropdown-item" href=""><i class="fas fa-users"></i>
+                Roles</a>
             {{--<a class="dropdown-item" href="register.html">Register</a>--}}
             {{--<a class="dropdown-item" href="forgot-password.html">Forgot Password</a>--}}
             {{--<div class="dropdown-divider"></div>--}}

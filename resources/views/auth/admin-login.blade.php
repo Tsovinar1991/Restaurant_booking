@@ -81,10 +81,12 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-            @if(session()->has('errors'))
-                <div class="alert alert-danger">
-                    Incorrect Login Or Password
-                </div>
+            @if(count($errors)>0)
+                @foreach($errors->all() as $error)
+                    <div class="alert alert-danger col-md-12">
+                        <i class="fas fa-exclamation-circle"></i> {{$error}}
+                    </div>
+                @endforeach
             @endif
 
             <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.login.submit') }}">
@@ -93,22 +95,22 @@
                     <div class="form-label-group">
                         <input type="email" id="inputEmail" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email address" required="required" autofocus="autofocus">
                         <label for="inputEmail">Email address</label>
-                        @if ($errors->has('email'))
-                            <span class="help-block text-danger">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                        @endif
+                        {{--@if ($errors->has('email'))--}}
+                            {{--<span class="help-block text-danger">--}}
+                                        {{--<strong>{{ $errors->first('email') }}</strong>--}}
+                                    {{--</span>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
                         <input type="password" id="inputPassword" class="form-control"   name="password" placeholder="Password" required="required">
                         <label for="inputPassword">Password</label>
-                        @if ($errors->has('password'))
-                            <span class="help-block text-danger">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
+                        {{--@if ($errors->has('password'))--}}
+                            {{--<span class="help-block text-danger">--}}
+                                        {{--<strong>{{ $errors->first('password') }}</strong>--}}
+                            {{--</span>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
                 <div class="form-group">
