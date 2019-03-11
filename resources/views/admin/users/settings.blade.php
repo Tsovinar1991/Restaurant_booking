@@ -85,8 +85,7 @@
                             </div>
                             <div class="col col-xs-6 text-right">
                                 <a href="{{route('admin.user.register.form')}}"
-                                   class="btn btn-sm btn-primary btn-create"> <i
-                                            class="fas fa-user-plus"></i> Create a New User Account</a>
+                                   class="btn  btn-create"> <i class="fas fa-plus fa-x" style="color:green;"></i> Add User</a>
                             </div>
                         </div>
                     </div>
