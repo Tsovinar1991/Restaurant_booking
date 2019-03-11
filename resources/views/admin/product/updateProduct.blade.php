@@ -23,8 +23,8 @@
 
 @section('content')
 
-    <div class="alert alert-info col-md-6" role="alert">
-        <i class="fas fa-exclamation-circle"></i> The fields you don`t want to change, don`t edit.
+    <div class=" col-md-12" role="alert">
+        <p class="{{FORM_UPDATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_UPDATE_INFO}}</p>
     </div>
     <form class="form-horizontal alert my_form_color" role="form" method="POST"
           action="{{url('admin/product/'.$product->id)}}" enctype="multipart/form-data">
@@ -221,7 +221,7 @@
             <div class="col-md-12">
                 <div class="col-md-2 mb-3">
                     <label for="avatar" class="col-md-4 control-label">Avatar</label>
-                    <img src="/storage/products/{{$product->avatar}}" alt="" style="width:100%">
+                    <img src="{{$product->avatar}}" alt="" style="width:100%">
                 </div>
                 <div class="form-group">
                     <div class="col-md-10">

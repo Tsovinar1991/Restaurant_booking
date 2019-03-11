@@ -37,9 +37,9 @@
         </div>
     @endif
 
-    <div class="container">
+    <div class="container col-md-12 col-lg-12">
         <div class="row">
-            <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-12  col-md-offset-1">
                 <div class="panel panel-default panel-table">
                     <div class="panel-heading">
                         <div class="row">
@@ -88,8 +88,8 @@
                                         <td class="hidden-xs">{{$i->id}}</td>
                                         <td>{{$i->restaurant_id}}</td>
                                         <td>{{$i->title}}</td>
-                                        <td><img src="/storage/restaurant_images/{{$i->name}}"
-                                                 style="width:100px;height:100px;object-fit:cover;">
+                                        <td><img src="{{$i->name}}"
+                                                 style="width:50px;height:50px;object-fit:cover;">
                                         </td>
                                     </tr>
                                 @endforeach
@@ -98,6 +98,9 @@
                         </div>
                         {!! $images->appends(\Request::except('page'))->render() !!}
                     @else
+                        <div class="alert alert-info col-md-12" role="alert">
+                            No Image yet.
+                        </div>
                     @endif
                 </div>
             </div>

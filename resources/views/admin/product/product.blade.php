@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-12 row">
             <div class="col-md-6">
-                <img src="/storage/products/{{$product->avatar}}" alt="" class="d-flex justify-content-center"
+                <img src="{{$product->avatar}}" alt="" class="d-flex justify-content-center"
                      style="width:100%; border-radius: 10px;">
             </div>
             <div class="col-md-6">

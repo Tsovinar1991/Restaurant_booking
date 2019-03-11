@@ -71,7 +71,7 @@ class AdminRestaurantImageController extends Controller
         $image = RestaurantImage::create(
             [
                 'restaurant_id' => request('restaurant_id'),
-                'name' => $fileNameToStore,
+                'name' => '/storage/restaurant_images/' .$fileNameToStore,
                 'title' => request('title')
 
             ]
@@ -146,7 +146,7 @@ class AdminRestaurantImageController extends Controller
 
         $image->update([
             'restaurant_id' => $request->restaurant_id,
-            'name' => $fileNameToStore,
+            'name' => '/storage/restaurant_images/' . $fileNameToStore,
             'title' => $request->title,
         ]);
 
@@ -167,11 +167,8 @@ class AdminRestaurantImageController extends Controller
     public function delete($id)
     {
         $image = RestaurantImage::find($id);
-        $file_path = 'public/restaurant_images/';
-        Storage::delete($file_path . $image->name);
+        Storage::delete($image->name);
         $delete = $image->delete();
-
-
         return redirect(url('admin/insert/images'))->with('success', 'Restaurant Image Deleted Successfully');
 
 

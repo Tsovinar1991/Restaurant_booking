@@ -21,10 +21,9 @@
 @section('page', 'Page Edit')
 
 @section('content')
-    <div class="alert alert-info col-md-6" role="alert">
-        <i class="fas fa-exclamation-circle"></i> The fields you don`t want to change, don`t edit.
+    <div class=" col-md-12" role="alert">
+        <p class="{{FORM_UPDATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_UPDATE_INFO}}</p>
     </div>
-
     <form class="form-horizontal alert my_form_color" role="form" method="POST"
           action="{{url('admin/page/'.$pages->id)}}" enctype="multipart/form-data">
         {{ csrf_field() }}

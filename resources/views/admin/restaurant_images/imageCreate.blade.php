@@ -7,8 +7,8 @@
 @section('page', 'Restaurant Image Create')
 @section('content')
 
-    <div class="alert alert-info col-md-6" role="alert">
-        <i class="fas fa-exclamation-circle"></i> All fields are required.
+    <div class=" col-md-12" role="alert">
+        <p class="{{FORM_CREATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_CREATE_INFO}}</p>
     </div>
 
     <form class="form-horizontal alert my_form_color" role="form" method="POST"
@@ -17,8 +17,8 @@
 
         <div class="row col-md-12">
             <div class="col-md-6 form-group{{ $errors->has('restaurant_id') ? ' has-error' : '' }}">
-                <label for="restaurant_id" class="col-md-4 control-label">Restaurant Id</label>
-                <div class="col-md-10">
+                <label for="restaurant_id" class="col-md-12 control-label">Restaurant Id</label>
+                <div class="col-md-12">
                     <select name="restaurant_id" id="restaurant_id" class="form-control">
                         {{--<option selected="true" disabled="disabled">Choose Restaurant</option>--}}
                         @foreach($restaurants as $k=>$r)
@@ -34,8 +34,8 @@
             </div>
 
             <div class="col-md-6 form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                <label for="image_title" class="col-md-4 control-label">Title</label>
-                <div class="col-md-10">
+                <label for="image_title" class="col-md-12 control-label">Title</label>
+                <div class="col-md-12">
                     <input id="image_title" type="text" class="form-control" name="title" value="{{ old('title') }}" required
                            autofocus>
                     @if ($errors->has('title'))
@@ -46,8 +46,8 @@
                 </div>
             </div>
             <div class="col-md-6 form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="image" class="col-md-4 control-label">Image</label>
-                <div class="col-md-10">
+                <label for="image" class="col-md-12 control-label">Image</label>
+                <div class="col-md-12">
                     <input id="image" type="file" name="name" value="{{ old('name') }}" required>
                     @if ($errors->has('name'))
                         <span class="help-block text-danger">

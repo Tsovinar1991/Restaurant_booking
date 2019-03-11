@@ -62,6 +62,10 @@
             margin-right: 3px;
         }
 
+        #super{
+            cursor:default;
+        }
+
 
     </style>
 @endsection
@@ -70,7 +74,7 @@
 @section('page', 'ADMIN User Settings')
 @section('content')
 
-    <div class="container">
+    <div class="container col-md-12 col-lg-12">
         <div class="row">
             <div class="col-md-12 col-md-offset-1">
                 <div class="panel panel-default panel-table">
@@ -80,9 +84,9 @@
                                 {{--<h3 class="panel-title">Panel Heading</h3>--}}
                             </div>
                             <div class="col col-xs-6 text-right">
-                                <a href="{{route('admin.user.register.form')}}" class="btn btn-sm btn-primary btn-create"> <i
-                                            class="fas fa-user-plus"></i> Create
-                                    New User</a>
+                                <a href="{{route('admin.user.register.form')}}"
+                                   class="btn btn-sm btn-primary btn-create"> <i
+                                            class="fas fa-user-plus"></i> Create a New User Account</a>
                             </div>
                         </div>
                     </div>
@@ -93,25 +97,34 @@
                                 <thead>
                                 <tr>
                                     <th><i class="fa fa-cog"></i></th>
-                                    {{--<th>Password</th>--}}
+                                    <th>Access</th>
                                     <th class="hidden-xs">ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Job Title</th>
                                     <th>Role</th>
+                                    <th>Status</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($users as $user)
                                     @foreach($user->roles as $role)
-                                        @if($role->name != 'superadmin')
-                                            <tr>
-                                                <td>
-                                                    <div class="row d-flex justify-content-center">
-                                                        <a href="{{route('edit.admin.user', ['id'=> $user->id])}}" class="btn btn-default btn_small btn-sm black">
-                                                            <i class="fas fa-user-edit"></i>
+
+                                        <tr>
+                                            <td>
+                                                <div class="row d-flex justify-content-center">
+                                                    <a href="{{route('edit.admin.user', ['id'=> $user->id])}}"
+                                                       class="btn btn-default btn_small btn-sm black">
+                                                        <i class="fas fa-user-edit"></i>
+                                                    </a>
+                                                    @if($role->name == "superadmin")
+                                                        <a>
+                                                            <button id="super" class="btn btn-success btn_small btn-sm">
+                                                            <i class="fas fa-user-shield"></i>
+                                                            </button>
                                                         </a>
+                                                    @else
                                                         <form action="{{route('delete.admin.user', ['id'=> $user->id])}}"
                                                               method="POST">
                                                             {{ method_field('DELETE') }}
@@ -121,26 +134,68 @@
                                                                 <i class="fas fa-user-times"></i>
                                                             </button>
                                                         </form>
-                                                    </div>
-                                                </td>
-                                                {{--<td><a  class="btn btn-info btn_small btn-sm black"><i class="fas fa-key"></i></a></td>--}}
-                                                <td class="hidden-xs">{{$user->id}}</td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->email}}</td>
-                                                <td>{{$user->job_title}}</td>
-                                                <td>{{$role->name}}</td>
-                                            </tr>
-                                        @endif
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            <td><a href="{{route('admin.user.changePassword', ['id'=> $user->id])}}"
+                                                   class="btn btn-secondary btn_small btn-sm"><i class="fas fa-key"></i></a>
+                                            </td>
+                                            <td class="hidden-xs">{{$user->id}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->job_title}}</td>
+                                            <td>{{$role->name}}</td>
+                                            <td>
+                                                @if($role->name == "superadmin")
+                                                    Active
+                                                @else
+                                                    <select name="" class="user_status form-control" id="{{$user->id}}">
+                                                        <option value="0" {{$user->status == 0?"selected":""}}>Passive
+                                                        </option>
+                                                        <option value="1" {{$user->status == 1?"selected":""}} >Active
+                                                        </option>
+                                                    </select>
+                                                @endif
+                                            </td>
+                                        </tr>
+
                                     @endforeach
                                 @endforeach
                                 </tbody>
                             </table>
                             {{ $users->links() }}
                         </div>
-                       @else
+                    @else
                     @endif
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+
+        $(document).ready(function () {
+            $(document).on('change', '.user_status', function () {
+                // alert('test');
+                var selected = $(this).val();
+                var id = $(this).attr('id');
+                console.log(selected, id);
+                $.ajax({
+                    url: "{{ url('admin/users/change_status') }}",
+                    type: 'get',
+                    data: {
+                        status: selected,
+                        id: id
+                    },
+                    success: function (resp) {
+                        console.log(resp);
+
+                    }
+                })
+            });
+
+        });
+    </script>
 @endsection

@@ -121,7 +121,7 @@ class AdminUserController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required|max:255|unique:admins,email,' . $admin->id,
-            'password' => 'required|min:6',
+//            'password' => 'required|min:6',
             'job_title' => 'required',
             'role' => 'required'
         ]);
@@ -133,7 +133,7 @@ class AdminUserController extends Controller
         $admin->update([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => bcrypt($request['password']),
+//            'password' => bcrypt($request['password']),
             'job_title' => $request['job_title']
         ]);
 
@@ -159,6 +159,47 @@ class AdminUserController extends Controller
         if ($delete) {
             return redirect(route('admin.user.settings'))->with('success', 'Admin user is deleted succesffully.');
         }
+    }
+
+
+    public function changePassword($id)
+    {
+//        dd($id);
+        $admin = Admin::where('id', $id)->first();
+        if(!$admin){
+            return redirect()->route('admin.error')->withErrors('User not found!')->with('status_cod', 404);
+        }
+        return view('admin.users.changePassword', compact('admin'));
+    }
+
+    public function updatePassword(Request $request,$id)
+    {
+//      dd($id, $request->all());
+
+
+        $validation = Validator::make($request->all(), [
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|min:6|same:password'
+        ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+        $admin = Admin::where('id', $id)->first();
+        if($admin){
+            $admin->password = bcrypt($request->password);
+            $admin->save();
+            return redirect(route('admin.user.settings'))->with('success', 'Admin user password is changed succesfully.');
+        }
+
+
+    }
+
+    public function userStatus(Request $request){
+        $admin = Admin::where('id', $request->id)->first();
+        $admin->status = $request->status;
+        $admin->save();
+        return response($admin);
     }
 
 

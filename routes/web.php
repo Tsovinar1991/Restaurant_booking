@@ -36,6 +36,17 @@ Route::prefix('admin')->group(function () {
     Route::get('/test', 'AdminDeliveryController@test');
 
 
+    //restaurant routes
+    Route::get('/insert/restaurants', 'AdminRestaurantController@index')->name('admin.restaurants');
+    Route::get('/restaurant/{id}', 'AdminRestaurantController@show')->name('admin.show.restaurant');
+    Route::get('/create/restaurant', 'AdminRestaurantController@create')->name('admin.restaurant.create');
+    Route::post('/restaurant', 'AdminRestaurantController@store')->name('admin.create.restaurant');
+    Route::get('/restaurant/{id}/edit', 'AdminRestaurantController@edit')->name('admin.edit.restaurant');
+    Route::put('/restaurant/{id}', 'AdminRestaurantController@update')->name('admin.update.restaurant');
+
+
+
+
     //Product routes
     Route::get('/insert/products', 'AdminProductController@index')->name('admin.products');
     Route::get('/product/create', 'AdminProductController@create');
@@ -79,6 +90,9 @@ Route::prefix('admin')->group(function () {
     Route::delete('/users/delete/{id}', 'AdminUserController@deleteUser')->name('delete.admin.user');
     Route::get('/users/edit/{id}', 'AdminUserController@editUser')->name('edit.admin.user');
     Route::put('/users/update/{id}', 'AdminUserController@updateUser')->name('update.admin.user');
+    Route::get('/users/changePassword/{id}', 'AdminUserController@changePassword')->name('admin.user.changePassword');
+    Route::put('/users/password/update/{id}', 'AdminUserController@updatePassword')->name('admin.user.password.update');
+    Route::get('/users/change_status', 'AdminUserController@userStatus');
 
 
 

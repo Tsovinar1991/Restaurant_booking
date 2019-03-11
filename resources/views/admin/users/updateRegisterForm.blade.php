@@ -8,13 +8,18 @@
 @section('page', 'Update ADMIN User')
 @section('content')
 
+
+    <div class=" col-md-12" role="alert">
+        <p class="{{FORM_UPDATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_UPDATE_INFO}}</p>
+    </div>
+
     <div class="modal-body alert my_form_color">
         <form id="registerForm" method="POST" action="{{route('update.admin.user', [$adminUser->id])}}">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
         {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
         <!---form--->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <!---input width--->
                 <div class="col-xs-6">
                     <label for="name">Name</label>
@@ -25,18 +30,18 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    <label for="password">Password</label>
-                    <div class="input-group">
-                        <input id="password" type="password" class="form-control" name="password"
-                               placeholder="Enter Password"
-                               required>
-                    </div>
-                </div>
-            </div>
+            {{--<div class="form-group">--}}
+                {{--<div class="col-xs-6">--}}
+                    {{--<label for="password">Password</label>--}}
+                    {{--<div class="input-group">--}}
+                        {{--<input id="password" type="password" class="form-control" name="password"--}}
+                               {{--placeholder="Enter Password"--}}
+                               {{--required>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <div class="col-xs-12">
                     <label for="email">Email</label>
                     <div class="input-group">
@@ -49,7 +54,7 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <div class="col-xs-12">
                     <label for="job_title">Job Title</label>
                     <div class="input-group">
@@ -60,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <div class="col-xs-12">
                     <label for="role">Role</label>
                     <div class="input-group">
@@ -78,7 +83,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <div class="input-group-addon">
                     <input type="submit" name="submit" id="submit" value="Submit"
                            class="btn btn-outline-success pull-right">

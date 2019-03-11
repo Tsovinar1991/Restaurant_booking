@@ -8,6 +8,11 @@ use DB;
 
 class AdminMessageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     public function set_messages_read(Request $request){
 
        //$mails =  ContactUs::all()->update(['status'=> $request->status]);

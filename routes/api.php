@@ -54,6 +54,10 @@ Route::delete('city/{id}', 'CityController@delete');
 
 Route::post('/create_order', 'GetOrdersController@store');
 
+//menu with request lang
+Route::get('/menu_all', 'PageController@index');
+Route::get('/menu_single/{id}', 'PageController@single');
+
 
 
 

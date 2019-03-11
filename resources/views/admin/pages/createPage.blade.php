@@ -13,6 +13,10 @@
 
 @section('content')
 
+    <div class=" col-md-12" role="alert">
+        <p class="{{FORM_CREATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_CREATE_INFO}}</p>
+    </div>
+
     <form class="form-horizontal alert my_form_color" role="form" method="POST" action="{{url('admin/pages')}}">
         {{ csrf_field() }}
 

@@ -126,7 +126,7 @@
                                                     <td>{{$prod['id']}}</td>
                                                     <td>
                                                         <div style="margin-top:5px;">
-                                                            <img src="/storage/products/{{$prod['avatar']}}"
+                                                            <img src="{{$prod['avatar']}}"
                                                                  style="width:150px;height:auto;">
                                                         </div>
                                                     </td>
@@ -176,7 +176,7 @@
                         let products = row.products.reduce((acc, product) => {
                             acc += `<tr class="prod">`;
                             acc += `<td>${product.id}</td>`;
-                            acc += `<td> <div style="margin-top:5px;"><img src="/storage/products/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
+                            acc += `<td> <div style="margin-top:5px;"><img src="${product.avatar}" style="width:150px;height:auto;"></div></td>`;
                             acc += `<td>${product.name_en}</td>`;
                             acc += `<td>${product.price} AMD</td>`;
                             acc += `<td>${product.count}</td>`;
@@ -243,7 +243,7 @@
                             let products = row.products.reduce((acc, product) => {
                                 acc += `<tr class="prod">`;
                                 acc += `<td>${product.id}</td>`;
-                                acc += `<td> <div style="margin-top:5px;"><img src="/storage/products/${product.avatar}" style="width:150px;height:auto;"></div></td>`;
+                                acc += `<td> <div style="margin-top:5px;"><img src="${product.avatar}" style="width:150px;height:auto;"></div></td>`;
                                 acc += `<td>${product.name_en}</td>`;
                                 acc += `<td>${product.price} AMD</td>`;
                                 acc += `<td>${product.count}</td>`;

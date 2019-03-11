@@ -97,7 +97,7 @@
                     <tr>
                         <td>{{$p->id}}</td>
                         <td>{{$p->name_en}}</td>
-                        <td><img src="/storage/products/{{$p->avatar}}" style="width:100px;height:100px;object-fit:cover;"></td>
+                        <td><img src="{{$p->avatar}}" style="width:50px;height:50px;object-fit:cover;"></td>
                         <td>{{$p->price}} AMD</td>
                         <td>{{$p->weight}} gram</td>
                         <td>

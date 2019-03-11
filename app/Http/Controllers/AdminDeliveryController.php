@@ -19,6 +19,8 @@ class AdminDeliveryController extends Controller
 
     public function orders()
     {
+
+        $order_list = [];
         $order = OrderInfo::whereStatus('confirmed')->Orwhere('status', 'in progress')->Orwhere('status', 'canceled')->orderBy('id', 'DESC')->paginate(6);
         foreach ($order as $key => $o) {
             $orderItem = MenuOrder::select('restaurant_menus.*', 'order_menus.count', 'order_menus.total')

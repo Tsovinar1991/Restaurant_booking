@@ -12,9 +12,9 @@
 
         }
 
-        .textarea_height {
-            height: 200px !important;
-        }
+        /*.textarea_height {*/
+            /*height: 200px !important;*/
+        /*}*/
 
 
     </style>
@@ -25,8 +25,8 @@
 @section('page', 'Product Create')
 
 @section('content')
-    <div class="alert alert-info col-md-6" role="alert">
-        <i class="fas fa-exclamation-circle"></i> All fields are required.
+    <div class=" col-md-12" role="alert">
+        <p class="{{FORM_CREATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_CREATE_INFO}}</p>
     </div>
 
     <form class="form-horizontal alert alert alert-secondary" role="form" method="POST"

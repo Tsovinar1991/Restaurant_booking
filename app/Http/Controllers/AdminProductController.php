@@ -114,7 +114,7 @@ class AdminProductController extends Controller
                 'description_ru' => request('description_ru'),
                 'description_am' => request('description_am'),
                 'type' => request('type'),
-                'avatar' => $fileNameToStore,
+                'avatar' => '/storage/products/' . $fileNameToStore,
                 'parent_id' => request('parent_id'),
                 'restaurant_id' => request('restaurant_id'),
                 'price' => request('price'),
@@ -134,7 +134,7 @@ class AdminProductController extends Controller
     {
         $product = RestaurantMenu::find($id);
         if (!$product) {
-            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);;
+            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);
         }
         $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name_en')->get();
@@ -151,7 +151,7 @@ class AdminProductController extends Controller
 
         $product = RestaurantMenu::find($id);
         if ($product == null) {
-            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);;
+            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);
         }
         $product_image = $product->avatar;
 
@@ -200,7 +200,7 @@ class AdminProductController extends Controller
             'description_en' => $request->description_en,
             'description_ru' => $request->description_ru,
             'description_am' => $request->description_am,
-            'avatar' => $fileNameToStore,
+            'avatar' => '/storage/products/' . $fileNameToStore,
             'parent_id' => $request->parent_id,
             'restaurant_id' => $request->restaurant_id,
             'price' => $request->price,
@@ -220,6 +220,7 @@ class AdminProductController extends Controller
     public function productStatus(Request $request)
     {
         $product = RestaurantMenu::find($request->id);
+
         $product->update(['status' => $request->status]);
         return response($product);
 //        return response(['Product status is' . $request->status]);

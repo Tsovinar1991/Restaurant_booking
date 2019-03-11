@@ -12,15 +12,16 @@
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-pencil-alt"></i>
-            <span>Insert Data</span>
+            <span>Data Management</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Table</h6>
-            <a class="dropdown-item" href="{{route('admin.products')}}"> <i class="fas fa-utensils"></i>
-                Products</a>
+            <a class="dropdown-item" href="{{route('admin.restaurants')}}"><i class="fas fa-hotel"></i> Restaurants</a>
+            <a class="dropdown-item" href="{{route('admin.images')}}"><i class="fas fa-image"></i> Images</a>
+            <a class="dropdown-item" href="{{route('admin.products')}}"> <i class="fas fa-utensils"></i> Products</a>
             {{--<div class="dropdown-divider"></div>--}}
-            <a class="dropdown-item" href="{{route('admin.images')}}"><i class="fas fa-image"></i>
-                Restaurant Images</a>
+
+
 
 
             {{--<a class="dropdown-item" href="register.html">Register</a>--}}
@@ -75,7 +76,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">User Settings</h6>
             <a class="dropdown-item" href="{{route('admin.user.register.form')}}"><i class="fas fa-user-plus"></i>
-                Register User</a>
+                Registration</a>
             <a class="dropdown-item" href="{{route('admin.user.settings')}}"><i class="fas fa-users-cog"></i>
                 Settings</a>
             {{--<a class="dropdown-item" href="register.html">Register</a>--}}
