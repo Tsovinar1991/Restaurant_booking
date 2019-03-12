@@ -147,7 +147,7 @@ class OrderController extends Controller
         $order = Order::create([
 
             'restaurant_id' => $request->restaurant_id,
-            'tel' => $request->phone,
+            'telephone' => $request->phone,
             'name' => $request->name,
             'guest_count' => $request->guest_count,
             'start' => $request->start,
@@ -315,7 +315,7 @@ class OrderController extends Controller
 
             $order->update([
                 'restaurant_id' => $request->restaurant_id,
-                'tel' => $request->phone,
+                'telephone' => $request->phone,
                 'name' => $request->name,
                 'guest_count' => $request->guest_count,
                 'start' => $request->start,

@@ -13,15 +13,26 @@ class AdminMessageController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function set_messages_read(Request $request){
+    public function read_message()
+    {
+        $mails = ContactUs::all()->where('status', 0);
+        if ($mails) {
+            return view('admin.contact_us.messages', compact('mails'));
+        } else {
+            return view('admin.contact_us.messages');
+        }
+    }
 
-       //$mails =  ContactUs::all()->update(['status'=> $request->status]);
+    public function set_messages_read(Request $request)
+    {
+
+        //$mails =  ContactUs::all()->update(['status'=> $request->status]);
         $mails = DB::table('contact_us')->update(array('status' => 1));
         return response($mails);
-       if($mails) {
-           return response(["Done"]);
-       }else{
-           return response(["Not Done"]);
-       }
+        if ($mails) {
+            return response(["Done"]);
+        } else {
+            return response(["Not Done"]);
+        }
     }
 }

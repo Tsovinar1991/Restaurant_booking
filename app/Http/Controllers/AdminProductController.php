@@ -17,31 +17,19 @@ class AdminProductController extends Controller
         $this->middleware('auth:admin');
 
         //tests
+//        $this->middleware(['roles:superadmin|waiter']); multiple roles
 //        $this->middleware('role:delivery');  //access to product contrller will be given only to delivery role for example.
 
     }
 
     public function index(Request $request)
     {
-
-
 //        dd($request->user());
-
 //        if ($request->user()->hasRole('admin')) {
-//            {
-//                $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
-//                return view('admin.product.products', compact('products'));
-//            }
-//        } else {
-//
-//            return redirect(url('admin'))->withErrors(['Unauthorized!']);
-//        }
-
 //        $request->user()->authorizeRoles(['admin', 'manager']); //give access to admin and manager
 
         $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
         return view('admin.product.products', compact('products'));
-
     }
 
     public function create()
@@ -119,7 +107,7 @@ class AdminProductController extends Controller
         $product->parent_id = $request->parent_id;
         $product->restaurant_id = $request->restaurant_id;
         $product->price = $request->price;
-        $product->weight  = $request->weight;
+        $product->weight = $request->weight;
         $product->status = $request->status;
         $product->created_by = $id;
         $product->save();
@@ -205,12 +193,10 @@ class AdminProductController extends Controller
         $product->parent_id = $request->parent_id;
         $product->restaurant_id = $request->restaurant_id;
         $product->price = $request->price;
-        $product->weight  = $request->weight;
+        $product->weight = $request->weight;
         $product->status = $request->status;
         $product->updated_by = $admin_id;
         $product->save();
-
-
 
 
 //        $product->update([
