@@ -82,11 +82,11 @@
         <div class="card-header">Login</div>
         <div class="card-body">
             @if(count($errors)>0)
-                @foreach($errors->all() as $error)
+                {{--@foreach($errors->all() as $error)--}}
                     <div class="alert alert-danger col-md-12">
-                        <i class="fas fa-exclamation-circle"></i> {{$error}}
+                        <i class="fas fa-exclamation-circle"></i> {{$errors->first()}}
                     </div>
-                @endforeach
+                {{--@endforeach--}}
             @endif
 
             <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.login.submit') }}">
