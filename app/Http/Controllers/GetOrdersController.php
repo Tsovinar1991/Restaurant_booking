@@ -27,7 +27,7 @@ class GetOrdersController extends Controller
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $validator->errors()
-            ]);
+            ], 401);
         }
 
         //filling results into products array
@@ -98,7 +98,7 @@ class GetOrdersController extends Controller
                 'message' => 'Order is Send',
                 'data' => $order,
                 'errors' => false
-            ]);
+            ],200);
         }
     }
 
