@@ -28,16 +28,4 @@ class AdminController extends Controller
         return view('admin.admin');
     }
 
-
-    public function read_message()
-    {
-        $mails = ContactUs::all()->where('status', 0);
-        if ($mails) {
-            return view('admin.contact_us.messages', compact('mails'));
-        } else {
-            return view('admin.contact_us.messages');
-        }
-    }
-
-
 }

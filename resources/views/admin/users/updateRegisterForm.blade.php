@@ -14,7 +14,7 @@
     </div>
 
     <div class="modal-body alert my_form_color">
-        <form id="registerForm" method="POST" action="{{route('update.admin.user', [$adminUser->id])}}">
+        <form id="registerForm" method="POST" action="{{route('update.admin.user', [$adminUser->id])}}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
         {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
@@ -82,6 +82,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="form-group col-md-6">
                 <div class="input-group-addon">

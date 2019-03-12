@@ -40,13 +40,26 @@ class AdminUserController extends Controller
      */
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
-        $admin = $this->create([
+
+        $validation = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|max:255|unique:admins,email',
+            'password' => 'required|min:6',
+            'job_title' => 'required',
+            'role' => 'required'
+        ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
+        $admin = Admin::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'job_title' => $request['job_title']
         ]);
+
 
         $id = $request->role;
 
@@ -58,6 +71,9 @@ class AdminUserController extends Controller
         if ($id && $role) {
             return redirect(route('admin.user.settings'))->with('success', 'Admin User Created Successfully!');
         }
+        else{
+            return redirect()->back()->withErrors("Something went wrong");
+        }
     }
 
 
@@ -65,28 +81,7 @@ class AdminUserController extends Controller
      * @param array $data
      * @return mixed
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:admins',
-            'password' => 'required|min:6',
-            'job_title' => 'required',
-            'role' => 'required'
-        ]);
-    }
 
-
-    //Create a new admininstance after a validation.
-    protected function create(array $data)
-    {
-        return Admin::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'job_title' => $data['job_title']
-        ]);
-    }
 
     //Get the guard to authenticate Seller
     protected function guard()
@@ -104,13 +99,11 @@ class AdminUserController extends Controller
 
     public function editUser($id)
     {
-
         $adminUser = Admin::with('roles')->where('id', $id)->first();
         $roles = Role::select('id', 'name')->get();
         if (!$adminUser) {
             return redirect()->route('admin.error')->withErrors('Admin User not found!')->with('status_cod', 404);
         }
-
         return view('admin.users.updateRegisterForm', compact(['adminUser', 'roles']));
     }
 
@@ -176,12 +169,10 @@ class AdminUserController extends Controller
     {
 //      dd($id, $request->all());
 
-
         $validation = Validator::make($request->all(), [
             'password' => 'required|min:6',
             'password_confirmation' => 'required|min:6|same:password'
         ]);
-
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
         }

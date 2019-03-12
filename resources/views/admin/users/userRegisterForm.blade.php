@@ -21,8 +21,7 @@
                 <div class="col-xs-6">
                     <label for="name">Name</label>
                     <div class="input-group">
-                        <input id="name" type="text" class="form-control" name="name" placeholder="Enter Name"
-                               required>
+                        <input id="name" type="text" class="form-control" name="name" placeholder="Enter Name" value="{{old('name')}}" required>
 
                     </div>
                 </div>
@@ -31,7 +30,9 @@
                 <div class="col-xs-6">
                     <label for="password">Password</label>
                     <div class="input-group">
-                        <input id="password" type="password" class="form-control" name="password"
+                        <input id="password" type="password" class="form-control"
+                               value="{{old('password')}}"
+                               name="password"
                                placeholder="Enter Password"
                                required>
                     </div>
@@ -42,7 +43,9 @@
                 <div class="col-xs-12">
                     <label for="email">Email</label>
                     <div class="input-group">
-                        <input id="email" type="email" class="form-control" name="email" placeholder="Enter Email"
+                        <input id="email" type="email" class="form-control" name="email"
+                               value="{{old('email')}}"
+                               placeholder="Enter Email"
                                required>
 
                     </div>
@@ -54,7 +57,9 @@
                 <div class="col-xs-12">
                     <label for="job_title">Job Title</label>
                     <div class="input-group">
-                        <input id="job_title" type="text" class="form-control" name="job_title"
+                        <input id="job_title" type="text" class="form-control"
+                               value="{{old('job_title')}}"
+                               name="job_title"
                                placeholder="Enter Job Title" required>
                     </div>
                 </div>

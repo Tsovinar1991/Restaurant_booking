@@ -17,50 +17,46 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('restaurant', 'RestaurantController@index');
-Route::get('restaurant/{id}', 'RestaurantController@show');
-Route::post('restaurant', 'RestaurantController@store');
-Route::put('restaurant/{id}', 'RestaurantController@update');
-Route::delete('restaurant/{id}', 'RestaurantController@delete');
+Route::middleware(['cors'])->group(function () {
+    Route::get('restaurant', 'RestaurantController@index');
+    Route::get('restaurant/{id}', 'RestaurantController@show');
+    Route::post('restaurant', 'RestaurantController@store');
+    Route::put('restaurant/{id}', 'RestaurantController@update');
+    Route::delete('restaurant/{id}', 'RestaurantController@delete');
 
 
-
-Route::get('order', 'OrderController@index');
-Route::get('order/{id}', 'OrderController@show');
-Route::post('order', 'OrderController@store');
-Route::put('order/{id}', 'OrderController@update');
-Route::delete('order/{id}', 'OrderController@delete');
-
+    Route::get('order', 'OrderController@index');
+    Route::get('order/{id}', 'OrderController@show');
+    Route::post('order', 'OrderController@store');
+    Route::put('order/{id}', 'OrderController@update');
+    Route::delete('order/{id}', 'OrderController@delete');
 
 
-Route::get('/seat', 'SeatController@index');
-Route::get('/seat/{id}', 'SeatController@show');
-Route::post('seat', 'SeatController@store');
-Route::put('seat/{id}', 'SeatController@update');
-Route::delete('seat/{id}', 'SeatController@delete');
+    Route::get('/seat', 'SeatController@index');
+    Route::get('/seat/{id}', 'SeatController@show');
+    Route::post('seat', 'SeatController@store');
+    Route::put('seat/{id}', 'SeatController@update');
+    Route::delete('seat/{id}', 'SeatController@delete');
 
 
-
-Route::get('restaurant_image', 'RestaurantImageController@index');
-Route::get('restaurant_image/{id}', 'RestaurantImageController@show');
-
-
-Route::get('city', 'CityController@index');
-Route::get('city/{id}', 'CityController@show');
-Route::post('city', 'CityController@store');
-Route::put('city/{id}', 'CityController@update');
-Route::delete('city/{id}', 'CityController@delete');
+    Route::get('restaurant_image', 'RestaurantImageController@index');
+    Route::get('restaurant_image/{id}', 'RestaurantImageController@show');
 
 
-Route::post('/create_order', 'GetOrdersController@store');
+    Route::get('city', 'CityController@index');
+    Route::get('city/{id}', 'CityController@show');
+    Route::post('city', 'CityController@store');
+    Route::put('city/{id}', 'CityController@update');
+    Route::delete('city/{id}', 'CityController@delete');
+
+
+    Route::post('/create_order', 'GetOrdersController@store');
 
 //menu with request lang
-Route::get('/menu_all', 'PageController@index');
-Route::get('/menu_single/{id}', 'PageController@single');
+    Route::get('/menu_all', 'PageController@index');
+    Route::get('/menu_single/{id}', 'PageController@single');
 
-
-
-
+});
 
 
 
