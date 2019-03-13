@@ -102,7 +102,7 @@ class AdminUserController extends Controller
         $adminUser = Admin::with('roles')->where('id', $id)->first();
         $roles = Role::select('id', 'name')->get();
         if (!$adminUser) {
-            return redirect()->route('admin.error')->withErrors('Admin User not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with("error", 'Admin User not found!')->with('status_cod', 404);
         }
         return view('admin.users.updateRegisterForm', compact(['adminUser', 'roles']));
     }
@@ -160,7 +160,7 @@ class AdminUserController extends Controller
 //        dd($id);
         $admin = Admin::where('id', $id)->first();
         if(!$admin){
-            return redirect()->route('admin.error')->withErrors('User not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Admin User not found!')->with('status_cod', 404);
         }
         return view('admin.users.changePassword', compact('admin'));
     }

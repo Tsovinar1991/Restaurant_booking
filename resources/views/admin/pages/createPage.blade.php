@@ -19,9 +19,7 @@
 
     <form class="form-horizontal alert my_form_color" role="form" method="POST" action="{{url('admin/pages')}}">
         {{ csrf_field() }}
-
         <div class="col-md-12 row">
-
             <div class="col-md-4 form-group{{ $errors->has('name_ru') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-4 control-label">Name Ru</label>
                 <div class="col-md-10">

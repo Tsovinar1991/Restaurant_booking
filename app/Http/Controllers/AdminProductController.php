@@ -48,7 +48,7 @@ class AdminProductController extends Controller
         $product = RestaurantMenu::find($id);
 
         if (!$product) {
-            return redirect()->route('admin.error')->withErrors('Product  not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
         }
 
         return view('admin.product.product')->with('product', $product);
@@ -122,7 +122,7 @@ class AdminProductController extends Controller
     {
         $product = RestaurantMenu::find($id);
         if (!$product) {
-            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
         }
         $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name_en')->get();
@@ -139,7 +139,7 @@ class AdminProductController extends Controller
 
         $product = RestaurantMenu::find($id);
         if ($product == null) {
-            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
         }
         $product_image = $product->avatar;
 

@@ -96,6 +96,7 @@ Route::prefix('admin')->group(function () {
 
     //profile routes
     Route::get('/admin/user/profile', 'AdminProfileController@adminUserProfile')->name('admin.user.profile');
+    Route::post('/admin/user/{id}/update', 'AdminProfileController@updateProfile')->name('admin.user.profile.update');
 
 
 

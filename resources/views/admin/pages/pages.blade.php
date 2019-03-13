@@ -2,7 +2,6 @@
 
 @section('css')
     <style>
-
         td {
             color: #3e5164;
             text-align: center;
@@ -29,15 +28,9 @@
 @section('content')
 
 
-        <div class="create">
+    <div class="create">
         <a class="btn btn-outline-success" href="{{url('admin/pages/create')}}">Create</a>
-        {{--<form action="{{url('admin/pages/delete')}}" method="POST">--}}
-            {{--{{ method_field('DELETE') }}--}}
-            {{--{{ csrf_field() }}--}}
-            {{--<button class="btn btn-danger">Truncate</button>--}}
-        {{--</form>--}}
-        </div>
-
+    </div>
 
     @if(isset($pages) && count($pages)>0)
         <div id="pages">
@@ -94,7 +87,10 @@
                             <form action="{{url('admin/page/'.$p->id)}}" method="POST">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash-alt"></i> Delete</button>
+                                <button class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this item?');"><i
+                                            class="fas fa-trash-alt"></i> Delete
+                                </button>
                             </form>
 
                         </td>
@@ -104,8 +100,8 @@
             </table>
         </div>
     @else
-        <div class="alert alert-info col-md-12" role="alert">
-            No page yet.
+        <div class="alert text-info col-md-12" role="alert">
+            <p>No page yet</p>
         </div>
     @endif
 

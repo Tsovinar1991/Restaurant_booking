@@ -63,7 +63,6 @@
                                 </thead>
                                 <tbody id="images">
                                 @foreach($images as $i)
-
                                     <tr>
                                         <td>
                                             <div class="row d-flex justify-content-center align-items-middle">
@@ -98,8 +97,8 @@
                         </div>
                         {!! $images->appends(\Request::except('page'))->render() !!}
                     @else
-                        <div class="alert alert-info col-md-12" role="alert">
-                            No Image yet.
+                        <div class="alert text-info col-md-12" role="alert">
+                            <p>No image yet</p>
                         </div>
                     @endif
                 </div>
