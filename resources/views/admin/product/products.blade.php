@@ -28,7 +28,7 @@
 
                     @if(isset($products) && count($products)>0)
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-list product-list">
+                            <table class="table table-striped table-bordered table-list  product-list">
                                 <thead>
                                 <tr>
                                     {{--<th>@sortablelink('id', 'ID')</th>--}}

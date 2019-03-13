@@ -16,7 +16,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Table</h6>
-            <a class="dropdown-item" href="{{route('admin.restaurants')}}"><i class="fas fa-hotel"></i> Restaurants</a>
+            <a class="dropdown-item" href="{{route('admin.restaurants')}}"><i class="fas fa-archway"></i> Restaurants</a>
             <a class="dropdown-item" href="{{route('admin.images')}}"><i class="fas fa-image"></i> Images</a>
             <a class="dropdown-item" href="{{route('admin.products')}}"> <i class="fas fa-utensils"></i> Products</a>
             {{--<div class="dropdown-divider"></div>--}}
