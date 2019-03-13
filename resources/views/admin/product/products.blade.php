@@ -68,14 +68,10 @@
 
 
 @section('content')
-
-
     <div class="create"><a class="btn btn-outline-success" href="{{url('admin/product/create')}}">Create</a></div>
-
-
     @if(isset($products) && count($products)>0)
         <div id="pr">
-            <table class="no-footer" width="100%">
+            <table class="no-footer table-responsive" width="100%">
                 <thead>
                 <tr class="important">
                     <th>@sortablelink('id', 'ID')</th>
@@ -89,7 +85,6 @@
                     <th>ACTION</th>
                     <th>CREATED BY</th>
                     <th>UPDATED BY</th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -118,7 +113,6 @@
                             <div><a href="{{url('admin/product/'.$p->id)}}">
                                     <span class="btn btn-info"><i class="fas fa-eye"></i>View</span></a>
                             </div>
-
                         </td>
                         <td>{{$p->created_by}}</td>
                         <td>
@@ -137,8 +131,8 @@
         </div>
 
     @else
-        <div class="alert alert-info col-md-12" role="alert">
-            No product yet.
+        <div class="alert text-info col-md-12" role="alert">
+            <p>No product yet</p>
         </div>
     @endif
 

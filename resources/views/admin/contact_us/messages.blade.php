@@ -17,8 +17,8 @@
         @endforeach
 
     @else
-        <div class="alert alert-info " role="alert">
-            No new messages yet.
+        <div class="alert text-info col-md-12" role="alert">
+            <p>No message yet</p>
         </div>
     @endif
 

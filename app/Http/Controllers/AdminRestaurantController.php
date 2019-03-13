@@ -97,7 +97,7 @@ class AdminRestaurantController extends Controller
     {
         $restaurant = Restaurant::find($id);
         if (!$restaurant) {
-            return redirect()->route('admin.error')->withErrors('Restaurant not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Restaurant not found!')->with('status_cod', 404);
         }
         return view('admin.restaurants.restaurantEdit', compact('restaurant'));
     }
@@ -107,7 +107,7 @@ class AdminRestaurantController extends Controller
 
         $restaurant = Restaurant::find($id);
         if (!$restaurant) {
-            return redirect()->route('admin.error')->withErrors('Restaurant  not found!')->with('status_cod', 404);;
+            return redirect()->route('admin.error')->with('error','Restaurant  not found!')->with('status_cod', 404);;
         }
         $oldImage = $restaurant->avatar;
 
@@ -170,7 +170,7 @@ class AdminRestaurantController extends Controller
     public function show($id){
         $restaurant = Restaurant::where('id', $id)->first();
         if (!$restaurant) {
-            return redirect()->route('admin.error')->withErrors('Restaurant not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Restaurant not found!')->with('status_cod', 404);
         }
 //        dd($restaurant);
         return view('admin.restaurants.restaurant', compact('restaurant'));

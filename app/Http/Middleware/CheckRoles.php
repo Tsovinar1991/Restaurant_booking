@@ -17,7 +17,7 @@ class CheckRoles
     {
         if ($roles != null) {
             if (!$request->user()->hasAnyRole(explode("|", $roles))) {
-                return redirect()->route('admin.error')->withErrors('Unauthorized action!')->with('status_cod', 403);
+                return redirect()->route('admin.error')->with('error','Unauthorized action!')->with('status_cod', 403);
             }
         }
         return $next($request);

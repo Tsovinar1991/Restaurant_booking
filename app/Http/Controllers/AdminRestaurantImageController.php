@@ -91,7 +91,7 @@ class AdminRestaurantImageController extends Controller
 
         $image = RestaurantImage::find($id);
         if (!$image) {
-            return redirect()->route('admin.error')->withErrors('Restaurant image not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Restaurant Image not found!')->with('status_cod', 404);
         }
 
         $restaurants = Restaurant::select('id', 'name')->get();
@@ -111,7 +111,7 @@ class AdminRestaurantImageController extends Controller
         $image = RestaurantImage::find($id);
 
         if (!$image) {
-            return redirect()->route('admin.error')->withErrors('Restaurant image not found!')->with('status_cod', 404);;
+            return redirect()->route('admin.error')->with('error','Restaurant Image not found!')->with('status_cod', 404);
         }
 
         $oldImage = $image->name;
