@@ -50,9 +50,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/insert/products', 'AdminProductController@index')->name('admin.products');
     Route::get('/product/create', 'AdminProductController@create');
     Route::post('/product', 'AdminProductController@store');
-    Route::get('/product/{id}/edit', 'AdminProductController@edit');
+    Route::get('/product/{id}/edit', 'AdminProductController@edit')->name('admin.edit.product');
     Route::put('/product/{id}', 'AdminProductController@update');
-    Route::get('/product/{id}', 'AdminProductController@show');
+    Route::get('/product/{id}', 'AdminProductController@show')->name('admin.show.product');
     Route::get('/products/change_status', 'AdminProductController@productStatus');
 
 

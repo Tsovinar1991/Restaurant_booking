@@ -52,18 +52,6 @@
                                                             class="fas fa-pencil-alt "></i></a>
                                                 <a href="{{route('admin.show.restaurant', $r->id)}}"
                                                    class="btn  black"><i class="fas fa-eye"></i></a>
-                                                {{--<a href="{{route('delete.user', ['id'=> $user->id])}}" class="btn btn-danger btn_small  btn-sm"><i--}}
-                                                {{--class="fa fa-trash white"></i></a>--}}
-
-                                                {{--<form action=""--}}
-                                                      {{--method="POST">--}}
-                                                    {{--{{ method_field('DELETE') }}--}}
-                                                    {{--{{ csrf_field() }}--}}
-                                                    {{--<button class="btn btn-danger"--}}
-                                                            {{--onclick="return confirm('Are you sure you want to delete this item?');">--}}
-                                                        {{--<i class="fa fa-trash white"></i>--}}
-                                                    {{--</button>--}}
-                                                {{--</form>--}}
 
                                             </div>
                                         </td>

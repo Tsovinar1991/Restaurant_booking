@@ -85,7 +85,7 @@
                                             </div>
                                         </td>
                                         <td class="hidden-xs">{{$i->id}}</td>
-                                        <td>{{$i->restaurant_id}}</td>
+                                        <td>{{$i->restaurant->name}}</td>
                                         <td>{{$i->title}}</td>
                                         <td><img src="{{$i->name}}"
                                                  style="width:50px;height:50px;object-fit:cover;">
