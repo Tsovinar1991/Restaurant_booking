@@ -56,7 +56,6 @@ class AdminRestaurantController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-
             'name' => 'required',
             'type' => 'required',
             'description' => 'required',
@@ -66,7 +65,6 @@ class AdminRestaurantController extends Controller
             'email' => 'required|email',
             'open_hour' => 'required',
             'close_hour' => 'required'
-
         ]);
 
 
@@ -97,17 +95,16 @@ class AdminRestaurantController extends Controller
     {
         $restaurant = Restaurant::find($id);
         if (!$restaurant) {
-            return redirect()->route('admin.error')->with('error','Restaurant not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Restaurant not found!')->with('status_cod', 404);
         }
         return view('admin.restaurants.restaurantEdit', compact('restaurant'));
     }
 
     public function update(Request $request, $id)
     {
-
         $restaurant = Restaurant::find($id);
         if (!$restaurant) {
-            return redirect()->route('admin.error')->with('error','Restaurant  not found!')->with('status_cod', 404);;
+            return redirect()->route('admin.error')->with('error', 'Restaurant  not found!')->with('status_cod', 404);;
         }
         $oldImage = $restaurant->avatar;
 
@@ -121,8 +118,6 @@ class AdminRestaurantController extends Controller
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
             $path = $request->file('avatar')->storeAs('public/restaurant_avatar', $fileNameToStore);
-
-
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -136,14 +131,12 @@ class AdminRestaurantController extends Controller
             'email' => 'required|email',
             'open_hour' => 'required',
             'close_hour' => 'required'
-
         ]);
 
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
 
         $restaurant->update([
             'name' => $request->name,
@@ -167,13 +160,13 @@ class AdminRestaurantController extends Controller
         }
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $restaurant = Restaurant::where('id', $id)->first();
         if (!$restaurant) {
-            return redirect()->route('admin.error')->with('error','Restaurant not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Restaurant not found!')->with('status_cod', 404);
         }
 //        dd($restaurant);
         return view('admin.restaurants.restaurant', compact('restaurant'));
     }
-
 }

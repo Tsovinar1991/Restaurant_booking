@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('styles.95fbdfff419ed6337f7f.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles.1aae9754bcc080d3023d.css') }}">
 
 </head>
 <body>

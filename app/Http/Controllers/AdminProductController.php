@@ -173,7 +173,6 @@ class AdminProductController extends Controller
             'restaurant_id' => 'required|numeric',
             'price' => 'required|numeric',
             'weight' => 'required',
-
         ]);
 
 
@@ -226,9 +225,7 @@ class AdminProductController extends Controller
     public function productStatus(Request $request)
     {
         $product = RestaurantMenu::find($request->id);
-
         $product->update(['status' => $request->status]);
         return response($product);
-//        return response(['Product status is' . $request->status]);
     }
 }

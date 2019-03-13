@@ -48,9 +48,6 @@ class AdminProfileController extends Controller
             $path = $request->file('image')->storeAs('public/profiles', $fileNameToStore);
         }
 
-//        else {
-//            $fileNameToStore = 'profile.png';
-//        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
