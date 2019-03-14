@@ -41,8 +41,6 @@ Route::middleware(['cors'])->group(function () {
 
     Route::get('restaurant/{id}/images', 'RestaurantImageController@index');
 
-
-
     Route::get('city', 'CityController@index');
     Route::get('city/{id}', 'CityController@show');
     Route::post('city', 'CityController@store');

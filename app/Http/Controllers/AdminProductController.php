@@ -35,7 +35,7 @@ class AdminProductController extends Controller
     public function create()
     {
         $restaurants = Restaurant::select('id', 'name')->get();
-        $parents = RestaurantMenu::select('id', 'name_en')->get();
+        $parents = RestaurantMenu::select('id', 'name_en')->where('parent_id', 0)->get();
         return view('admin.product.productCreate', compact(['restaurants', 'parents']));
     }
 
@@ -120,7 +120,7 @@ class AdminProductController extends Controller
             return redirect()->route('admin.error')->with('error', 'Product not found!')->with('status_cod', 404);
         }
         $restaurants = Restaurant::select('id', 'name')->get();
-        $parents = RestaurantMenu::select('id', 'name_en')->get();
+        $parents = RestaurantMenu::select('id', 'name_en')->where('parent_id', 0)->get();
         $restaurant_id = $product->restaurant_id;
         $restaurantName = Restaurant::where('id', $restaurant_id)->get(['name'])->first();
         $r_name = $restaurantName->name;

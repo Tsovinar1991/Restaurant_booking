@@ -23,9 +23,9 @@ class RestaurantImageController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Image table data not exist.',
-                    'data' => null,
+                    'data' => [],
                     'errors' => true
-                ], 404);
+                ], 200);
             }
 
             return response()->json([

@@ -139,9 +139,24 @@
                         <div class="col-md-10">
                             <select name="parent_id" id="parent_id" class="form-control">
 
-                                <option selected value="{{$product->parent_id}}">{{$product->name_en}}</option>
+                                @if($product->parent_id != 0)
+                                    <option selected
+                                            value="{{$product->parent_id}}">{{$product->category->name_en}}</option>
+                                @endif
                                 <option value="{{0}}">No Category</option>
-                                @foreach($parents as $k=> $p)
+
+                                @foreach($parents as $k=>$p)
+                                    @if($product->parent_id != 0)
+                                        @if($p->name_en == $product->category->name_en)
+                                            @continue
+                                        @endif
+                                    @endif
+
+                                    @if($p->id == $product->id)
+                                        @continue
+                                    @endif
+
+
                                     <option value='{{$p->id}}'>{{$p->name_en}}</option>
                                 @endforeach
 
