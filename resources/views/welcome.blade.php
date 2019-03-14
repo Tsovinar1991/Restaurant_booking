@@ -15,6 +15,6 @@
     <script type="text/javascript" src="{{ asset('runtime.752b75292cd2dc81f245.js') }}"></script>
     <script type="text/javascript" src="{{ asset('polyfills.3eb7881d3a00da6c675e.js') }}"></script>
     <script type="text/javascript" src="{{ asset('scripts.ecbf1e4e445943032e3d.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('main.b931654c82d4248e16e4.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('main.6f501cb5c786e12cbe4b.js') }}"></script>
 </body>
 </html>
