@@ -13,55 +13,37 @@ class RestaurantImageController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
 
         if (isset($request->offset) and isset($request->limit)) {
-            $images = RestaurantImage::skip($request->input('offset'))->take($request->input('limit'))->get();
+            $images = RestaurantImage::where('restaurant_id', $id)->skip($request->input('offset'))->take($request->input('limit'))->get();
+            $count = count(RestaurantImage::all());
             if ($images->isEmpty()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Image table data not exist.',
                     'data' => null,
                     'errors' => true
-                ],404);
+                ], 404);
             }
 
             return response()->json([
                 'success' => true,
                 'message' => 'Restaurant images table all data.',
                 'data' => $images,
+                'total' => $count,
                 'errors' => false
-            ],200);
-        }else{
+            ], 200);
+        } else {
             $not_specified = collect(['Restaurant Image' => ['Restaurant images offset and limit are not specified.']]);
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
                 'data' => null,
                 'errors' => $not_specified
-            ],404);
+            ], 404);
         }
-    }
-
-    public function show($id)
-    {
-        $image = RestaurantImage::find($id);
-        if ($image == null) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Data not found or not exist.',
-                'data' => null,
-                'error' => true
-            ],404);
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Restaurant images single data.',
-            'data' => $image,
-            'errors' => false
-        ],200);
     }
 
 }
