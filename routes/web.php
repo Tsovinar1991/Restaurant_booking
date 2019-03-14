@@ -46,14 +46,13 @@ Route::prefix('admin')->group(function () {
 
 
 
-
     //Product routes
     Route::get('/insert/products', 'AdminProductController@index')->name('admin.products');
     Route::get('/product/create', 'AdminProductController@create');
     Route::post('/product', 'AdminProductController@store');
-    Route::get('/product/{id}/edit', 'AdminProductController@edit');
+    Route::get('/product/{id}/edit', 'AdminProductController@edit')->name('admin.edit.product');
     Route::put('/product/{id}', 'AdminProductController@update');
-    Route::get('/product/{id}', 'AdminProductController@show');
+    Route::get('/product/{id}', 'AdminProductController@show')->name('admin.show.product');
     Route::get('/products/change_status', 'AdminProductController@productStatus');
 
 
@@ -79,7 +78,7 @@ Route::prefix('admin')->group(function () {
 
 
     //mail message notification
-    Route::get('/read_message', 'AdminController@read_message')->name('admin.message.read');
+    Route::get('/read_message', 'AdminMessageController@read_message')->name('admin.message.read');
     Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');
 
 
@@ -93,6 +92,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/users/changePassword/{id}', 'AdminUserController@changePassword')->name('admin.user.changePassword');
     Route::put('/users/password/update/{id}', 'AdminUserController@updatePassword')->name('admin.user.password.update');
     Route::get('/users/change_status', 'AdminUserController@userStatus');
+
+
+    //profile routes
+    Route::get('/admin/user/profile', 'AdminProfileController@adminUserProfile')->name('admin.user.profile');
+    Route::post('/admin/user/{id}/update', 'AdminProfileController@updateProfile')->name('admin.user.profile.update');
 
 
 

@@ -9,7 +9,7 @@
 @section('content')
 
 
-    <div class="my_form_color p-3 mb-3" role="alert" >
+    <div class="my_form_color p-3 mb-3" role="alert">
         <div class="row">
             <div class="col-md-4">
                 <h5>Name en</h5>
@@ -38,15 +38,28 @@
             <div class="col-md-6">
                 <h5>Category</h5>
                 <p>{{$product->parent_id==0?"This is Category":"Category id - $product->parent_id"}}</p>
-                <h5>Restaurant Id</h5>
-                <p>{{$product->restaurant_id}}</p>
+                <h5>Restaurant</h5>
+                <p>{{$product->restaurant->name}}</p>
                 <h5>Price</h5>
                 <p>{{$product->price}} AMD</p>
                 <h5>Weight</h5>
                 <p>{{$product->weight}} gram</p>
             </div>
-            <div class="info"><h5>Status</h5>
-                <p>{{$product->status===0?'Passive':'Active'}}</p>
+
+            <div class="col-md-12 row">
+                <div class="info col-md-4"><h5>Status</h5>
+                    <p>{{$product->status===0?'Passive':'Active'}}</p>
+                </div>
+                <div class="info col-md-4"> <h5>Created By</h5>
+                    <p>{{$product->adminCreated->name}}</p>
+                </div>
+                <div class="info col-md-4"><h5>Updated By</h5>
+                    @if($product->updated_by == null)
+                        No One
+                    @else
+                        {{$product->adminUpdated->name}}
+                    @endif
+                </div>
             </div>
 
         </div>

@@ -19,10 +19,9 @@ class AdminCreatePageController extends Controller
     public function index(Request $request, $p)
     {
         $page = Page::where('id', $p)->first();
-       if(!$page){
-           return redirect()->route('admin.error')->withErrors('Page item not found!')->with('status_cod', 404);
-       }
-
+        if (!$page) {
+            return redirect()->route('admin.error')->with('error', 'Page item not found!')->with('status_cod', 404);
+        }
         return view('admin.pages.page')->with('page', $page);
     }
 
@@ -31,7 +30,6 @@ class AdminCreatePageController extends Controller
     {
         $pages = Page::all();
         return view('admin.pages.pages')->with('pages', $pages);
-
     }
 
 
@@ -39,8 +37,6 @@ class AdminCreatePageController extends Controller
     {
         return view('admin.pages.createPage');
     }
-
-
 
 
     public function store(Request $request)
@@ -62,23 +58,16 @@ class AdminCreatePageController extends Controller
         $page = Page::create($request->all());
 
         if ($page) {
-            return redirect(url('admin/page/'. $page->id))->with('success', "Created Successfully");;
+            return redirect(url('admin/page/' . $page->id))->with('success', "Created Successfully");;
         }
-
     }
-
-
 
 
     public function edit($id)
     {
         $pages = Page::find($id);
         if (!$pages) {
-
-            return redirect()
-                ->route('admin.error')
-                ->withErrors('Page item not found!')
-                ->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Page item not found!')->with('status_cod', 404);
         }
         return view('admin.pages.updatePage')->with('pages', $pages);
 
@@ -89,7 +78,7 @@ class AdminCreatePageController extends Controller
 
         $page = Page::find($id);
         if ($page == null) {
-            return redirect()->route('admin.error')->withErrors('Page item not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Page item not found!')->with('status_cod', 404);
         }
 
         $validator = Validator::make($request->all(), [

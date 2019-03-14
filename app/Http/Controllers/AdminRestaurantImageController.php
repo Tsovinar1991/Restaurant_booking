@@ -16,7 +16,6 @@ class AdminRestaurantImageController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
-
     }
 
 
@@ -49,8 +48,6 @@ class AdminRestaurantImageController extends Controller
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
             $path = $request->file('name')->storeAs('public/restaurant_images', $fileNameToStore);
-
-
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -59,7 +56,6 @@ class AdminRestaurantImageController extends Controller
             'restaurant_id' => 'required|numeric',
             'name' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title' => 'required'
-
         ]);
 
 
@@ -71,9 +67,8 @@ class AdminRestaurantImageController extends Controller
         $image = RestaurantImage::create(
             [
                 'restaurant_id' => request('restaurant_id'),
-                'name' => '/storage/restaurant_images/' .$fileNameToStore,
+                'name' => '/storage/restaurant_images/' . $fileNameToStore,
                 'title' => request('title')
-
             ]
         );
 
@@ -87,18 +82,15 @@ class AdminRestaurantImageController extends Controller
 
     public function edit($id)
     {
-
-
         $image = RestaurantImage::find($id);
         if (!$image) {
-            return redirect()->route('admin.error')->withErrors('Restaurant image not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Restaurant Image not found!')->with('status_cod', 404);
         }
 
         $restaurants = Restaurant::select('id', 'name')->get();
         $restaurant_id = $image->restaurant_id;
         $restaurantName = Restaurant::where('id', $restaurant_id)->get(['name'])->first();
         $r_name = $restaurantName->name;
-
 
         return view('admin.restaurant_images.updateImage', compact(['image', 'r_name', 'restaurants']));
 
@@ -111,9 +103,8 @@ class AdminRestaurantImageController extends Controller
         $image = RestaurantImage::find($id);
 
         if (!$image) {
-            return redirect()->route('admin.error')->withErrors('Restaurant image not found!')->with('status_cod', 404);;
+            return redirect()->route('admin.error')->with('error', 'Restaurant Image not found!')->with('status_cod', 404);
         }
-
         $oldImage = $image->name;
 
         if ($request->hasFile('name')) {
@@ -126,16 +117,13 @@ class AdminRestaurantImageController extends Controller
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
             $path = $request->file('name')->storeAs('public/restaurant_images', $fileNameToStore);
-
-
-        } else {
+            } else {
             $fileNameToStore = 'noimage.jpg';
         }
 
         $validator = Validator::make($request->all(), [
             'restaurant_id' => 'required|numeric',
             'title' => 'required'
-
         ]);
 
 
@@ -150,11 +138,9 @@ class AdminRestaurantImageController extends Controller
             'title' => $request->title,
         ]);
 
-
         if (!$request->name) {
             $image->update(['name' => $oldImage]);
         }
-
 
         if ($image) {
             return redirect(url('admin/insert/images'))->with('success', "Image Updated Successfully");

@@ -1,16 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Restaurant</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <base href="/">
+  <meta charset="utf-8">
+  <title>Restaurant</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <base href="/">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('styles.1aae9754bcc080d3023d.css') }}">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('styles.1aae9754bcc080d3023d.css') }}"></head>
 <body>
     <app-root></app-root>
     <script type="text/javascript" src="{{ asset('runtime.3f6f1651234f8de68df0.js') }}"></script>

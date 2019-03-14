@@ -17,31 +17,19 @@ class AdminProductController extends Controller
         $this->middleware('auth:admin');
 
         //tests
+//        $this->middleware(['roles:superadmin|waiter']); multiple roles
 //        $this->middleware('role:delivery');  //access to product contrller will be given only to delivery role for example.
 
     }
 
     public function index(Request $request)
     {
-
-
 //        dd($request->user());
-
 //        if ($request->user()->hasRole('admin')) {
-//            {
-//                $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
-//                return view('admin.product.products', compact('products'));
-//            }
-//        } else {
-//
-//            return redirect(url('admin'))->withErrors(['Unauthorized!']);
-//        }
-
 //        $request->user()->authorizeRoles(['admin', 'manager']); //give access to admin and manager
 
         $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
         return view('admin.product.products', compact('products'));
-
     }
 
     public function create()
@@ -60,7 +48,7 @@ class AdminProductController extends Controller
         $product = RestaurantMenu::find($id);
 
         if (!$product) {
-            return redirect()->route('admin.error')->withErrors('Product  not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
         }
 
         return view('admin.product.product')->with('product', $product);
@@ -119,7 +107,7 @@ class AdminProductController extends Controller
         $product->parent_id = $request->parent_id;
         $product->restaurant_id = $request->restaurant_id;
         $product->price = $request->price;
-        $product->weight  = $request->weight;
+        $product->weight = $request->weight;
         $product->status = $request->status;
         $product->created_by = $id;
         $product->save();
@@ -134,7 +122,7 @@ class AdminProductController extends Controller
     {
         $product = RestaurantMenu::find($id);
         if (!$product) {
-            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
         }
         $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name_en')->get();
@@ -151,7 +139,7 @@ class AdminProductController extends Controller
 
         $product = RestaurantMenu::find($id);
         if ($product == null) {
-            return redirect()->route('admin.error')->withErrors('Product not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
         }
         $product_image = $product->avatar;
 
@@ -185,7 +173,6 @@ class AdminProductController extends Controller
             'restaurant_id' => 'required|numeric',
             'price' => 'required|numeric',
             'weight' => 'required',
-
         ]);
 
 
@@ -205,12 +192,10 @@ class AdminProductController extends Controller
         $product->parent_id = $request->parent_id;
         $product->restaurant_id = $request->restaurant_id;
         $product->price = $request->price;
-        $product->weight  = $request->weight;
+        $product->weight = $request->weight;
         $product->status = $request->status;
         $product->updated_by = $admin_id;
         $product->save();
-
-
 
 
 //        $product->update([
@@ -240,9 +225,7 @@ class AdminProductController extends Controller
     public function productStatus(Request $request)
     {
         $product = RestaurantMenu::find($request->id);
-
         $product->update(['status' => $request->status]);
         return response($product);
-//        return response(['Product status is' . $request->status]);
     }
 }
