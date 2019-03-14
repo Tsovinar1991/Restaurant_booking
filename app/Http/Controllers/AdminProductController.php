@@ -36,9 +36,6 @@ class AdminProductController extends Controller
     {
         $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name_en')->get();
-//        echo "<pre>";
-//        var_dump($restaurant);
-//        die();
         return view('admin.product.productCreate', compact(['restaurants', 'parents']));
     }
 
@@ -46,11 +43,9 @@ class AdminProductController extends Controller
     public function show($id)
     {
         $product = RestaurantMenu::find($id);
-
         if (!$product) {
-            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Product not found!')->with('status_cod', 404);
         }
-
         return view('admin.product.product')->with('product', $product);
     }
 
@@ -122,7 +117,7 @@ class AdminProductController extends Controller
     {
         $product = RestaurantMenu::find($id);
         if (!$product) {
-            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Product not found!')->with('status_cod', 404);
         }
         $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name_en')->get();
@@ -136,10 +131,9 @@ class AdminProductController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $product = RestaurantMenu::find($id);
         if ($product == null) {
-            return redirect()->route('admin.error')->with('error','Product not found!')->with('status_cod', 404);
+            return redirect()->route('admin.error')->with('error', 'Product not found!')->with('status_cod', 404);
         }
         $product_image = $product->avatar;
 
@@ -154,12 +148,9 @@ class AdminProductController extends Controller
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
             $path = $request->file('avatar')->storeAs('public/products', $fileNameToStore);
-
-
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
-
 
         $validator = Validator::make($request->all(), [
             'name_en' => 'required',
@@ -174,7 +165,6 @@ class AdminProductController extends Controller
             'price' => 'required|numeric',
             'weight' => 'required',
         ]);
-
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -197,26 +187,9 @@ class AdminProductController extends Controller
         $product->updated_by = $admin_id;
         $product->save();
 
-
-//        $product->update([
-//            'name_en' => $request->name_en,
-//            'name_ru' => $request->name_ru,
-//            'name_am' => $request->name_am,
-//            'description_en' => $request->description_en,
-//            'description_ru' => $request->description_ru,
-//            'description_am' => $request->description_am,
-//            'avatar' => '/storage/products/' . $fileNameToStore,
-//            'parent_id' => $request->parent_id,
-//            'restaurant_id' => $request->restaurant_id,
-//            'price' => $request->price,
-//            'weight' => $request->weight,
-//            'status' => $request->status
-//        ]);
-
         if (!$request->avatar) {
             $product->update(['avatar' => $product_image]);
         }
-
         return redirect(url('admin/insert/products'))->with('success', "Product Updated Successfully");
 
     }

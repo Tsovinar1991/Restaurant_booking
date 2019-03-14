@@ -29,9 +29,7 @@ class AdminProfileController extends Controller
 
     public function updateProfile(Request $request, $id)
     {
-
         $admin = Admin::find($id);
-        //dd($admin);
         if (!$admin) {
             return redirect()->route('admin.error')->with('error', 'Admin not found!')->with('status_cod', 404);
         }
@@ -48,23 +46,20 @@ class AdminProfileController extends Controller
             $path = $request->file('image')->storeAs('public/profiles', $fileNameToStore);
         }
 
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required|max:255|unique:admins,email,' . $admin->id,
             'job_title' => 'required',
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
         if ($request->hasFile('image')) {
             $admin->name = $request->name;
             $admin->email = $request->email;
-            $admin->avatar = '/storage/profiles/' . $fileNameToStore;
+            $admin->avatar = '/storage/profiles/'.$fileNameToStore;
             $admin->job_title = $request->job_title;
             $admin->save();
         } else {

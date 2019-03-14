@@ -10,6 +10,16 @@
 
 
 
+        .table thead th {
+            width: 10%;
+            text-align: center;
+        }
+
+        .table tbody td {
+            text-align: center;
+        }
+
+
     </style>
 @endsection
 
@@ -44,7 +54,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <div class="create"><a class="btn btn-outline-success" href="{{route('admin.restaurant_image.create')}}">Create</a></div>
+                                <div class="create"><a class="btn btn-outline-success" href="{{route('admin.restaurant_image.create')}}">Add Image</a></div>
                             </div>
                         </div>
                     </div>

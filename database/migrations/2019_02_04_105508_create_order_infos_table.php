@@ -19,7 +19,9 @@ class CreateOrderInfosTable extends Migration
             $table->string('telephone');
             $table->string('address');
             $table->integer('total');
-            $table->integer('payment_type')->default(0)->nullable();
+            $table->integer('delivery_price');
+            $table->integer('is_delivery');
+            $table->string('payment_type')->default(0)->nullable();
             $table->integer('payment_status')->default(0)->nullable();
             //$table->string('status')->default('new')->nullable();
             $table->enum('status', ['new', 'confirmed', 'in progress', 'canceled'])->default('new')->nullable();

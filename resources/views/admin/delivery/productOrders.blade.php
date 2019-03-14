@@ -3,30 +3,36 @@
 @section('css')
     <style>
         @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+
         td {
             color: #3e5164;
         }
+
         select {
             border-width: 2px !important;
         }
+
         select option {
             background: rgba(0, 0, 0, 0.3) !important;
             color: #fff !important;
             text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4) !important;
         }
+
         select option[value="in progress"] {
             background: #008080 !important;
         }
+
         select option[value="canceled"] {
             background: #FF6347 !important;
         }
+
         select option[value="confirmed"] {
             background: #5ac16f !important;
         }
 
-         table tbody tr td{
-             text-align:center !important;
-         }
+        table tbody tr td {
+            text-align: center !important;
+        }
 
     </style>
 @endsection
@@ -208,7 +214,11 @@
                                    <thead>
                                        <tr><th>Product Id</th><th>Product Avatar</th><th>Product Name</th><th>Product Price</th><th>Product Count</th><th>Total</th></tr>
                                    </thead>
-                                    <tbody>${products}</tbody>
+                                    <tbody>${products}
+                                    <tr>
+                                   <td colspan="6">Delivery Price: ${row.order_info.delivery_price} AMD</tdcolspan>
+                                   </tr>
+                                   </tbody>
                                   </table>
                                 </div>
                                 </td>

@@ -154,36 +154,39 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-5">
-                    {{--<div class="alert p-4">--}}
-                    <div class="card example-1 square scrollbar-cyan bordered-cyan mt-4">
-                        <div class="card-body">
-                            <h5 class="text-muted user-info pt-0">Recent Activity</h5>
-                            @if(isset($createdBy))
-                                @foreach($createdBy as $created)
-                                    @if($created->parent_id != 0)
-                                        <p>Product <span class="activity">{{$created->name_en}}</span> was created
-                                            by {{$currentUser->name}} </p>
-                                    @else
-                                        <p>Category <span class="activity">{{$created->name_en}}</span> was created
-                                            by {{$currentUser->name}} </p>
-                                    @endif
-                                @endforeach
-                            @endif
-                            @if(isset($updatedBy))
-                                @foreach($updatedBy as $updated)
-                                    @if($updated->parent_id != 0)
-                                        <p>Product <span class="activity">{{$updated->name_en}}</span> was updated
-                                            by {{$currentUser->name}} </p>
-                                    @else
-                                        <p>Category <span class="activity">{{$updated->name_en}}</span> was updated
-                                            by {{$currentUser->name}} </p>
-                                    @endif
-                                @endforeach
-                            @endif
+
+                @if(isset($createdBy) && count($createdBy)>0 || isset($updatedBy) && count($updatedBy)>0)
+                    <div class="col-5">
+                        {{--<div class="alert p-4">--}}
+                        <div class="card example-1 square scrollbar-cyan bordered-cyan mt-4">
+                            <div class="card-body">
+                                <h5 class="text-muted user-info pt-0">Recent Activity</h5>
+                                @if(isset($createdBy))
+                                    @foreach($createdBy as $created)
+                                        @if($created->parent_id != 0)
+                                            <p>Product <span class="activity">{{$created->name_en}}</span> was created
+                                                by {{$currentUser->name}} </p>
+                                        @else
+                                            <p>Category <span class="activity">{{$created->name_en}}</span> was created
+                                                by {{$currentUser->name}} </p>
+                                        @endif
+                                    @endforeach
+                                @endif
+                                @if(isset($updatedBy))
+                                    @foreach($updatedBy as $updated)
+                                        @if($updated->parent_id != 0)
+                                            <p>Product <span class="activity">{{$updated->name_en}}</span> was updated
+                                                by {{$currentUser->name}} </p>
+                                        @else
+                                            <p>Category <span class="activity">{{$updated->name_en}}</span> was updated
+                                                by {{$currentUser->name}} </p>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

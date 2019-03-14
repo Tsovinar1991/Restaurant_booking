@@ -67,7 +67,6 @@ class AdminRestaurantController extends Controller
             'close_hour' => 'required'
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -77,7 +76,7 @@ class AdminRestaurantController extends Controller
                 'name' => request('name'),
                 'type' => request('type'),
                 'description' => request('description'),
-                'avatar' => '/storage/restaurant_avatar/' . $fileNameToStore,
+                'avatar' => '/storage/restaurant_avatar/'.$fileNameToStore,
                 'address' => request('address'),
                 'tel' => request('tel'),
                 'email' => request('email'),
@@ -142,14 +141,13 @@ class AdminRestaurantController extends Controller
             'name' => $request->name,
             'type' => $request->type,
             'description' => $request->description,
-            'avatar' => '/storage/restaurant_avatar/' . $fileNameToStore,
+            'avatar' => '/storage/restaurant_avatar/'.$fileNameToStore,
             'address' => $request->address,
             'tel' => $request->tel,
             'email' => $request->email,
             'open_hour' => $request->open_hour,
             'close_hour' => $request->close_hour,
         ]);
-
 
         if (!$request->avatar) {
             $restaurant->update(['avatar' => $oldImage]);
@@ -166,7 +164,6 @@ class AdminRestaurantController extends Controller
         if (!$restaurant) {
             return redirect()->route('admin.error')->with('error', 'Restaurant not found!')->with('status_cod', 404);
         }
-//        dd($restaurant);
         return view('admin.restaurants.restaurant', compact('restaurant'));
     }
 }

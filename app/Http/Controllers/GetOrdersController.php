@@ -18,7 +18,10 @@ class GetOrdersController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'total' => 'required|numeric'
+            'total' => 'required|numeric',
+            'delivery_price' => 'required|numeric',
+            'is_delivery' => 'required|numeric',
+            'payment_type' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -79,6 +82,9 @@ class GetOrdersController extends Controller
             'name' => request('name'),
             'telephone' => request('phone'),
             'address' => request('address'),
+            'delivery_price' => request('delivery_price'),
+            'is_delivery' => request('is_delivery'),
+            'payment_type' => request('payment_type'),
             'total' => $total
         ]);
 

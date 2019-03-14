@@ -75,7 +75,6 @@ class AdminCreatePageController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $page = Page::find($id);
         if ($page == null) {
             return redirect()->route('admin.error')->with('error', 'Page item not found!')->with('status_cod', 404);
@@ -94,7 +93,6 @@ class AdminCreatePageController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
 
         $page->update($request->all());
         return redirect(url('admin/page/' . $page->id))->with('success', "Updated Successfully");

@@ -5,6 +5,19 @@
         #restaurants tr td {
             vertical-align: middle;
         }
+
+        .table thead th {
+            width: 5%;
+            text-align: center;
+        }
+
+        .table tbody td {
+            text-align: center;
+        }
+
+        #info {
+       width:20%;
+        }
     </style>
 @endsection
 
@@ -21,14 +34,15 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <div class="create"><a class="btn btn-outline-success" href="{{route('admin.restaurant.create')}}">Create</a></div>
+                                <div class="create"><a class="btn btn-outline-success"
+                                                       href="{{route('admin.restaurant.create')}}">Create</a></div>
                             </div>
                         </div>
                     </div>
 
                     @if(isset($restaurants) && count($restaurants)>0)
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-list ">
+                            <table class="table table-striped table-responsive table-bordered table-list ">
                                 <thead>
                                 <tr>
                                     <th><i class="fa fa-cog"></i></th>
@@ -68,13 +82,12 @@
                                             </div>
 
 
-
                                             {{--{{$r->description}}--}}
 
                                         </td>
                                         <td><img src="{{$r->avatar}}" style="width:50px;height:50px;object-fit:cover;">
                                         </td>
-                                        <td>
+                                        <td id="info">
                                             <div><i class="fas fa-address-card"></i> {{$r->address}}</div>
                                             <div><i class="fas fa-phone"></i> {{$r->tel}} </div>
                                             <div><i class="fas fa-envelope-open"></i> {{$r->email}} </div>

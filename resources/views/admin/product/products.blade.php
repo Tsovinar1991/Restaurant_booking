@@ -6,6 +6,15 @@
             padding: 5px 10px !important;
         }
 
+        .table thead th {
+            width: 20%;
+            text-align: center;
+        }
+
+        .table tbody td {
+            text-align: center;
+        }
+
     </style>
 @endsection
 
@@ -20,7 +29,7 @@
                         <div class="row">
                             <div class="col col-xs-6">
                                 <div class="create"><a class="btn btn-outline-success"
-                                                       href="{{url('admin/product/create')}}">Create</a>
+                                                       href="{{url('admin/product/create')}}">Add Product</a>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +37,7 @@
 
                     @if(isset($products) && count($products)>0)
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-list  product-list">
+                            <table class="table table-striped table-responsive table-bordered table-list  product-list">
                                 <thead>
                                 <tr>
                                     {{--<th>@sortablelink('id', 'ID')</th>--}}

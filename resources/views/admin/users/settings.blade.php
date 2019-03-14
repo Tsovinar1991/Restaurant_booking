@@ -66,6 +66,17 @@
             cursor:default;
         }
 
+        .table thead th {
+            width:12%;
+            text-align: center;
+        }
+
+        .table tbody td {
+            text-align: center;
+        }
+
+
+
 
     </style>
 @endsection
@@ -92,7 +103,7 @@
 
                     @if(isset($users) && count($users)>0)
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-list">
+                            <table class="table table-striped  table-bordered table-list">
                                 <thead>
                                 <tr>
                                     <th><i class="fa fa-cog"></i></th>
