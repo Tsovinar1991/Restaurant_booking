@@ -14,12 +14,13 @@ class PageController extends Controller
         $lang = $request->header('lang');
         $pages = Page::select('id', 'name_' . $lang, 'description_' . $lang)->get();
         if ($pages->isEmpty()) {
+            $not_exist = collect(['Page' => ['Page table data not exist.']]);
             return response()->json([
                 'success' => false,
-                'message' => 'Menu is empty or does not exist.',
+                'message' => 'Error',
                 'data' => null,
-                'errors' => true
-            ], 404);
+                'errors' => $not_exist
+            ], 200);
         }
 
         return response()->json([
@@ -37,12 +38,13 @@ class PageController extends Controller
             ->where('id', $id)->first();
 
         if ($page == null) {
+            $not_exist = collect(['Page' => ['Page table data not exist.']]);
             return response()->json([
                 'success' => false,
-                'message' => 'Data not found or not exist.',
-                'data' => '',
-                'errors' => true
-            ],404);
+                'message' => 'Error',
+                'data' => null,
+                'errors' => $not_exist
+            ],202);
         }
 
         return response()->json([

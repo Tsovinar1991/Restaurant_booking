@@ -27,7 +27,7 @@ class SeatController extends Controller
                     'message' => 'Error',
                     'data' => null,
                     'errors' => $not_exist
-                ],404);
+                ],200);
             }
 
             return response()->json([
@@ -38,7 +38,6 @@ class SeatController extends Controller
             ],200);
 
         } else {
-
             $not_specified = collect(['Seat' => ['Order is not specified.']]);
             return response()->json([
                 'success' => false,

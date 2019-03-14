@@ -17,37 +17,37 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        if (isset($request->offset) and isset($request->limit)) {
-            $orders = Order::skip($request->input('offset'))->take($request->input('limit'))->get();
-            if ($orders->isEmpty()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Order table data not exist.',
-                    'data' => null,
-                    'errors' => true
-                ], 404);
-            }
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Order table all data.',
-                'data' => $orders,
-                'errors' => false
-            ],200);
-
-        } else {
-            $not_specified = collect(['Restaurant' => ['Order  offset and limit are not specified.']]);
-            return response()->json([
-                'success' => false,
-                'message' => 'Error',
-                'data' => null,
-                'errors' => $not_specified
-            ],404);
-        }
-
-    }
+//    public function index(Request $request)
+//    {
+//        if (isset($request->offset) and isset($request->limit)) {
+//            $orders = Order::skip($request->input('offset'))->take($request->input('limit'))->get();
+//            if ($orders->isEmpty()) {
+//                return response()->json([
+//                    'success' => false,
+//                    'message' => 'Order table data not exist.',
+//                    'data' => null,
+//                    'errors' => true
+//                ], 404);
+//            }
+//
+//            return response()->json([
+//                'success' => true,
+//                'message' => 'Order table all data.',
+//                'data' => $orders,
+//                'errors' => false
+//            ],200);
+//
+//        } else {
+//            $not_specified = collect(['Restaurant' => ['Order  offset and limit are not specified.']]);
+//            return response()->json([
+//                'success' => false,
+//                'message' => 'Error',
+//                'data' => null,
+//                'errors' => $not_specified
+//            ],404);
+//        }
+//
+//    }
 
 
     /**

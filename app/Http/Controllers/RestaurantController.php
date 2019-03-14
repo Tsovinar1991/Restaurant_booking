@@ -146,12 +146,13 @@ class RestaurantController extends Controller
 
 
         if ($restaurant == null) {
+            $not_exist = collect(['Restaurant' => ['Restaurant table data not exist.']]);
             return response()->json([
                 'success' => false,
-                'message' => 'Data not found or not exist.',
+                'message' => 'Error',
                 'data' => null,
-                'errors' => true
-            ], 404);
+                'errors' => $not_exist
+            ], 200);
         }
         return response()->json([
             'success' => true,

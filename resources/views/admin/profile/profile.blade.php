@@ -70,10 +70,10 @@
     <div class=" col-md-12" role="alert">
         <p class="{{FORM_UPDATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_UPDATE_INFO}}</p>
     </div>
-    <div class="container col-12">
-        <div class="col-12">
-            <div class="col-12 row">
-                <div class="col-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                <div class="col-lg-2 col-md-4 col-xs-12 col-sm-12 float-left">
 
                     @if($currentUser->avatar != null)
                         <div class=" mt-4 col-12">
@@ -87,7 +87,7 @@
                     @endif
 
                 </div>
-                <div class="col-5">
+                <div class="col-lg-5 col-md-6 col-xs-12 col-sm-12 float-left">
                     <div class="alert p-4">
                         <form action="{{action('AdminProfileController@updateProfile', $currentUser->id )}}"
                               method="post" enctype="multipart/form-data">
@@ -156,7 +156,7 @@
                 </div>
 
                 @if(isset($createdBy) && count($createdBy)>0 || isset($updatedBy) && count($updatedBy)>0)
-                    <div class="col-5">
+                    <div class="col-lg-5 col-md-12 col-xs-12 col-sm-12 float-left">
                         {{--<div class="alert p-4">--}}
                         <div class="card example-1 square scrollbar-cyan bordered-cyan mt-4">
                             <div class="card-body">

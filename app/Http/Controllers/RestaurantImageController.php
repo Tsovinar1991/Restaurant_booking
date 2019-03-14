@@ -20,11 +20,12 @@ class RestaurantImageController extends Controller
             $images = RestaurantImage::where('restaurant_id', $id)->skip($request->input('offset'))->take($request->input('limit'))->get();
             $count = count(RestaurantImage::all());
             if ($images->isEmpty()) {
+                $not_exist = collect(['Image' => ['Image table data not exist.']]);
                 return response()->json([
                     'success' => false,
-                    'message' => 'Image table data not exist.',
-                    'data' => [],
-                    'errors' => true
+                    'message' => 'Error',
+                    'data' => null,
+                    'errors' => $not_exist
                 ], 200);
             }
 
