@@ -132,13 +132,20 @@ class RestaurantController extends Controller
     public function show(Request $request, $id)
     {
         $lang = $request->header('lang');
-       $restaurant = Restaurant::with(array('products'=>function($query)  use ($lang){
-           $query->select('id',"name_$lang as name", "description_$lang as description","avatar", "parent_id", "price", "weight", "status", "created_by", "updated_by", 'restaurant_id');
-       }))
-           ->find($id);
+        if (isset($lang)) {
+            $restaurant = Restaurant::with(array('products' => function ($query) use ($lang) {
+                $query->select('id', "name_$lang as name", "description_$lang as description", "avatar", "parent_id", "price", "weight", "status", "created_by", "updated_by", 'restaurant_id');
+            }))
+                ->find($id);
+        } else {
+            $restaurant = Restaurant::with(array('products' => function ($query) use ($lang) {
+                $query->select('id', "name_en as name", "description_en as description", "avatar", "parent_id", "price", "weight", "status", "created_by", "updated_by", 'restaurant_id');
+            }))
+                ->find($id);
+        }
 
 
-       if ($restaurant == null) {
+        if ($restaurant == null) {
             return response()->json([
                 'success' => false,
                 'message' => 'Data not found or not exist.',
