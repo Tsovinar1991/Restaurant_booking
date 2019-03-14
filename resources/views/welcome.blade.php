@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="{{ asset('styles.1aae9754bcc080d3023d.css') }}"></head>
 <body>
     <app-root></app-root>
-    <script type="text/javascript" src="{{ asset('runtime.3f6f1651234f8de68df0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('runtime.f44539ab640761be1d6e.js') }}"></script>
     <script type="text/javascript" src="{{ asset('polyfills.3eb7881d3a00da6c675e.js') }}"></script>
     <script type="text/javascript" src="{{ asset('scripts.ecbf1e4e445943032e3d.js') }}"></script>
     <script type="text/javascript" src="{{ asset('main.b931654c82d4248e16e4.js') }}"></script>
