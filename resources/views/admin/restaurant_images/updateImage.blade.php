@@ -16,7 +16,7 @@
         <input name="_method" type="hidden" value="PUT">
         <div class="row col-md-12">
             <div class="col-md-6 form-group{{ $errors->has('restaurant_id') ? ' has-error' : '' }}">
-                <label for="restaurant_id" class="col-md-12 control-label">Restaurant Id</label>
+                <label for="restaurant_id" class="col-md-12 control-label">Restaurant</label>
                 <div class="col-md-12">
                     <select name="restaurant_id" id="restaurant_id" class="form-control">
                         {{--<option selected="true" disabled="disabled">Choose Restaurant</option>--}}

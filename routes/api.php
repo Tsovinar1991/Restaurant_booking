@@ -39,8 +39,8 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('seat/{id}', 'SeatController@delete');
 
 
-    Route::get('restaurant_image', 'RestaurantImageController@index');
-    Route::get('restaurant_image/{id}', 'RestaurantImageController@show');
+    Route::get('restaurant/{id}/images', 'RestaurantImageController@index');
+
 
 
     Route::get('city', 'CityController@index');

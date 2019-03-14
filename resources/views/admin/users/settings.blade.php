@@ -67,7 +67,7 @@
         }
 
         .table thead th {
-            width:12%;
+            width:15%;
             text-align: center;
         }
 
@@ -75,6 +75,13 @@
             text-align: center;
         }
 
+        .table{
+            width:100%;
+        }
+
+        .setting{
+            width:20% !important;
+        }
 
 
 
@@ -103,10 +110,10 @@
 
                     @if(isset($users) && count($users)>0)
                         <div class="panel-body">
-                            <table class="table table-striped  table-bordered table-list">
+                            <table class="table table-striped table-responsive table-bordered table-list">
                                 <thead>
                                 <tr>
-                                    <th><i class="fa fa-cog"></i></th>
+                                    <th class="setting"><i class="fa fa-cog"></i></th>
                                     <th>Access</th>
                                     <th class="hidden-xs">ID</th>
                                     <th>Name</th>
