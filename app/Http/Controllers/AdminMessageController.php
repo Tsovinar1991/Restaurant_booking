@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ContactUs;
 use DB;
+use Mail;
 
 class AdminMessageController extends Controller
 {
@@ -27,12 +28,42 @@ class AdminMessageController extends Controller
     {
 
         //$mails =  ContactUs::all()->update(['status'=> $request->status]);
-        $mails = DB::table('contact_us')->update(array('status' => 1));
+        $mails = DB::table('contact_us')->where('id', $request->id)->update(array('status' => 1));
         return response($mails);
         if ($mails) {
             return response(["Done"]);
         } else {
             return response(["Not Done"]);
         }
+    }
+
+
+    public function answer_message(Request $request, $id)
+    {
+        $mail = ContactUs::where('id', $id)->first();
+        $emailTo = $mail->email;
+
+//        dd( $request->message . $emailTo);
+
+
+        $this->validate($request, [
+            'message' => 'required'
+        ]);
+
+        Mail::send('contact_us.email_answer',
+                array(
+                    'user_message' => $request->message
+                ), function ($message) use ($emailTo){
+                    $message->from('2019laraveltesting@gmail.com');
+                    $message->to( $emailTo, 'Customer')->subject('Contact Us');
+                });
+
+
+        if(Mail::failures()){
+            return back()->with('error', 'Email is not send!');
+        }
+        return back()->with('success', 'Answer is send Successfull!');
+
+
     }
 }

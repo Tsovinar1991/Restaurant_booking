@@ -27,7 +27,7 @@
         <p class="{{FORM_UPDATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_UPDATE_INFO}}</p>
     </div>
     <form class="form-horizontal alert my_form_color" role="form" method="POST"
-          action="{{url('admin/product/'.$product->id)}}" enctype="multipart/form-data">
+          action="{{route('admin.update.product',$product->id)}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PUT">
         <div class="row col-md-12">

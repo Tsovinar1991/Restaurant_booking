@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col col-xs-6">
                                 <div class="create"><a class="btn btn-outline-success"
-                                                       href="{{url('admin/product/create')}}">Add Product</a>
+                                                       href="{{route('admin.product.create')}}">Add Product</a>
                                 </div>
                             </div>
                         </div>

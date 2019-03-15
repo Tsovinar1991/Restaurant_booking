@@ -31,9 +31,9 @@ Route::prefix('admin')->group(function () {
 
     //delivery routes
     Route::get('/productOrders', 'AdminDeliveryController@orders')->name('admin.product_orders');
-    Route::get('/getNewOrders', 'AdminDeliveryController@getNewOrders');
-    Route::get('/setStatus', 'AdminDeliveryController@setStatus');
-    Route::get('/test', 'AdminDeliveryController@test');
+    Route::get('/getNewOrders', 'AdminDeliveryController@getNewOrders');//ajax
+    Route::get('/setStatus', 'AdminDeliveryController@setStatus'); //ajax
+    Route::get('/test', 'AdminDeliveryController@test'); //ajax
 
 
     //restaurant routes
@@ -48,50 +48,51 @@ Route::prefix('admin')->group(function () {
 
     //Product routes
     Route::get('/insert/products', 'AdminProductController@index')->name('admin.products');
-    Route::get('/product/create', 'AdminProductController@create');
-    Route::post('/product', 'AdminProductController@store');
+    Route::get('/product/create', 'AdminProductController@create')->name('admin.product.create');
+    Route::post('/product', 'AdminProductController@store')->name('admin.product.store');
     Route::get('/product/{id}/edit', 'AdminProductController@edit')->name('admin.edit.product');
-    Route::put('/product/{id}', 'AdminProductController@update');
+    Route::put('/product/{id}', 'AdminProductController@update')->name('admin.update.product');
     Route::get('/product/{id}', 'AdminProductController@show')->name('admin.show.product');
-    Route::get('/products/change_status', 'AdminProductController@productStatus');
+    Route::get('/products/change_status', 'AdminProductController@productStatus'); //ajax
 
 
     //restaurant image routes
     Route::get('/insert/images', 'AdminRestaurantImageController@all')->name('admin.images');
     Route::get('/restaurant_image/create', 'AdminRestaurantImageController@create')->name('admin.restaurant_image.create');
-    Route::post('/restaurant_image', 'AdminRestaurantImageController@store');
-    Route::get('/restaurant_image/{id}/edit', 'AdminRestaurantImageController@edit');
-    Route::put('/restaurant_image/{id}', 'AdminRestaurantImageController@update');
-    Route::delete('/restaurant_image/{id}', 'AdminRestaurantImageController@delete');
-    Route::get('/restaurant_images/gallery/{category}', 'AdminRestaurantImageController@gallery');
+    Route::post('/restaurant_image', 'AdminRestaurantImageController@store')->name('admin.store.restaurant_image');
+    Route::get('/restaurant_image/{id}/edit', 'AdminRestaurantImageController@edit')->name('admin.restaurant_image.edit');
+    Route::put('/restaurant_image/{id}', 'AdminRestaurantImageController@update')->name('admin.restaurant_image.update');
+    Route::delete('/restaurant_image/{id}', 'AdminRestaurantImageController@delete')->name('admin.restaurant_image.delete');
+    Route::get('/restaurant_images/gallery/{category}', 'AdminRestaurantImageController@gallery')->name('admin.restaurant_images.gallery');
 
 
     //Page routes
-    Route::get('/page/{p}', 'AdminCreatePageController@index');
-    Route::get('/pages/create', 'AdminCreatePageController@create');
-    Route::get('/pages', 'AdminCreatePageController@all');
-    Route::get('/page/{p}/edit', 'AdminCreatePageController@edit');
-    Route::post('/pages', 'AdminCreatePageController@store');
-    Route::put('/page/{id}', 'AdminCreatePageController@update');
-    Route::delete('/page/{id}', 'AdminCreatePageController@delete');
-    Route::delete('/pages/delete', 'AdminCreatePageController@truncate');
+    Route::get('/page/{p}', 'AdminCreatePageController@index')->name('admin.page.single');
+    Route::get('/pages/create', 'AdminCreatePageController@create')->name('admin.create.page');
+    Route::get('/pages', 'AdminCreatePageController@all')->name('admin.pages');
+    Route::get('/page/{p}/edit', 'AdminCreatePageController@edit')->name('admin.edit.page');
+    Route::post('/pages', 'AdminCreatePageController@store')->name('admin.store.page');
+    Route::put('/page/{id}', 'AdminCreatePageController@update')->name('admin.update.page');
+    Route::delete('/page/{id}', 'AdminCreatePageController@delete')->name('admin.delete.page');
+
 
 
     //mail message notification
     Route::get('/read_message', 'AdminMessageController@read_message')->name('admin.message.read');
-    Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');
+    Route::post('/answer-message/{id}', 'AdminMessageController@answer_message')->name('admin.message.answer');
+    Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');//ajax
 
 
     //user setting routes
     Route::get('/register_form', 'AdminUserController@registerForm')->name('admin.user.register.form');
-    Route::post('/register_user', 'AdminUserController@register');
+    Route::post('/register_user', 'AdminUserController@register')->name('admin.user.store');
     Route::get('/user/settings', 'AdminUserController@settings')->name('admin.user.settings');
     Route::delete('/users/delete/{id}', 'AdminUserController@deleteUser')->name('delete.admin.user');
     Route::get('/users/edit/{id}', 'AdminUserController@editUser')->name('edit.admin.user');
     Route::put('/users/update/{id}', 'AdminUserController@updateUser')->name('update.admin.user');
     Route::get('/users/changePassword/{id}', 'AdminUserController@changePassword')->name('admin.user.changePassword');
     Route::put('/users/password/update/{id}', 'AdminUserController@updatePassword')->name('admin.user.password.update');
-    Route::get('/users/change_status', 'AdminUserController@userStatus');
+    Route::get('/users/change_status', 'AdminUserController@userStatus');//ajax
 
 
     //profile routes

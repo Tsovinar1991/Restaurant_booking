@@ -30,7 +30,7 @@
     </div>
 
     <form class="form-horizontal alert alert alert-secondary" role="form" method="POST"
-          action="{{ action('AdminProductController@store')}}" enctype="multipart/form-data">
+          action="{{route('admin.product.store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row col-md-12">
             <div class="col-md-6 form-group{{ $errors->has('name_en') ? ' has-error' : '' }}">

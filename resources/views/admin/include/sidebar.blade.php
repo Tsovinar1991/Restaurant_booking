@@ -44,7 +44,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Pages</h6>
-            <a class="dropdown-item" href="{{url('/admin/pages')}}">
+            <a class="dropdown-item" href="{{route('admin.pages')}}">
                 {{--<i class="fa fa-book-open"></i>--}}
                 <i class="fas fa-th-list"></i>
                 All Pages</a>

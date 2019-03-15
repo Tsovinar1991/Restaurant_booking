@@ -13,7 +13,7 @@
         <p class="{{FORM_CREATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_CREATE_INFO}}</p>
     </div>
     <div class="modal-body alert my_form_color">
-        <form id="registerForm" method="POST" action="{{action('AdminUserController@register')}}">
+        <form id="registerForm" method="POST" action="{{route('admin.user.store')}}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <!---form--->
             <div class="form-group col-md-6">

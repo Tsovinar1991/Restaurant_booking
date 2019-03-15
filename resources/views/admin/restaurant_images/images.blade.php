@@ -33,7 +33,7 @@
             <div class="col-md-12 d-flex justify-content-around flex-wrap ">
                 @foreach($categories as $category)
                     <div id="category_container" class="alert alert-secondary d-flex justify-content-center">
-                        <a class="nounderline" href="{{url('admin/restaurant_images/gallery/'.$category->title)}}">
+                        <a class="nounderline" href="{{route('admin.restaurant_images.gallery',$category->title)}}">
                             <i class="fas fa-folder fa-2x gallery-folder"></i>
                             <span class="image_class">{{$category->title}}</span>
                         </a>
@@ -76,13 +76,13 @@
                                     <tr>
                                         <td>
                                             <div class="row d-flex justify-content-center align-items-middle">
-                                                <a href="{{url("admin/restaurant_image/$i->id/edit")}}"
+                                                <a href="{{route("admin.restaurant_image.edit", $i->id)}}"
                                                    class="btn btn-default black"><i
                                                             class="fas fa-pencil-alt "></i></a>
                                                 {{--<a href="{{route('delete.user', ['id'=> $user->id])}}" class="btn btn-danger btn_small  btn-sm"><i--}}
                                                 {{--class="fa fa-trash white"></i></a>--}}
 
-                                                <form action="{{url('admin/restaurant_image/' . $i->id)}}"
+                                                <form action="{{route('admin.restaurant_image.delete' , $i->id)}}"
                                                       method="POST">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}

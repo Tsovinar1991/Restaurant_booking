@@ -29,7 +29,8 @@
 
 
     <div class="create">
-        <a class="btn btn-outline-success" href="{{url('admin/pages/create')}}">Create</a>
+        <a class="btn btn-outline-success" href="">Create Menu</a>
+        <a class="btn btn-outline-success" href="{{route('admin.create.page')}}">Create Page</a>
     </div>
 
     @if(isset($pages) && count($pages)>0)
@@ -58,7 +59,7 @@
                         <td>
                             <div class="image">   {{ str_limit(strip_tags($p->description_ru), 20) }}
                                 @if (strlen(strip_tags($p->description_ru)) > 20)
-                                    <a href="{{url('admin/page/'.$p->id)}}"
+                                    <a href="{{route('admin.page.single',$p->id)}}"
                                     ><p>Read More</p>
                                     </a>
                                 @endif
@@ -67,7 +68,7 @@
                         <td>
                             <div class="image">   {{ str_limit(strip_tags($p->description_am), 20) }}
                                 @if (strlen(strip_tags($p->description_am)) > 20)
-                                    <a href="{{url('admin/page/'.$p->id)}}"
+                                    <a href="{{route('admin.page.single',$p->id)}}"
                                     ><p>Read More</p></a>
                                 @endif
                             </div>
@@ -75,16 +76,16 @@
                         <td>
                             <div class="image">   {{ str_limit(strip_tags($p->description_en), 20) }}
                                 @if (strlen(strip_tags($p->description_en)) > 20)
-                                    <a href="{{url('admin/page/'.$p->id)}}"
+                                    <a href="{{route('admin.page.single',$p->id)}}"
                                     ><p>Read More</p></a>
                                 @endif
                             </div>
                         </td>
                         <td>
-                            <a href="{{url('admin/page/'. $p->id .'/edit')}}"> <span class="btn btn-primary"><i
+                            <a href="{{route('admin.edit.page', $p->id)}}"> <span class="btn btn-primary"><i
                                             class="fas fa-pen"></i> Edit</span></a>
 
-                            <form action="{{url('admin/page/'.$p->id)}}" method="POST">
+                            <form action="{{route('admin.delete.page', $p->id)}}" method="POST">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button class="btn btn-danger"

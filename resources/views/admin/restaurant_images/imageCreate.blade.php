@@ -12,7 +12,7 @@
     </div>
 
     <form class="form-horizontal alert my_form_color" role="form" method="POST"
-          action="{{action('AdminRestaurantImageController@store')}}" enctype="multipart/form-data">
+          action="{{route('admin.store.restaurant_image')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="row col-md-12">
