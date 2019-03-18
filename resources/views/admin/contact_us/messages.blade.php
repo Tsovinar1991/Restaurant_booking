@@ -25,10 +25,10 @@
 
     @if(isset($mails) && count($mails)>0)
         <div class="col-lg-12 col-md-12 row">
-            <div class="col-lg-12" style="clear: both">
-                <div class="col-lg-6 col-md-12 alert alert-secondary mt-3 float-left">
+            <div class="col-lg-12 col-md-12 col-sm-12" style="clear: both">
+                <div class="col-lg-6 col-md-7 mt-3 float-left">
                 @foreach($mails as $key => $message)
-                    <div class="col-lg-12 col-md-12 row">
+                    <div class="col-lg-12 col-md-12 alert my_form_color pb-0 row">
                         <p data-id="{{$message->id}}" class=" read_contact_message message_cursor col-lg-8 col-md-7 col-sm-7 col-xs-12"><i
                                     class="far fa-envelope message_icon"></i> From: {{$message->name}}
                         </p>
@@ -46,7 +46,7 @@
             <div class="col-lg-6 col-md-12  alert  float-right" id="message-form-div">
                 <form id="answer_message_form" method="POST" action="{{route('admin.message.answer', '+id+')}}">
                     {{ csrf_field() }}
-                    <div class="form-group alert alert-secondary"> <!-- Message field -->
+                    <div class="form-group alert my_form_color"> <!-- Message field -->
                         <label class="control-label message_to " for="message"></label>
                         <textarea class="form-control" cols="40" id="message" name="message" rows="5"></textarea>
                         @if ($errors->has('message'))
@@ -64,7 +64,7 @@
         </div>
     @else
         <div class="alert text-info col-md-12" role="alert">
-            <p>No message yet</p>
+            <p>No Message yet</p>
         </div>
     @endif
 

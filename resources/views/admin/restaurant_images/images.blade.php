@@ -108,8 +108,8 @@
                         {{--{!! $images->appends(\Request::except('page'))->render() !!}--}}
                         {{ $images->links('vendor.pagination.simple-bootstrap-4') }}
                     @else
-                        <div class="alert text-info col-md-12" role="alert">
-                            <p>No image yet</p>
+                        <div class="alert text-info col-md-12 p-0" role="alert">
+                            <p>No Image yet</p>
                         </div>
                     @endif
                 </div>

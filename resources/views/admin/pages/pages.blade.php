@@ -45,7 +45,7 @@
         {{--<a class="btn btn-outline-success" href="">Create Menu</a>--}}
         <form>
             <div class="col-lg-12 row">
-                <div class="form-row col-lg-5 alert alert-dark ml-3">
+                <div class="form-row col-lg-5 alert alert-dark pb-0 ml-3">
                     <div class="col-lg-12 mb-3">
                         {{--<label for="validationServerUsername">Username</label>--}}
                         <div class="input-group">
@@ -156,120 +156,14 @@
                             </table>
                         </div>
                     @else
-                        <div class="alert text-info col-md-12" role="alert">
-                            <p>No page yet</p>
+                        <div class="alert text-info col-md-12 p-0" role="alert">
+                            <p>No Page yet</p>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {{--@if(isset($pages) && count($pages)>0)--}}
-    {{--<div id="pages">--}}
-    {{--<table class="no-footer table-responsive pages_table" width="100%">--}}
-    {{--<thead>--}}
-    {{--<tr class="important">--}}
-    {{--<th>ID</th>--}}
-    {{--<th>MENU</th>--}}
-    {{--<th>NAME RU</th>--}}
-    {{--<th>NAME AM</th>--}}
-    {{--<th>NAME EN</th>--}}
-    {{--<th>DESCRIPTION RU</th>--}}
-    {{--<th>DESCRIPTION AM</th>--}}
-    {{--<th>DESCRIPTION EN</th>--}}
-    {{--<th>ACTION</th>--}}
-
-    {{--</tr>--}}
-    {{--</thead>--}}
-    {{--<tbody>--}}
-    {{--@foreach($pages as $p)--}}
-    {{--<tr>--}}
-    {{--<td>{{$p->id}}</td>--}}
-    {{--<td>menu</td>--}}
-    {{--<td>{{$p->name_ru}}</td>--}}
-    {{--<td>{{$p->name_am}}</td>--}}
-    {{--<td>{{$p->name_en}}</td>--}}
-    {{--<td>--}}
-    {{--<div class="image">   {{ str_limit(strip_tags($p->description_ru), 20) }}--}}
-    {{--@if (strlen(strip_tags($p->description_ru)) > 20)--}}
-    {{--<a href="{{route('admin.page.single',$p->id)}}"--}}
-    {{--><p>Read More</p>--}}
-    {{--</a>--}}
-    {{--@endif--}}
-    {{--</div>--}}
-    {{--</td>--}}
-    {{--<td>--}}
-    {{--<div class="image">   {{ str_limit(strip_tags($p->description_am), 20) }}--}}
-    {{--@if (strlen(strip_tags($p->description_am)) > 20)--}}
-    {{--<a href="{{route('admin.page.single',$p->id)}}"--}}
-    {{--><p>Read More</p></a>--}}
-    {{--@endif--}}
-    {{--</div>--}}
-    {{--</td>--}}
-    {{--<td>--}}
-    {{--<div class="image">   {{ str_limit(strip_tags($p->description_en), 20) }}--}}
-    {{--@if (strlen(strip_tags($p->description_en)) > 20)--}}
-    {{--<a href="{{route('admin.page.single',$p->id)}}"--}}
-    {{--><p>Read More</p></a>--}}
-    {{--@endif--}}
-    {{--</div>--}}
-    {{--</td>--}}
-    {{--<td>--}}
-    {{--<a href="{{route('admin.edit.page', $p->id)}}"> <span class="btn btn-primary"><i--}}
-    {{--class="fas fa-pen"></i> Edit</span></a>--}}
-
-    {{--<form action="{{route('admin.delete.page', $p->id)}}" method="POST">--}}
-    {{--{{ method_field('DELETE') }}--}}
-    {{--{{ csrf_field() }}--}}
-    {{--<button class="btn btn-danger"--}}
-    {{--onclick="return confirm('Are you sure you want to delete this item?');"><i--}}
-    {{--class="fas fa-trash-alt"></i> Delete--}}
-    {{--</button>--}}
-    {{--</form>--}}
-
-    {{--</td>--}}
-    {{--</tr>--}}
-    {{--@endforeach--}}
-    {{--</tbody>--}}
-    {{--</table>--}}
-    {{--</div>--}}
-    {{--@else--}}
-    {{--<div class="alert text-info col-md-12" role="alert">--}}
-    {{--<p>No page yet</p>--}}
-    {{--</div>--}}
-    {{--@endif--}}
-
 @endsection
 
 @section('js')

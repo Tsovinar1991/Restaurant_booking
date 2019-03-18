@@ -98,7 +98,7 @@
                         {{ $products->links('vendor.pagination.simple-bootstrap-4') }}
 
                     @else
-                        <div class="alert text-info col-md-12" role="alert">
+                        <div class="alert text-info col-md-12 p-0" role="alert">
                             <p>No Product yet</p>
                         </div>
                     @endif

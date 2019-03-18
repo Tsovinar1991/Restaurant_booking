@@ -5,6 +5,7 @@ use App\Restaurant;
 use App\AdminRole;
 use App\Role;
 use App\Admin;
+use App\Menu;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //seeding Restaurant
+//        //seeding Restaurant
         $restaurant = new Restaurant();
         $restaurant->city_id = 1;
         $restaurant->name = 'Famous';
@@ -72,6 +73,19 @@ class DatabaseSeeder extends Seeder
         $role->role_id = 1;
         $role->admin_id = $admin->id;
         $role->save();
+
+        //creating menus
+        $menu = new Menu;
+        $menu->name = 'header';
+        $menu->save();
+
+        $menu = new Menu;
+        $menu->name = 'aside';
+        $menu->save();
+
+        $menu = new Menu;
+        $menu->name = 'footer';
+        $menu->save();
 
 
 
