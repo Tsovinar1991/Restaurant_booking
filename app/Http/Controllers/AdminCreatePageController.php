@@ -58,7 +58,7 @@ class AdminCreatePageController extends Controller
         $page = Page::create($request->all());
 
         if ($page) {
-            return redirect(url('admin/page/' . $page->id))->with('success', "Created Successfully");;
+            return redirect(route('admin.page.single' , $page->id))->with('success', "Created Successfully");;
         }
     }
 
@@ -95,7 +95,7 @@ class AdminCreatePageController extends Controller
         }
 
         $page->update($request->all());
-        return redirect(url('admin/page/' . $page->id))->with('success', "Updated Successfully");
+        return redirect(route('admin.page.single' . $page->id))->with('success', "Updated Successfully");
     }
 
 
@@ -103,15 +103,10 @@ class AdminCreatePageController extends Controller
     {
         $page = Page::find($id);
         $page->delete();
-        return redirect(url('/admin/pages'));
+        return redirect(route('admin.pages'))->with('success', "Deleted Successfully");;
     }
 
 
-    public function truncate()
-    {
-        Page::query()->truncate();
-        return redirect(url('admin/pages'));
-    }
 
 
 }

@@ -54,7 +54,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <div class="create"><a class="btn btn-outline-success" href="{{route('admin.restaurant_image.create')}}">Add Image</a></div>
+                                <div class="create"><a class="btn btn-outline-success btn-sm" href="{{route('admin.restaurant_image.create')}}">Add Image</a></div>
                             </div>
                         </div>
                     </div>
@@ -66,9 +66,9 @@
                                 <tr>
                                     <th><i class="fa fa-cog"></i></th>
                                     <th class="hidden-xs">@sortablelink('id', 'ID')</th>
-                                    <th>@sortablelink('restaurant_id', 'Restaurant')</th>
-                                    <th>@sortablelink('title', 'Title')</th>
-                                    <th>Image</th>
+                                    <th>@sortablelink('restaurant_id', 'RESTAURANT')</th>
+                                    <th>@sortablelink('title', 'CATEGORY')</th>
+                                    <th>IMAGE</th>
                                 </tr>
                                 </thead>
                                 <tbody id="images">
@@ -105,7 +105,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        {!! $images->appends(\Request::except('page'))->render() !!}
+                        {{--{!! $images->appends(\Request::except('page'))->render() !!}--}}
+                        {{ $images->links('vendor.pagination.simple-bootstrap-4') }}
                     @else
                         <div class="alert text-info col-md-12" role="alert">
                             <p>No image yet</p>

@@ -24,7 +24,7 @@ class RestaurantController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Restaurants table data not exist.',
-                    'data' => null,
+                    'data' => [],
                     'errors' => true
                 ], 404);
 
@@ -41,7 +41,7 @@ class RestaurantController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_specified
             ], 404);
         }
@@ -150,7 +150,7 @@ class RestaurantController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_exist
             ], 200);
         }
@@ -191,7 +191,7 @@ class RestaurantController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Data not found or not exist.',
-                'data' => null,
+                'data' => [],
                 'errors' => true
             ], 404);
         }
@@ -213,7 +213,7 @@ class RestaurantController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $validator->errors()
             ], 401);
         }
@@ -274,7 +274,7 @@ class RestaurantController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Data not found or not exist.',
-                'data' => null,
+                'data' => [],
                 'errors' => true
             ], 404);
         }

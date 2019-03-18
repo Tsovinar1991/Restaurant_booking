@@ -83,7 +83,7 @@
                 <div class="form-group mt-3">
                     <div class="input-group-addon">
                         <input type="submit" name="submit" id="submit" value="Submit"
-                               class="btn btn-outline-success pull-right">
+                               class="btn btn-outline-success pull-right btn-sm">
 
                     </div>
                 </div>

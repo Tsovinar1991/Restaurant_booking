@@ -34,8 +34,8 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <div class="create"><a class="btn btn-outline-success"
-                                                       href="{{route('admin.restaurant.create')}}">Create</a></div>
+                                <div class="create"><a class="btn btn-outline-success btn-sm"
+                                                       href="{{route('admin.restaurant.create')}}">Add Restaurant</a></div>
                             </div>
                         </div>
                     </div>
@@ -47,13 +47,13 @@
                                 <tr>
                                     <th><i class="fa fa-cog"></i></th>
                                     <th class="hidden-xs">ID</th>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Description</th>
-                                    <th>Avatar</th>
-                                    <th>Contact Info</th>
-                                    <th>Open</th>
-                                    <th>Close</th>
+                                    <th>NAME</th>
+                                    <th>TYPE</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>AVATAR</th>
+                                    <th>CONTACT</th>
+                                    <th>OPEN</th>
+                                    <th>CLOSE</th>
                                 </tr>
                                 </thead>
                                 <tbody id="restaurants">

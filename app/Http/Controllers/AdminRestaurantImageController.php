@@ -17,7 +17,7 @@ class AdminRestaurantImageController extends Controller
     }
 
 
-    public function all()
+    public function index()
     {
         $images = RestaurantImage::sortable()->orderBy('id', 'DESC')->paginate(5);
         $categories = RestaurantImage::distinct()->get(['title']);
@@ -67,7 +67,7 @@ class AdminRestaurantImageController extends Controller
         );
 
         if ($image) {
-            return redirect(url('admin/insert/images'))->with('success', "Image Created Successfully");
+            return redirect(route('admin.images'))->with('success', "Image Created Successfully");
         }
 
     }
@@ -129,7 +129,7 @@ class AdminRestaurantImageController extends Controller
         }
 
         if ($image) {
-            return redirect(url('admin/insert/images'))->with('success', "Image Updated Successfully");
+            return redirect(route('admin.images'))->with('success', "Image Updated Successfully");
         }
 
 
@@ -141,7 +141,7 @@ class AdminRestaurantImageController extends Controller
         $image = RestaurantImage::find($id);
         Storage::delete($image->name);
         $delete = $image->delete();
-        return redirect(url('admin/insert/images'))->with('success', 'Restaurant Image Deleted Successfully');
+        return redirect(route('admin.images'))->with('success', 'Restaurant Image Deleted Successfully');
     }
 
     public function gallery(Request $request, $category)

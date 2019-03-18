@@ -21,7 +21,8 @@
             "database"
         ],
         "files":[
-            "app/Constants/main.php"
+            "app/Constants/main.php",
+            "app/Custom/helper.php"
         ],
         "psr-4": {
             "App\\": "app/"

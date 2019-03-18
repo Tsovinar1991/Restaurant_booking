@@ -25,7 +25,7 @@ class SeatController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Error',
-                    'data' => null,
+                    'data' => [],
                     'errors' => $not_exist
                 ],200);
             }
@@ -42,7 +42,7 @@ class SeatController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_specified
             ],404);
         }
@@ -79,7 +79,7 @@ class SeatController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $validator->errors()
             ],401);
         }
@@ -97,7 +97,7 @@ class SeatController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_created
             ],404);
 
@@ -120,7 +120,7 @@ class SeatController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_found
             ],404);
         }
@@ -161,7 +161,7 @@ class SeatController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_found
             ],404);
         }
@@ -178,7 +178,7 @@ class SeatController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $validator->errors()
             ],401);
         }
@@ -206,7 +206,7 @@ class SeatController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_found
             ],404);
         }

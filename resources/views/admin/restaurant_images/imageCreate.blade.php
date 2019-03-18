@@ -12,8 +12,8 @@
     </div>
 
     <form class="form-horizontal alert my_form_color" role="form" method="POST"
-          action="{{route('admin.store.restaurant_image')}}" enctype="multipart/form-data">
-        {{ csrf_field() }}
+          action="{{route('admin.store.images')}}" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="row col-md-12">
             <div class="col-md-6 form-group{{ $errors->has('restaurant_id') ? ' has-error' : '' }}">
@@ -62,7 +62,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
-                    <button type="submit" class="btn btn-outline-success">
+                    <button type="submit" class="btn btn-outline-success btn-sm">
                         Submit
                     </button>
                 </div>

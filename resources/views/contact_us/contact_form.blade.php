@@ -10,7 +10,7 @@
         font-style:italic;
     }
 </style>
-<body style="background-image: url({{asset('images/background.png')}})">
+<body style="background-image: url({{asset('images/contact_background.jpg')}});background-size: cover;">
 <div class="container">
 
 

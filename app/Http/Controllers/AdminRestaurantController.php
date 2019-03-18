@@ -86,7 +86,7 @@ class AdminRestaurantController extends Controller
         );
 
         if ($restaurant) {
-            return redirect(url('admin/insert/restaurants'))->with('success', "Restaurant Created Successfully");
+            return redirect(rout('admin.restaurants'))->with('success', "Restaurant Created Successfully");
         }
     }
 

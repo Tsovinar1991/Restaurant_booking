@@ -53,6 +53,8 @@
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('items/jquery/jquery.min.js')}}"></script>
+
+
 <script src="{{asset('items/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <!-- Core plugin JavaScript-->
@@ -71,10 +73,9 @@
 {{--<script src="{{asset('js/demo/chart-area-demo.js')}}"></script>--}}
 
 
-
-
-
 @yield('js')
+
+
 </body>
 
 </html>

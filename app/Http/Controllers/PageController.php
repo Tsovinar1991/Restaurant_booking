@@ -18,7 +18,7 @@ class PageController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_exist
             ], 200);
         }
@@ -42,7 +42,7 @@ class PageController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_exist
             ],202);
         }

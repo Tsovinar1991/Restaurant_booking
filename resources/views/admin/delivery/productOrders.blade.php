@@ -34,6 +34,20 @@
             text-align: center !important;
         }
 
+
+
+        #responsive_old_delivery_products{
+            padding:0;
+        }
+        #responsive_old_delivery_products tr{
+            padding:0 !important;
+        }
+
+        #responsive_old_delivery_products th{
+            width:4%;
+        }
+
+
     </style>
 @endsection
 
@@ -65,7 +79,7 @@
         </table>
     </div>
     <div>
-        <button type="button" class="btn btn-outline-info access">Close/Open Other Orders</button>
+        <button type="button" class="btn btn-outline-info access btn-sm">Close/Open Other Orders</button>
     </div>
 
     @if(isset($order) && count($order)>0)
@@ -111,7 +125,7 @@
                     <tr id='product-other-info-{{$o->id}}' class="ordered_products">
                         <td colspan="12">
                             <div>
-                                <table>
+                                <table class="table-responsive" id="responsive_old_delivery_products">
                                     <thead>
                                     <tr>
                                         <th>Product Id</th>
@@ -127,7 +141,6 @@
                                     @foreach ($order_list as $key => $products)
                                         @foreach( $products as $prod)
                                             @if($o->id === $key)
-
                                                 <tr class="prod">
                                                     <td>{{$prod['id']}}</td>
                                                     <td>
@@ -141,7 +154,9 @@
                                                     <td>{{$prod['count']}}</td>
                                                     <td>{{$prod['total']}} AMD</td>
                                                 </tr>
-
+                                                <tr>
+                                                    <td colspan="6">Delivery Price: {{$o->delivery_price}} AMD AMD</td>
+                                                </tr>
                                             @endif
                                         @endforeach
                                     @endforeach
@@ -216,7 +231,7 @@
                                    </thead>
                                     <tbody>${products}
                                     <tr>
-                                   <td colspan="6">Delivery Price: ${row.order_info.delivery_price} AMD</tdcolspan>
+                                   <td colspan="6">Delivery Price: ${row.order_info.delivery_price} AMD</td>
                                    </tr>
                                    </tbody>
                                   </table>
@@ -285,7 +300,12 @@
                                    <thead>
                                        <tr><th>Product Id</th><th>Product Avatar</th><th>Product Name</th><th>Product Price</th><th>Product Count</th><th>Total</th></tr>
                                    </thead>
-                                    <tbody>${products}</tbody>
+                                    <tbody>${products}
+                                     <tr>
+                                   <td colspan="6">Delivery Price: ${row.order_info.delivery_price} AMD</td>
+                                   </tr>
+
+                               </tbody>
                                   </table>
                                 </div>
                                 </td>

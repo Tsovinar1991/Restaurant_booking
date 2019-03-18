@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ContactUs;
 use DB;
 use Mail;
+use Validator;
 
 class AdminMessageController extends Controller
 {
@@ -17,6 +18,7 @@ class AdminMessageController extends Controller
     public function read_message()
     {
         $mails = ContactUs::all()->where('status', 0);
+        $mails = $mails->sortByDesc('id');
         if ($mails) {
             return view('admin.contact_us.messages', compact('mails'));
         } else {
@@ -46,9 +48,15 @@ class AdminMessageController extends Controller
 //        dd( $request->message . $emailTo);
 
 
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'message' => 'required'
         ]);
+
+        if($validator->fails()){
+            return back()->with('error', 'Mail is not send, because message field is required!');
+        }
+
+
 
         Mail::send('contact_us.email_answer',
                 array(

@@ -107,7 +107,7 @@ class AdminProductController extends Controller
         $product->created_by = $id;
         $product->save();
         if ($product) {
-            return redirect(url('admin/insert/products'))->with('success', "Product Created Successfully");
+            return redirect(route('admin.products'))->with('success', "Product Created Successfully");
         }
 
 
@@ -190,7 +190,7 @@ class AdminProductController extends Controller
         if (!$request->avatar) {
             $product->update(['avatar' => $product_image]);
         }
-        return redirect(url('admin/insert/products'))->with('success', "Product Updated Successfully");
+        return redirect(route('admin.products'))->with('success', "Product Updated Successfully");
 
     }
 

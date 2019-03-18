@@ -48,7 +48,7 @@
                                 <input id="password-confirm" type="password" class="form-control"
                                        name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary btn-sm">
                                 {{ __('Change') }}
                             </button>
                         </form>

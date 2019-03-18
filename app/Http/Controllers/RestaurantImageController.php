@@ -24,7 +24,7 @@ class RestaurantImageController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Error',
-                    'data' => null,
+                    'data' => [],
                     'errors' => $not_exist
                 ], 200);
             }
@@ -41,7 +41,7 @@ class RestaurantImageController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_specified
             ], 404);
         }

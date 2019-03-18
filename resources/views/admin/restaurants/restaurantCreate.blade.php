@@ -143,7 +143,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
-                    <button type="submit" class="btn btn-outline-success">
+                    <button type="submit" class="btn btn-outline-success btn-sm">
                         Submit
                     </button>
                 </div>

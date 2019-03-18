@@ -28,7 +28,7 @@ class GetOrdersController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $validator->errors()
             ], 401);
         }
@@ -49,7 +49,7 @@ class GetOrdersController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Error',
-                    'data' => null,
+                    'data' => [],
                     'errors' => $not_active
                 ], 404);
 
@@ -64,7 +64,7 @@ class GetOrdersController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error',
-                'data' => null,
+                'data' => [],
                 'errors' => $not_exist
             ], 404);
         }

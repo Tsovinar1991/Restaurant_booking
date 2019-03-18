@@ -67,7 +67,7 @@
         }
 
         .table thead th {
-            width:15%;
+            width:10%;
             text-align: center;
         }
 
@@ -80,6 +80,9 @@
         }
 
         .setting{
+            width:20% !important;
+        }
+        .setting_status{
             width:20% !important;
         }
 
@@ -120,7 +123,7 @@
                                     <th>Email</th>
                                     <th>Job Title</th>
                                     <th>Role</th>
-                                    <th>Status</th>
+                                    <th class="setting_status">Status</th>
 
                                 </tr>
                                 </thead>

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 
-
 class ContactMailController extends Controller
 {
 
@@ -40,11 +39,18 @@ class ContactMailController extends Controller
                     $message->to('2019laraveltesting@gmail.com', 'Admin')->subject('Contact Us');
                 });
 
-        }catch (\Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        } catch (\Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+        }
+
+
+        if (Mail::failures()) {
+            return back()->with('error', 'Email is not send!');
         }
         return back()->with('success', 'Thanks for contacting us!');
-        }
+    }
+
+
 }
 
 

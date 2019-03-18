@@ -30,14 +30,14 @@ Route::prefix('admin')->group(function () {
 
 
     //delivery routes
-    Route::get('/productOrders', 'AdminDeliveryController@orders')->name('admin.product_orders');
+    Route::get('/delivery', 'AdminDeliveryController@orders')->name('admin.product_orders');
     Route::get('/getNewOrders', 'AdminDeliveryController@getNewOrders');//ajax
     Route::get('/setStatus', 'AdminDeliveryController@setStatus'); //ajax
     Route::get('/test', 'AdminDeliveryController@test'); //ajax
 
 
     //restaurant routes
-    Route::get('/insert/restaurants', 'AdminRestaurantController@index')->name('admin.restaurants');
+    Route::get('/restaurants', 'AdminRestaurantController@index')->name('admin.restaurants');
     Route::get('/restaurant/{id}', 'AdminRestaurantController@show')->name('admin.show.restaurant');
     Route::get('/create/restaurant', 'AdminRestaurantController@create')->name('admin.restaurant.create');
     Route::post('/restaurant', 'AdminRestaurantController@store')->name('admin.create.restaurant');
@@ -47,9 +47,9 @@ Route::prefix('admin')->group(function () {
 
 
     //Product routes
-    Route::get('/insert/products', 'AdminProductController@index')->name('admin.products');
-    Route::get('/product/create', 'AdminProductController@create')->name('admin.product.create');
-    Route::post('/product', 'AdminProductController@store')->name('admin.product.store');
+    Route::get('/products', 'AdminProductController@index')->name('admin.products');
+    Route::get('create/product', 'AdminProductController@create')->name('admin.product.create');
+    Route::post('/products', 'AdminProductController@store')->name('admin.product.store');
     Route::get('/product/{id}/edit', 'AdminProductController@edit')->name('admin.edit.product');
     Route::put('/product/{id}', 'AdminProductController@update')->name('admin.update.product');
     Route::get('/product/{id}', 'AdminProductController@show')->name('admin.show.product');
@@ -57,13 +57,13 @@ Route::prefix('admin')->group(function () {
 
 
     //restaurant image routes
-    Route::get('/insert/images', 'AdminRestaurantImageController@all')->name('admin.images');
-    Route::get('/restaurant_image/create', 'AdminRestaurantImageController@create')->name('admin.restaurant_image.create');
-    Route::post('/restaurant_image', 'AdminRestaurantImageController@store')->name('admin.store.restaurant_image');
-    Route::get('/restaurant_image/{id}/edit', 'AdminRestaurantImageController@edit')->name('admin.restaurant_image.edit');
-    Route::put('/restaurant_image/{id}', 'AdminRestaurantImageController@update')->name('admin.restaurant_image.update');
-    Route::delete('/restaurant_image/{id}', 'AdminRestaurantImageController@delete')->name('admin.restaurant_image.delete');
-    Route::get('/restaurant_images/gallery/{category}', 'AdminRestaurantImageController@gallery')->name('admin.restaurant_images.gallery');
+    Route::get('restaurant-images', 'AdminRestaurantImageController@index')->name('admin.images');
+    Route::get('/restaurant-image/create', 'AdminRestaurantImageController@create')->name('admin.restaurant_image.create');
+    Route::post('/restaurant-images', 'AdminRestaurantImageController@store')->name('admin.store.images');
+    Route::get('/restaurant-image/{id}/edit', 'AdminRestaurantImageController@edit')->name('admin.restaurant_image.edit');
+    Route::put('/restaurant-image/{id}', 'AdminRestaurantImageController@update')->name('admin.restaurant_image.update');
+    Route::delete('/restaurant-image/{id}', 'AdminRestaurantImageController@delete')->name('admin.restaurant_image.delete');
+    Route::get('/restaurant-images/gallery/{category}', 'AdminRestaurantImageController@gallery')->name('admin.restaurant_images.gallery');
 
 
     //Page routes
@@ -78,14 +78,14 @@ Route::prefix('admin')->group(function () {
 
 
     //mail message notification
-    Route::get('/read_message', 'AdminMessageController@read_message')->name('admin.message.read');
+    Route::get('/read-message', 'AdminMessageController@read_message')->name('admin.message.read');
     Route::post('/answer-message/{id}', 'AdminMessageController@answer_message')->name('admin.message.answer');
     Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');//ajax
 
 
     //user setting routes
-    Route::get('/register_form', 'AdminUserController@registerForm')->name('admin.user.register.form');
-    Route::post('/register_user', 'AdminUserController@register')->name('admin.user.store');
+    Route::get('/register-form', 'AdminUserController@registerForm')->name('admin.user.register.form');
+    Route::post('/register-user', 'AdminUserController@register')->name('admin.user.store');
     Route::get('/user/settings', 'AdminUserController@settings')->name('admin.user.settings');
     Route::delete('/users/delete/{id}', 'AdminUserController@deleteUser')->name('delete.admin.user');
     Route::get('/users/edit/{id}', 'AdminUserController@editUser')->name('edit.admin.user');
@@ -118,7 +118,7 @@ Route::get('/contact_us', 'ContactMailController@index')->name('contact_us');
 Route::post('contact_us', ['as' => 'contact_us.store', 'uses' => 'ContactMailController@store']);
 
 
-Route::any('{query}',
-    function() { return redirect(route('welcome')); })
-    ->where('query', '.*');
+//Route::any('{query}',
+//    function() { return redirect(route('welcome')); })
+//    ->where('query', '.*');
 

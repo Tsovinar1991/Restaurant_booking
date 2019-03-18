@@ -13,6 +13,7 @@
 
         .table tbody td {
             text-align: center;
+
         }
 
     </style>
@@ -28,7 +29,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <div class="create"><a class="btn btn-outline-success"
+                                <div class="create"><a class="btn btn-outline-success btn-sm"
                                                        href="{{route('admin.product.create')}}">Add Product</a>
                                 </div>
                             </div>
@@ -93,7 +94,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        {!! $products->appends(\Request::except('page'))->render() !!}
+                        {{--{!! $products->appends(\Request::except('page'))->render() !!}--}}
+                        {{ $products->links('vendor.pagination.simple-bootstrap-4') }}
+
                     @else
                         <div class="alert text-info col-md-12" role="alert">
                             <p>No Product yet</p>
