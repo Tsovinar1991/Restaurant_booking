@@ -34,17 +34,16 @@
             text-align: center !important;
         }
 
-
-
-        #responsive_old_delivery_products{
-            padding:0;
-        }
-        #responsive_old_delivery_products tr{
-            padding:0 !important;
+        #responsive_old_delivery_products {
+            padding: 0;
         }
 
-        #responsive_old_delivery_products th{
-            width:4%;
+        #responsive_old_delivery_products tr {
+            padding: 0 !important;
+        }
+
+        #responsive_old_delivery_products th {
+            width: 4%;
         }
 
 
@@ -81,6 +80,7 @@
     <div>
         <button type="button" class="btn btn-outline-info access btn-sm">Close/Open Other Orders</button>
     </div>
+    {{--<i class="fas fa-minus"></i>--}}
 
     @if(isset($order) && count($order)>0)
         <div id="old">
@@ -103,7 +103,8 @@
                 @foreach($order as $o)
                     {{--order part--}}
                     <tr data-id={{$o->id}}>
-                        <td class="order-other-show"><i class="fa fa-plus fa-lg"></i></td>
+                        <td class="order-other-show" id="order-other-show-{{$o->id}}"><i class="fa fa-plus fa-lg"></i>
+                        </td>
                         <td>{{$o->id}}</td>
                         <td>{{$o->name}}</td>
                         <td>{{$o->telephone}}</td>
@@ -207,7 +208,7 @@
                         }, '');
                         $("#cont").append(
                             `<tr  class="order_info"  data-id="${row.order_info.id}">
-                                <td class="order_show"><i class="fa fa-plus fa-lg"></i></td>
+                                <td id="order-show-${row.order_info.id}" class="order_show"><i class="fa fa-plus fa-lg"></i></td>
                                 <td class="new" >${row.order_info.id}</td>
                                 <td class="">${row.order_info.name}</td>
                                 <td class="">${row.order_info.telephone}</td>
@@ -278,7 +279,7 @@
                             }, '');
                             $("#cont").append(
                                 `<tr  class="order_info"  data-id="${row.order_info.id}">
-                                <td class="order_show"><i class="fa fa-plus fa-lg"></td>
+                                <td id="order-show-${row.order_info.id}" class="order_show"><i class="fa fa-plus fa-lg"></td>
                                 <td class="new" >${row.order_info.id}</td>
                                 <td class="">${row.order_info.name}</td>
                                 <td class="">${row.order_info.telephone}</td>
@@ -384,12 +385,36 @@
             $(document).on('click', ".order_show", function () {
 
                 let id = $(this).parent().attr('data-id');
-                $(`#product-info-${id}`).fadeToggle(200);
+                $(`#product-info-${id}`).toggle(
+                    'slow', function() {
+                        if ($(this).is(':visible')) {
+                            $(`#order-show-${id}`).children('i').attr('class', 'fas fa-minus fa-lg');
+                        } else {
+                            $(`#order-show-${id}`).children('i').attr('class', 'fas fa-plus fa-lg');
+                        }
+                    }
+
+
+
+                );
 
             });
             $(document).on('click', ".order-other-show", function () {
                 let id = $(this).parent().attr('data-id');
-                $(`#product-other-info-${id}`).fadeToggle(200);
+                console.log($(`#order-other-show-${id}`));
+                $(`#product-other-info-${id}`).toggle(
+                    'slow', function() {
+                        if ($(this).is(':visible')) {
+                            $(`#order-other-show-${id}`).children('i').attr('class', 'fas fa-minus fa-lg');
+                        } else {
+                            $(`#order-other-show-${id}`).children('i').attr('class', 'fas fa-plus fa-lg');
+                        }
+                    }
+
+
+
+
+                );
             });
             if ($("#old_cont").children().length != 0) {
                 $(document).on('click', ".access", function () {
