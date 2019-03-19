@@ -13,10 +13,13 @@ class AdminRestaurantImageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('roles:superadmin|admin|delivery|waiter|manager');
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $images = RestaurantImage::sortable()->orderBy('id', 'DESC')->paginate(5);
@@ -24,13 +27,19 @@ class AdminRestaurantImageController extends Controller
         return view('admin.restaurant_images.images', compact(['images', 'categories']));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $restaurants = Restaurant::select('id', 'name')->get();
         return view('admin.restaurant_images.imageCreate', compact('restaurants'));
     }
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         if ($request->hasFile('name')) {
@@ -69,9 +78,12 @@ class AdminRestaurantImageController extends Controller
         if ($image) {
             return redirect(route('admin.images'))->with('success', "Image Created Successfully");
         }
-
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $image = RestaurantImage::find($id);
@@ -86,7 +98,11 @@ class AdminRestaurantImageController extends Controller
         return view('admin.restaurant_images.updateImage', compact(['image', 'r_name', 'restaurants']));
     }
 
-
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $image = RestaurantImage::find($id);
@@ -135,7 +151,11 @@ class AdminRestaurantImageController extends Controller
 
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function delete($id)
     {
         $image = RestaurantImage::find($id);
@@ -144,6 +164,11 @@ class AdminRestaurantImageController extends Controller
         return redirect(route('admin.images'))->with('success', 'Restaurant Image Deleted Successfully');
     }
 
+    /**
+     * @param Request $request
+     * @param $category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function gallery(Request $request, $category)
     {
         $images = RestaurantImage::where('title', $category)->paginate(5);

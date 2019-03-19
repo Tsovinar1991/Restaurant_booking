@@ -12,8 +12,9 @@
         }
 
         .jumbotron {
-            /*background-color:transparent !important;*/
-            background:rgba(255,255,255,0.5);
+            background-color:transparent !important;
+
+
         }
     </style>
 @endsection
@@ -43,10 +44,10 @@
                     </div>
                 @endforeach
             </div>
-            <div class="col-lg-6 col-md-12  alert  float-right" id="message-form-div">
+            <div class="col-lg-6 col-md-12  alert  float-right" id="message-form-div" >
                 <form id="answer_message_form" method="POST" action="{{route('admin.message.answer', '+id+')}}">
                     {{ csrf_field() }}
-                    <div class="form-group alert my_form_color"> <!-- Message field -->
+                    <div class="form-group alert my_form_color" > <!-- Message field -->
                         <label class="control-label message_to " for="message"></label>
                         <textarea class="form-control" cols="40" id="message" name="message" rows="5"></textarea>
                         @if ($errors->has('message'))

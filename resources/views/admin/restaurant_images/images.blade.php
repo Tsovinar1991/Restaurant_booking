@@ -86,9 +86,9 @@
                                                       method="POST">
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
-                                                    <button class="btn btn-danger"
+                                                    <button class="btn"
                                                             onclick="return confirm('Are you sure you want to delete this item?');">
-                                                        <i class="fa fa-trash white"></i>
+                                                        <i class="fa fa-trash  text-danger"></i>
                                                     </button>
                                                 </form>
 

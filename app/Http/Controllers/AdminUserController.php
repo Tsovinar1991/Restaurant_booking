@@ -18,7 +18,6 @@ class AdminUserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin');
         $this->middleware('role:superadmin');
     }
 
@@ -88,6 +87,7 @@ class AdminUserController extends Controller
 
     public function settings()
     {
+
         $users = Admin::with('roles')->paginate(8);
         return view('admin.users.settings', compact('users'));
     }
@@ -160,6 +160,7 @@ class AdminUserController extends Controller
 
     public function updatePassword(Request $request, $id)
     {
+
         $validation = Validator::make($request->all(), [
             'password' => 'required|min:6',
             'password_confirmation' => 'required|min:6|same:password'

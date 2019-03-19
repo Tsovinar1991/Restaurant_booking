@@ -16,15 +16,31 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+// Login routes
+Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+// Password reset routes
+Route::post('admin/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+Route::get('admin/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+Route::post('admin/password/reset', 'Auth\AdminResetPasswordController@reset');
+Route::get('admin/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+
+
+
+Route::group(['prefix' => 'admin',
+    'middleware' => [
+        'auth:admin'
+//        'anotherMiddleware',
+    ],
+], function () {
+
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
@@ -43,7 +59,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/restaurant', 'AdminRestaurantController@store')->name('admin.create.restaurant');
     Route::get('/restaurant/{id}/edit', 'AdminRestaurantController@edit')->name('admin.edit.restaurant');
     Route::put('/restaurant/{id}', 'AdminRestaurantController@update')->name('admin.update.restaurant');
-
 
 
     //Product routes
@@ -66,6 +81,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/restaurant-images/gallery/{category}', 'AdminRestaurantImageController@gallery')->name('admin.restaurant_images.gallery');
 
 
+    //Menus
+    Route::get('menus', 'AdminMenuController@index')->name('admin.menus');
+    Route::get('menu-update', 'AdminMenuController@change_name')->name('admin.menus.update');
+
+
     //Page routes
     Route::get('/page/{p}', 'AdminCreatePageController@index')->name('admin.page.single');
     Route::get('/pages/create', 'AdminCreatePageController@create')->name('admin.create.page');
@@ -74,7 +94,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/pages', 'AdminCreatePageController@store')->name('admin.store.page');
     Route::put('/page/{id}', 'AdminCreatePageController@update')->name('admin.update.page');
     Route::delete('/page/{id}', 'AdminCreatePageController@delete')->name('admin.delete.page');
-
 
 
     //mail message notification
@@ -100,25 +119,17 @@ Route::prefix('admin')->group(function () {
     Route::post('/admin/user/{id}/update', 'AdminProfileController@updateProfile')->name('admin.user.profile.update');
 
 
-
     //error route
-    Route::get('/error', function(){
+    Route::get('/error', function () {
         return view('admin.error');
     })->name('admin.error');
-
-
-    // Password reset routes
-    Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-    Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
-    Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 });
 
 Route::get('/contact_us', 'ContactMailController@index')->name('contact_us');
 Route::post('contact_us', ['as' => 'contact_us.store', 'uses' => 'ContactMailController@store']);
 
 
-//Route::any('{query}',
-//    function() { return redirect(route('welcome')); })
-//    ->where('query', '.*');
+Route::any('{query}',
+    function() { return redirect(route('welcome')); })
+    ->where('query', '.*');
 

@@ -14,7 +14,7 @@ class AdminProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+//        $this->middleware('auth:admin');
 
         //tests
 //        $this->middleware(['roles:superadmin|waiter']); multiple roles
@@ -22,6 +22,10 @@ class AdminProductController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
 //        dd($request->user());
@@ -32,6 +36,9 @@ class AdminProductController extends Controller
         return view('admin.product.products', compact('products'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $restaurants = Restaurant::select('id', 'name')->get();
@@ -39,7 +46,10 @@ class AdminProductController extends Controller
         return view('admin.product.productCreate', compact(['restaurants', 'parents']));
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function show($id)
     {
         $product = RestaurantMenu::find($id);
@@ -50,6 +60,10 @@ class AdminProductController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
 
@@ -109,10 +123,13 @@ class AdminProductController extends Controller
         if ($product) {
             return redirect(route('admin.products'))->with('success', "Product Created Successfully");
         }
-
-
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $product = RestaurantMenu::find($id);
@@ -129,6 +146,11 @@ class AdminProductController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $product = RestaurantMenu::find($id);
@@ -194,7 +216,10 @@ class AdminProductController extends Controller
 
     }
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function productStatus(Request $request)
     {
         $product = RestaurantMenu::find($request->id);

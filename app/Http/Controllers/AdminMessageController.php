@@ -12,9 +12,12 @@ class AdminMessageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function read_message()
     {
         $mails = ContactUs::all()->where('status', 0);
@@ -26,6 +29,10 @@ class AdminMessageController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function set_messages_read(Request $request)
     {
 
@@ -39,39 +46,36 @@ class AdminMessageController extends Controller
         }
     }
 
-
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function answer_message(Request $request, $id)
     {
         $mail = ContactUs::where('id', $id)->first();
         $emailTo = $mail->email;
-
-//        dd( $request->message . $emailTo);
-
-
         $validator = Validator::make($request->all(), [
             'message' => 'required'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return back()->with('error', 'Mail is not send, because message field is required!');
         }
 
-
-
         Mail::send('contact_us.email_answer',
-                array(
-                    'user_message' => $request->message
-                ), function ($message) use ($emailTo){
-                    $message->from('2019laraveltesting@gmail.com');
-                    $message->to( $emailTo, 'Customer')->subject('Contact Us');
-                });
+            array(
+                'user_message' => $request->message
+            ), function ($message) use ($emailTo) {
+                $message->from('2019laraveltesting@gmail.com');
+                $message->to($emailTo, 'Customer')->subject('Contact Us');
+            });
 
 
-        if(Mail::failures()){
+        if (Mail::failures()) {
             return back()->with('error', 'Email is not send!');
         }
         return back()->with('success', 'Answer is send Successfull!');
-
 
     }
 }

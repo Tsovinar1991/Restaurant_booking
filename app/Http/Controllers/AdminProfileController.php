@@ -16,9 +16,12 @@ class AdminProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminUserProfile()
     {
         $currentUser = Auth::guard('admin')->user();
@@ -27,6 +30,11 @@ class AdminProfileController extends Controller
         return view('admin.profile.profile', compact(['currentUser', 'createdBy', 'updatedBy', 'roles']));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateProfile(Request $request, $id)
     {
         $admin = Admin::find($id);

@@ -13,7 +13,7 @@ class AdminRestaurantController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin');
+
     }
 
     /**
@@ -90,6 +90,11 @@ class AdminRestaurantController extends Controller
         }
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $restaurant = Restaurant::find($id);
@@ -99,6 +104,11 @@ class AdminRestaurantController extends Controller
         return view('admin.restaurants.restaurantEdit', compact('restaurant'));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $restaurant = Restaurant::find($id);
@@ -148,16 +158,19 @@ class AdminRestaurantController extends Controller
             'open_hour' => $request->open_hour,
             'close_hour' => $request->close_hour,
         ]);
-
         if (!$request->avatar) {
             $restaurant->update(['avatar' => $oldImage]);
         }
-
         if ($restaurant) {
             return redirect(route('admin.restaurants'))->with('success', "Restaurant Updated Successfully");
         }
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function show($id)
     {
         $restaurant = Restaurant::where('id', $id)->first();

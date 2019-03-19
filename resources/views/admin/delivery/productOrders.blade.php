@@ -103,7 +103,7 @@
                 @foreach($order as $o)
                     {{--order part--}}
                     <tr data-id={{$o->id}}>
-                        <td class="order-other-show" id="order-other-show-{{$o->id}}"><i class="fa fa-plus fa-lg"></i>
+                        <td class="order-other-show" id="order-other-show-{{$o->id}}"><i class="fas fa-plus fa-lg"></i>
                         </td>
                         <td>{{$o->id}}</td>
                         <td>{{$o->name}}</td>
@@ -208,7 +208,7 @@
                         }, '');
                         $("#cont").append(
                             `<tr  class="order_info"  data-id="${row.order_info.id}">
-                                <td id="order-show-${row.order_info.id}" class="order_show"><i class="fa fa-plus fa-lg"></i></td>
+                                <td id="order-show-${row.order_info.id}" class="order_show"><i class="fas fa-plus fa-lg"></i></td>
                                 <td class="new" >${row.order_info.id}</td>
                                 <td class="">${row.order_info.name}</td>
                                 <td class="">${row.order_info.telephone}</td>
@@ -279,7 +279,7 @@
                             }, '');
                             $("#cont").append(
                                 `<tr  class="order_info"  data-id="${row.order_info.id}">
-                                <td id="order-show-${row.order_info.id}" class="order_show"><i class="fa fa-plus fa-lg"></td>
+                                <td id="order-show-${row.order_info.id}" class="order_show"><i class="fas fa-plus fa-lg"></td>
                                 <td class="new" >${row.order_info.id}</td>
                                 <td class="">${row.order_info.name}</td>
                                 <td class="">${row.order_info.telephone}</td>

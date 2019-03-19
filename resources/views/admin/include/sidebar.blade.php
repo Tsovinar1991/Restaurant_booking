@@ -41,7 +41,7 @@
 
 
 
-            @if(url()->current() == route('admin.pages') || compare_url(url()->current(), App\Page::all()) )
+            @if(url()->current() == route('admin.pages') || compare_url(url()->current(), App\Page::all()) || url()->current() == route('admin.menus') )
                 <li class="nav-item dropdown show">
                     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="true">
@@ -53,16 +53,20 @@
                         <i class="fas fa-book-reader"></i>
                         <span>Menu</span>
                     </a>
-                    @if(url()->current() == route('admin.pages') || compare_url(url()->current(), App\Page::all()))
+                    @if(url()->current() == route('admin.pages') || compare_url(url()->current(), App\Page::all()) ||url()->current() == route('admin.menus'))
                         <div class="dropdown-menu show" aria-labelledby="pagesDropdown">
                             @else
                                 <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                                     @endif
                                     <h6 class="dropdown-header">Pages</h6>
+                                    <a class="{{url()->current() == route('admin.menus')?'font-weight-bold':''}} dropdown-item" href="{{route('admin.menus')}}">
+                                        <i class="fa fa-book-open"></i>
+                                        Menus</a>
                                     <a class="{{url()->current() == route('admin.pages')?'font-weight-bold':''}} dropdown-item" href="{{route('admin.pages')}}">
                                         {{--<i class="fa fa-book-open"></i>--}}
                                         <i class="fas fa-th-list"></i>
                                         All Pages</a>
+
                                     @foreach(App\Page::all() as $p)
                                         <a class="{{url()->current() == route('admin.page.single', $p->id)? 'font-weight-bold':''}} dropdown-item" href="{{route('admin.page.single', $p->id)}}"><i
                                                     class="fas fa-wrench"></i> {{$p->name_en}}</a>

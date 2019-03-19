@@ -40,38 +40,6 @@
 
 @section('content')
 
-
-    <div class="create">
-        {{--<a class="btn btn-outline-success" href="">Create Menu</a>--}}
-        <form>
-            <div class="col-lg-12 row">
-                <div class="form-row col-lg-5 alert alert-dark pb-0 ml-3">
-                    <div class="col-lg-12 mb-3">
-                        {{--<label for="validationServerUsername">Username</label>--}}
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend3">Menu</span>
-                            </div>
-                            <input type="text" class="form-control" id="validationServerUsername"
-                                   placeholder="Insert Menu Item" aria-describedby="inputGroupPrepend3" required>
-                            <button class="btn btn-success ml-2 btn-sm" href="">Add</button>
-                            {{--<div class="invalid-feedback">--}}
-                            {{--Please choose a username.--}}
-                            {{--</div>--}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 ml-5">
-                    <a class="text-info">
-                        <i class="fas fa-book-reader"></i>
-                        VIEW ALL MENU ITEMS
-                    </a>
-                </div>
-            </div>
-        </form>
-    </div>
-
-
     <div class="container col-md-12 col-lg-12">
         <div class="row">
             <div class="col-md-12  col-md-offset-1">
