@@ -90,7 +90,8 @@ class AdminMessageController extends Controller
     public function history($id){
         $customer = ContactUs::find($id);
         $emails = ContactUs::with('childs')->where('email', $customer->email)->get();
+        $last_id = ContactUs::where('email', $customer->email)->orderBy('id','desc')->first();
 //        dd($emails);
-        return view('admin.contact_us.history', compact('emails'));
+        return view('admin.contact_us.history', compact(['emails','last_id']));
     }
 }

@@ -101,6 +101,7 @@ Route::group(['prefix' => 'admin',
     Route::post('/answer-message/{id}', 'AdminMessageController@answer_message')->name('admin.message.answer');
     Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');//ajax
     Route::get('/contact-us/history/{id}', 'AdminMessageController@history')->name('admin.dialog.history');
+    Route::post('/contact-us/dialog/{id}', 'AdminMessageController@history')->name('admin.dialog.history');
 
 
     //user setting routes

@@ -54,8 +54,9 @@
         ul {
             list-style-type: none;
         }
-        .clearfix{
-        margin:0 !important;
+
+        .clearfix {
+            margin: 0 !important;
         }
     </style>
 @endsection
@@ -70,10 +71,10 @@
                     <div class="panel-body">
                         @foreach($emails as $email)
                             <ul class="chat">
-                                <li class="left clearfix my_form_color">
-                                    <div class="chat-img pull-left">
+                                <li class="left clearfix my_form_color pl-3">
+                                    <div class="chat-img pull-left ">
                                         <i class="fas fa-user" style="color:#167888"></i>
-                                        {{$email->id}}
+                                        {{--{{$last_id->id}}--}}
                                         {{$email->name}}
                                         <small class=" text-muted"><span
                                                     class="glyphicon glyphicon-time"></span>13 mins ago
@@ -85,15 +86,18 @@
                                         </div>
                                         <p>
                                             {{$email->message}}
+
                                         </p>
                                     </div>
                                 </li>
                                 @foreach($email->childs as $key=> $child)
                                     <ul>
-                                        <li class="right clearfix">
+                                        <li class="right clearfix pl-3">
                                             <div class="chat-img pull-right">
                                                 <i class="fas fa-user" style="color: #5ac16f"></i>
-                                                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                                <small class=" text-muted"><span
+                                                            class="glyphicon glyphicon-time"></span>13 mins ago
+                                                </small>
                                             </div>
                                             <div class="chat-body clearfix">
                                                 <div class="header">
@@ -109,14 +113,20 @@
                             </ul>
                         @endforeach
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer col-lg-12 alert">
                         <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm"
-                                   placeholder="Type your message here..."/>
-                            <span class="input-group-btn">
+                            <form method="POST" action="{{route('admin.message.answer', $last_id->id )}}" class="col-lg-12 ">
+                                {{ csrf_field() }}
+                                <div class="alert alert-dark">
+                                <input id="btn-input" name="message" type="text" class="form-control input-sm"
+                                       placeholder="Type your message here..."/>
+                                </div>
+                                <span class="input-group-btn">
                             <button class="btn btn-outline-success btn-md" id="btn-chat">
                                 Send</button>
-                        </span>
+                              </span>
+                            </form>
+
                         </div>
                     </div>
                 </div>
