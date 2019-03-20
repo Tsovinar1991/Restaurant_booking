@@ -86,7 +86,6 @@
                                         </div>
                                         <p>
                                             {{$email->message}}
-
                                         </p>
                                     </div>
                                 </li>
@@ -115,27 +114,23 @@
                     </div>
                     <div class="panel-footer col-lg-12 alert">
                         <div class="input-group">
-                            <form method="POST" action="{{route('admin.dialog.answer', $last_id->id )}}" class="col-lg-12 ">
+                            <form method="POST" action="{{route('admin.dialog.answer', $last_id->id )}}"
+                                  class="col-lg-12 ">
                                 {{ csrf_field() }}
-                                <div class="alert alert-dark">
-                                <input id="btn-input" name="message" type="text" class="form-control input-sm"
-                                       placeholder="Type your message here..."/>
+                                <div class="alert" style="background-color: #686a6b;">
+                                <textarea id="btn-input" name="message" type="text" rows="3"
+                                          class="form-control input-sm"
+                                          placeholder="Type your message here..."/></textarea>
                                 </div>
                                 <span class="input-group-btn">
                             <button class="btn btn-outline-success btn-md" id="btn-chat">
                                 Send</button>
                               </span>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     @endif
-
-
-
-
-
 @endsection
