@@ -89,6 +89,9 @@ class AdminMessageController extends Controller
 
     public function history($id){
         $customer = ContactUs::find($id);
+        if(!$customer){
+            return redirect()->route('admin.error')->with('error', 'Email is not found!')->with('status_cod', 404);
+        }
         $emails = ContactUs::with('childs')->where('email', $customer->email)->get();
         $last_id = ContactUs::where('email', $customer->email)->orderBy('id','desc')->first();
 //        dd($emails);
