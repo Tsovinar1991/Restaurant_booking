@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Page;
+use App\Menu;;
 use Validator;
 
 class AdminCreatePageController extends Controller
@@ -35,7 +36,8 @@ class AdminCreatePageController extends Controller
 
     public function create()
     {
-        return view('admin.pages.createPage');
+        $menus = Menu::all();
+        return view('admin.pages.createPage', compact('menus'));
     }
 
 
@@ -47,7 +49,8 @@ class AdminCreatePageController extends Controller
             'name_en' => 'required',
             'description_ru' => 'required',
             'description_am' => 'required',
-            'description_en' => 'required'
+            'description_en' => 'required',
+            'menu_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -65,11 +68,12 @@ class AdminCreatePageController extends Controller
 
     public function edit($id)
     {
+        $menus = Menu::all();
         $pages = Page::find($id);
         if (!$pages) {
             return redirect()->route('admin.error')->with('error', 'Page item not found!')->with('status_cod', 404);
         }
-        return view('admin.pages.updatePage')->with('pages', $pages);
+        return view('admin.pages.updatePage', compact(['menus', 'pages']));
 
     }
 
@@ -86,7 +90,8 @@ class AdminCreatePageController extends Controller
             'name_en' => 'required',
             'description_ru' => 'required',
             'description_am' => 'required',
-            'description_en' => 'required'
+            'description_en' => 'required',
+            'menu_id' => 'required'
         ]);
 
 
@@ -95,7 +100,7 @@ class AdminCreatePageController extends Controller
         }
 
         $page->update($request->all());
-        return redirect(route('admin.page.single' . $page->id))->with('success', "Updated Successfully");
+        return redirect(route('admin.page.single' , $page->id))->with('success', "Updated Successfully");
     }
 
 

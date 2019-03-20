@@ -89,7 +89,7 @@
 
                                         </td>
                                         {{--<td>{{$p->id}}</td>--}}
-                                        <td>menu</td>
+                                        <td>{{$p->menu->name}}</td>
                                         <td>{{$p->name_ru}}</td>
                                         <td>{{$p->name_am}}</td>
                                         <td>{{$p->name_en}}</td>

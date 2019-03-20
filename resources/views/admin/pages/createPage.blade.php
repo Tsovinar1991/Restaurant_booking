@@ -105,6 +105,23 @@
                 </div>
             </div>
 
+            <div class="col-lg-5 p-0 form-group{{ $errors->has('menu_id') ? ' has-error' : '' }}">
+                <label for="menu_id" class="col-md-12 control-label">Menu</label>
+                <div class="col-md-12">
+                    <select name="menu_id" id="restaurant_id" class="form-control">
+
+                        @foreach($menus as $k=>$m)
+                            <option value="{{$m->id}}">{{$m->name}}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('menu_id'))
+                        <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('menu_id') }}</strong>
+                                    </span>
+                    @endif
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                     <button type="submit" class="btn btn-outline-success btn-sm">

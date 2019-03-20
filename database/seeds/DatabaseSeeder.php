@@ -74,19 +74,6 @@ class DatabaseSeeder extends Seeder
         $role->admin_id = $admin->id;
         $role->save();
 
-        //creating menus
-        $menu = new Menu;
-        $menu->name = 'header';
-        $menu->save();
-
-        $menu = new Menu;
-        $menu->name = 'aside';
-        $menu->save();
-
-        $menu = new Menu;
-        $menu->name = 'footer';
-        $menu->save();
-
 
 
 //       $this->call(RestaurantSeeder::class);

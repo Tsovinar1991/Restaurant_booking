@@ -82,6 +82,7 @@ Route::group(['prefix' => 'admin',
 
     //Menus
     Route::get('menus', 'AdminMenuController@index')->name('admin.menus');
+    Route::post('/menu-store', 'AdminMenuController@store')->name('admin.menus.store');
     Route::get('menu-update', 'AdminMenuController@change_name')->name('admin.menus.update');
 
 

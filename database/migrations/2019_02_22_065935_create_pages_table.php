@@ -22,11 +22,9 @@ class CreatePagesTable extends Migration
             $table->longText('description_ru');
             $table->longText('description_am');
             $table->longtext('description_en');
+            $table->integer('menu_id');
             $table->timestamps();
-
         });
-
-
     }
 
     /**
