@@ -17,12 +17,12 @@ class CheckRoles
     public function handle($request, Closure $next, $roles = null)
     {
 
-        if($request->user()->status == 0){
-            Auth::guard('admin')->logout();
-            session()->flush();
-            session()->regenerate();
-            return redirect(url('admin/login'));
-        }
+//        if($request->user()->status == 0){
+//            Auth::guard('admin')->logout();
+//            session()->flush();
+//            session()->regenerate();
+//            return redirect(url('admin/login'));
+//        }
 
         if ($roles != null) {
             if (!$request->user()->hasAnyRole(explode("|", $roles))) {

@@ -33,7 +33,7 @@
 
         .panel-body {
             overflow-y: scroll;
-            height: 400px;
+            height: 300px;
         }
 
         ::-webkit-scrollbar-track {
@@ -93,7 +93,7 @@
                                     <ul>
                                         <li class="right clearfix pl-3">
                                             <div class="chat-img pull-right">
-                                                <i class="fas fa-user" style="color: #5ac16f"></i>
+                                                <i class="fas fa-user" style="color: #5ac16f"></i> Us
                                                 <small class=" text-muted"><span
                                                             class="glyphicon glyphicon-time"></span>13 mins ago
                                                 </small>

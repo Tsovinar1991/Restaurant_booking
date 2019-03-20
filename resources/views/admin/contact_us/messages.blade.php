@@ -6,7 +6,6 @@
             display: none;
         }
 
-
         .jumbotron {
             background-color: transparent !important;
 
@@ -26,8 +25,9 @@
                     @foreach($mails as $key => $message)
                         <div class="col-lg-12 col-md-12 alert my_form_color pb-0 row ml-1 mt-3">
                             <p data-id="{{$message->id}}"
-                               class=" read_contact_message message_cursor col-lg-8 col-md-7 col-sm-7 col-xs-12"><i
-                                        class="fas fa-envelope " style="color: #FF6347;"></i> From: <b>{{$message->name}}</b>
+                               class=" read_contact_message message_cursor col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                                <i class="fas fa-envelope " style="    padding-right: 2px;border: 1px solid red;color: #FF6347;padding-left: 2px;">
+                                </i> From: <b>{{$message->name}}</b>
                             </p>
                             <p data-id="{{$message->id}}" id="read-{{$message->id}}"
                                class="col-lg-1 col-md-2 col-sm-2 col-xs-6 set_read_status message_cursor"><i
@@ -36,7 +36,8 @@
                                data-name="{{$message->name}}"><i
                                         class="fas fa-reply"></i> Reply</p>
                             {{--@if(count($message->childs) != 0)--}}
-                                <div class="col-lg-12"><p><a href="{{route('admin.dialog.history', $message->id)}}">View Dialog History</a></p></div>
+                            <div class="col-lg-12"><p><a href="{{route('admin.dialog.history', $message->id)}}">View
+                                        Dialog History</a></p></div>
                             {{--@endif--}}
                         </div>
 
@@ -49,7 +50,7 @@
                 <div class="col-lg-6 col-md-12  alert  float-right " id="message-form-div">
                     <form id="answer_message_form" method="POST" action="{{route('admin.message.answer', '+id+')}}">
                         {{ csrf_field() }}
-                        <div class="form-group alert"  style="background-color:#686a6b"> <!-- Message field -->
+                        <div class="form-group alert" style="background-color:#686a6b"> <!-- Message field -->
                             <label class="control-label message_to white" for="message"></label>
                             <textarea class="form-control" cols="40" id="message" name="message" rows="5"></textarea>
                             @if ($errors->has('message'))

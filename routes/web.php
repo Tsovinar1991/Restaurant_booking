@@ -33,11 +33,10 @@ Route::post('admin/password/reset', 'Auth\AdminResetPasswordController@reset');
 Route::get('admin/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
 
-
 Route::group(['prefix' => 'admin',
     'middleware' => [
-        'auth:admin'
-//        'anotherMiddleware',
+        'auth:admin',
+        'isActive'
     ],
 ], function () {
 
