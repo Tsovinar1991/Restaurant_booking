@@ -101,7 +101,7 @@ Route::group(['prefix' => 'admin',
     Route::post('/answer-message/{id}', 'AdminMessageController@answer_message')->name('admin.message.answer');
     Route::get('/set_messages_read', 'AdminMessageController@set_messages_read');//ajax
     Route::get('/contact-us/history/{id}', 'AdminMessageController@history')->name('admin.dialog.history');
-    Route::post('/contact-us/dialog/{id}', 'AdminMessageController@history')->name('admin.dialog.history');
+    Route::post('/contact-us/dialog/{id}', 'AdminMessageController@answer_message')->name('admin.dialog.answer');
 
 
     //user setting routes
@@ -132,7 +132,7 @@ Route::post('contact_us', ['as' => 'contact_us.store', 'uses' => 'ContactMailCon
 
 
 
-Route::any('{query}',
-    function() { return redirect(route('welcome')); })
-    ->where('query', '.*');
+//Route::any('{query}',
+//    function() { return redirect(route('welcome')); })
+//    ->where('query', '.*');
 

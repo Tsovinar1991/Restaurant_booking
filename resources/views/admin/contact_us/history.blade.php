@@ -115,7 +115,7 @@
                     </div>
                     <div class="panel-footer col-lg-12 alert">
                         <div class="input-group">
-                            <form method="POST" action="{{route('admin.message.answer', $last_id->id )}}" class="col-lg-12 ">
+                            <form method="POST" action="{{route('admin.dialog.answer', $last_id->id )}}" class="col-lg-12 ">
                                 {{ csrf_field() }}
                                 <div class="alert alert-dark">
                                 <input id="btn-input" name="message" type="text" class="form-control input-sm"

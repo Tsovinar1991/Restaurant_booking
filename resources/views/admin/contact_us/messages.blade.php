@@ -22,7 +22,7 @@
     @if(isset($mails) && count($mails)>0)
         <div class="col-lg-12 col-md-12 row">
             <div class="col-lg-12 col-md-12 col-sm-12" style="clear: both">
-                <div class="col-lg-6 col-md-7 mt-3 float-left" style="background-color: #0f6674">
+                <div class="col-lg-6 col-md-7 mt-3 float-left" style="background-color:#8fa1a4">
                     @foreach($mails as $key => $message)
                         <div class="col-lg-12 col-md-12 alert my_form_color pb-0 row ml-1 mt-3">
                             <p data-id="{{$message->id}}"
@@ -49,7 +49,7 @@
                 <div class="col-lg-6 col-md-12  alert  float-right " id="message-form-div">
                     <form id="answer_message_form" method="POST" action="{{route('admin.message.answer', '+id+')}}">
                         {{ csrf_field() }}
-                        <div class="form-group alert my_form_color"  style="background-color: #0f6674"> <!-- Message field -->
+                        <div class="form-group alert"  style="background-color:#8fa1a4"> <!-- Message field -->
                             <label class="control-label message_to white" for="message"></label>
                             <textarea class="form-control" cols="40" id="message" name="message" rows="5"></textarea>
                             @if ($errors->has('message'))
