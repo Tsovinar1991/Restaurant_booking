@@ -58,6 +58,10 @@
         .clearfix {
             margin: 0 !important;
         }
+
+        .pad-20{
+            padding:20px;
+        }
     </style>
 @endsection
 
@@ -68,11 +72,11 @@
         <div class="container col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel-body">
+                    <div class="panel-body pad-20">
                         @foreach($emails as $email)
                             <ul class="chat">
-                                <li class="left clearfix my_form_color pl-3">
-                                    <div class="chat-img pull-left ">
+                                <li class="left clearfix my_form_color">
+                                    <div class="chat-img pull-left pl-5 ">
                                         <i class="fas fa-user" style="color:#167888"></i>
                                         {{--{{$last_id->id}}--}}
                                         {{$email->name}}
@@ -80,7 +84,7 @@
                                                     class="glyphicon glyphicon-time"></span>13 mins ago
                                         </small>
                                     </div>
-                                    <div class="chat-body clearfix">
+                                    <div class="chat-body clearfix  pl-3">
                                         <div class="header">
                                             <strong class="pull-right primary-font">{{$email->email}}</strong>
                                         </div>
@@ -92,13 +96,13 @@
                                 @foreach($email->childs as $key=> $child)
                                     <ul>
                                         <li class="right clearfix pl-3">
-                                            <div class="chat-img pull-right">
+                                            <div class="chat-img pull-right pl-5">
                                                 <i class="fas fa-user" style="color: #5ac16f"></i> Us
                                                 <small class=" text-muted"><span
                                                             class="glyphicon glyphicon-time"></span>13 mins ago
                                                 </small>
                                             </div>
-                                            <div class="chat-body clearfix">
+                                            <div class="chat-body clearfix pl-3">
                                                 <div class="header">
                                                     <strong class="pull-right primary-font">{{$email->childs[$key]->email}}</strong>
                                                 </div>
@@ -112,7 +116,7 @@
                             </ul>
                         @endforeach
                     </div>
-                    <div class="panel-footer col-lg-12 alert">
+                    <div class="panel-footer col-lg-12 alert p-0">
                         <div class="input-group">
                             <form method="POST" action="{{route('admin.dialog.answer', $last_id->id )}}"
                                   class="col-lg-12 ">
