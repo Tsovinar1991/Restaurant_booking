@@ -19,6 +19,7 @@ class CreateContactUsTable extends Migration
             $table->string('email');
             $table->text('message');
             $table->string('status')->default(0)->nullable();
+            $table->string('parent_id')->default(0)->nullable();
             $table->timestamps();
         });
     }

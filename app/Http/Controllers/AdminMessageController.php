@@ -8,6 +8,7 @@ use DB;
 use Mail;
 use Validator;
 
+
 class AdminMessageController extends Controller
 {
     public function __construct()
@@ -20,8 +21,7 @@ class AdminMessageController extends Controller
      */
     public function read_message()
     {
-        $mails = ContactUs::all()->where('status', 0);
-        $mails = $mails->sortByDesc('id');
+        $mails = ContactUs::with('childs')->where('status', 0)->where('name', '!=','Restaurant Admin')->orderBy('id', 'desc')->get();
         if ($mails) {
             return view('admin.contact_us.messages', compact('mails'));
         } else {
@@ -63,6 +63,14 @@ class AdminMessageController extends Controller
             return back()->with('error', 'Mail is not send, because message field is required!');
         }
 
+        $answer = new ContactUs;
+        $answer->name = 'Restaurant Admin';
+        $answer->email = '2019laraveltesting@gmail.com';
+        $answer->message = $request->message;
+        $answer->parent_id = $mail->id;
+        $answer->save();
+
+
         Mail::send('contact_us.email_answer',
             array(
                 'user_message' => $request->message
@@ -77,5 +85,12 @@ class AdminMessageController extends Controller
         }
         return back()->with('success', 'Answer is send Successfull!');
 
+    }
+
+    public function history($id){
+        $customer = ContactUs::find($id);
+        $emails = ContactUs::with('childs')->where('email', $customer->email)->get();
+//        dd($emails);
+        return view('admin.contact_us.history', compact('emails'));
     }
 }

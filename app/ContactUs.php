@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactUs extends Model
 {
-    public $table = 'contact_us';
-    public $fillable = ['name','email','message'];
+    protected $table = 'contact_us';
+    protected $fillable = ['name','email','message'];
+
+    public function parent(){
+        return $this->hasOne(ContactUs::class,'id', 'parent_id');
+    }
+
+    public function childs(){
+        return $this->hasMany(ContactUs::class,'parent_id', 'id');
+    }
 }
+
+

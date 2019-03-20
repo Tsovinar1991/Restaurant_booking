@@ -21,6 +21,8 @@ Route::middleware(['cors'])->group(function () {
     Route::get('restaurant', 'RestaurantController@index');
     Route::get('restaurant/{id}', 'RestaurantController@show');
 
+    Route::get('restaurant/product/{id}', 'RestaurantController@product');
+
 
     Route::post('order', 'OrderController@store');
 

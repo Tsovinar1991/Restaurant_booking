@@ -51,7 +51,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
-                <?php  $mails = App\ContactUs::all()->where('status', 0);?>
+                <?php  $mails = App\ContactUs::all()->where('status', 0)->where('name', '!=','Restaurant Admin');?>
                 @if(isset($mails) && count($mails)>0)
                     @if(count($mails)>9)
                         <span class="badge badge-danger">9+</span>
