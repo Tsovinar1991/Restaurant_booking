@@ -6,10 +6,6 @@
             display: none;
         }
 
-        .jumbotron {
-            background-color: transparent !important;
-
-        }
     </style>
 @endsection
 
