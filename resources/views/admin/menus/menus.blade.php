@@ -8,6 +8,8 @@
 
 @section('content')
 
+
+
     <div class="col-lg-12 row">
         <div class="create col-lg-6">
             <form method="POST" action="{{route('admin.menus.store')}}">

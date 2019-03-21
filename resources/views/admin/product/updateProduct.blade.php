@@ -262,4 +262,5 @@
 @endsection
 
 @section('js')
+
 @endsection

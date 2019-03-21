@@ -79,18 +79,25 @@
                                                 <a href="{{route("admin.restaurant_image.edit", $i->id)}}"
                                                    class="btn btn-default black"><i
                                                             class="fas fa-pencil-alt "></i></a>
-                                                {{--<a href="{{route('delete.user', ['id'=> $user->id])}}" class="btn btn-danger btn_small  btn-sm"><i--}}
-                                                {{--class="fa fa-trash white"></i></a>--}}
 
-                                                <form action="{{route('admin.restaurant_image.delete' , $i->id)}}"
-                                                      method="POST">
+
+                                                <form action="{{route('admin.restaurant_image.delete' , $i->id)}}" method="POST" >
                                                     {{ method_field('DELETE') }}
                                                     {{ csrf_field() }}
-                                                    <button class="btn"
+                                                    <button class="btn delete-edition-btn " data-id="{{$i->id}}"
                                                             onclick="return confirm('Are you sure you want to delete this item?');">
                                                         <i class="fa fa-trash  text-danger"></i>
                                                     </button>
                                                 </form>
+
+
+
+                                                {{--<form id="delete-company" action="{{route('admin.restaurant_image.delete' , $i->id)}}" method="post">--}}
+                                                    {{--{{csrf_field()}}--}}
+                                                    {{--{{method_field('delete')}}--}}
+                                                    {{--<button type="button" class="btn" onclick="confirmDelete('delete-company')"><i class="fa fa-trash  text-danger"></i></button>--}}
+                                                {{--</form>--}}
+
 
                                             </div>
                                         </td>
@@ -127,4 +134,23 @@
 @endsection
 
 @section('js')
+<script>
+    // function confirmDelete(item_id) {
+    //     swal({
+    //         title: "Are you sure?",
+    //         text: "Once deleted, you will not be able to recover it!",
+    //         icon: "warning",
+    //         buttons: true,
+    //         dangerMode: true,
+    //     })
+    //         .then((willDelete) => {
+    //             if (willDelete) {
+    //                 $('#'+item_id).submit();
+    //             } else {
+    //                 swal("Cancelled Successfully");
+    //             }
+    //         });
+    // }
+</script>
+
 @endsection

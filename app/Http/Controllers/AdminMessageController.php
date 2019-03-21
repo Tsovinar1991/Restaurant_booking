@@ -7,6 +7,8 @@ use App\ContactUs;
 use DB;
 use Mail;
 use Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 
 class AdminMessageController extends Controller
@@ -83,7 +85,12 @@ class AdminMessageController extends Controller
         if (Mail::failures()) {
             return back()->with('error', 'Email is not send!');
         }
-        return back()->with('success', 'Answer is send Successfull!');
+
+        if(isset($request->history) && $request->history == 'history') {
+            return Redirect::to(URL::previous() . "#here");
+        }else{
+            return back()->with('success', 'Answer is send Successfull!');
+        }
 
     }
 
@@ -94,7 +101,10 @@ class AdminMessageController extends Controller
         }
         $emails = ContactUs::with('childs')->where('email', $customer->email)->get();
         $last_id = ContactUs::where('email', $customer->email)->orderBy('id','desc')->first();
-//        dd($emails);
         return view('admin.contact_us.history', compact(['emails','last_id']));
     }
+
+
+
+
 }

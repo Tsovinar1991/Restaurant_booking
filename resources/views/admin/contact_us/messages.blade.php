@@ -15,7 +15,7 @@
 
 
     @if(isset($mails) && count($mails)>0)
-        <div class="col-lg-12 col-md-12 row">
+        <div class="col-lg-12 col-md-12 row p-0 m-0">
             <div class="col-lg-12 col-md-12 col-sm-12" style="clear: both">
                 <div class="col-lg-6 col-md-7 mt-3 float-left" style="background-color:#686a6b">
                     @foreach($mails as $key => $message)

@@ -114,6 +114,7 @@
                                     </ul>
                                 @endforeach
                             </ul>
+                            <span id="here"></span>
                         @endforeach
                     </div>
                     <div class="panel-footer col-lg-12 alert p-0">
@@ -126,6 +127,7 @@
                                           class="form-control input-sm"
                                           placeholder="Type your message here..."/></textarea>
                                 </div>
+                                <input type="hidden" id="custId" name="history" value="history">
                                 <span class="input-group-btn">
                             <button class="btn btn-outline-success btn-md" id="btn-chat">
                                 Send</button>
