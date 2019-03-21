@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ContactUs;
+use App\Mail\ContactEmail;
 use DB;
 use Mail;
 use Validator;
@@ -23,7 +24,7 @@ class AdminMessageController extends Controller
      */
     public function read_message()
     {
-        $mails = ContactUs::with('childs')->where('status', 0)->where('name', '!=','Restaurant Admin')->orderBy('id', 'desc')->get();
+        $mails = ContactUs::with('childs')->where('status', 0)->where('name', '!=', 'Restaurant Admin')->orderBy('id', 'desc')->paginate(5);
         if ($mails) {
             return view('admin.contact_us.messages', compact('mails'));
         } else {
@@ -72,39 +73,30 @@ class AdminMessageController extends Controller
         $answer->parent_id = $mail->id;
         $answer->save();
 
-
-        Mail::send('contact_us.email_answer',
-            array(
-                'user_message' => $request->message
-            ), function ($message) use ($emailTo) {
-                $message->from('2019laraveltesting@gmail.com');
-                $message->to($emailTo, 'Customer')->subject('Contact Us');
-            });
-
+        Mail::to($emailTo)->send(new ContactEmail($answer));
 
         if (Mail::failures()) {
             return back()->with('error', 'Email is not send!');
         }
 
-        if(isset($request->history) && $request->history == 'history') {
+        if (isset($request->history) && $request->history == 'history') {
             return Redirect::to(URL::previous() . "#here");
-        }else{
+        } else {
             return back()->with('success', 'Answer is send Successfull!');
         }
 
     }
 
-    public function history($id){
+    public function history($id)
+    {
         $customer = ContactUs::find($id);
-        if(!$customer){
+        if (!$customer) {
             return redirect()->route('admin.error')->with('error', 'Email is not found!')->with('status_cod', 404);
         }
         $emails = ContactUs::with('childs')->where('email', $customer->email)->get();
-        $last_id = ContactUs::where('email', $customer->email)->orderBy('id','desc')->first();
-        return view('admin.contact_us.history', compact(['emails','last_id']));
+        $last_id = ContactUs::where('email', $customer->email)->orderBy('id', 'desc')->first();
+        return view('admin.contact_us.history', compact(['emails', 'last_id']));
     }
-
-
 
 
 }

@@ -61,7 +61,7 @@
 
                     @if(isset($images) && count($images)>0)
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-list">
+                            <table class="table table-striped table-bordered table-responsive table-list">
                                 <thead>
                                 <tr>
                                     <th><i class="fa fa-cog"></i></th>
@@ -134,23 +134,23 @@
 @endsection
 
 @section('js')
-<script>
-    // function confirmDelete(item_id) {
-    //     swal({
-    //         title: "Are you sure?",
-    //         text: "Once deleted, you will not be able to recover it!",
-    //         icon: "warning",
-    //         buttons: true,
-    //         dangerMode: true,
-    //     })
-    //         .then((willDelete) => {
-    //             if (willDelete) {
-    //                 $('#'+item_id).submit();
-    //             } else {
-    //                 swal("Cancelled Successfully");
-    //             }
-    //         });
-    // }
-</script>
+{{--<script>--}}
+    {{--function confirmDelete(item_id) {--}}
+        {{--swal({--}}
+            {{--title: "Are you sure?",--}}
+            {{--text: "Once deleted, you will not be able to recover it!",--}}
+            {{--icon: "warning",--}}
+            {{--buttons: true,--}}
+            {{--dangerMode: true,--}}
+        {{--})--}}
+            {{--.then((willDelete) => {--}}
+                {{--if (willDelete) {--}}
+                    {{--$('#'+item_id).submit();--}}
+                {{--} else {--}}
+                    {{--swal("Cancelled Successfully");--}}
+                {{--}--}}
+            {{--});--}}
+    {{--}--}}
+{{--</script>--}}
 
 @endsection

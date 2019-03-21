@@ -28,10 +28,10 @@
           action="{{route('admin.update.page', $pages->id)}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PUT">
-        <div class="row col-md-12">
-            <div class="col-md-4 form-group{{ $errors->has('name_ru') ? ' has-error' : '' }}">
+        <div class="row col-md-12 col-sm-12">
+            <div class="col-lg-4 col-md-12 col-sm-12 form-group{{ $errors->has('name_ru') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-4 control-label">Name Ru</label>
-                <div class="col-md-10">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     <input id="name" type="text" class="form-control" name="name_ru" value="{{ $pages->name_ru }}"
                            required
                            autofocus>
@@ -43,9 +43,9 @@
                 </div>
             </div>
 
-            <div class="col-md-4 form-group{{ $errors->has('name_am') ? ' has-error' : '' }}">
+            <div class="col-lg-4 col-md-12 col-sm-12 form-group{{ $errors->has('name_am') ? ' has-error' : '' }}">
                 <label for="name_am" class="col-md-4 control-label">Name Am</label>
-                <div class="col-md-10">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     <input id="name_am" type="text" class="form-control" name="name_am" value="{{ $pages->name_am }}"
                            required autofocus>
                     @if ($errors->has('name_am'))
@@ -56,9 +56,9 @@
                 </div>
             </div>
 
-            <div class="col-md-4 form-group{{ $errors->has('name_en') ? ' has-error' : '' }}">
+            <div class="col-lg-4 col-md-12 col-sm-12  form-group{{ $errors->has('name_en') ? ' has-error' : '' }}">
                 <label for="name_en" class="col-md-4 control-label">Name En</label>
-                <div class="col-md-10">
+                <div class="ol-lg-12 col-md-12 col-sm-12">
                     <input id="name_en" type="text" class="form-control" name="name_en" value="{{ $pages->name_en }}"
                            required autofocus>
                     @if ($errors->has('name_en'))
@@ -70,10 +70,10 @@
             </div>
 
         </div>
-        <div class="col-md-12">
+        <div class="col-lg-12 col-md-12">
             <div class="form-group{{ $errors->has('description_ru') ? ' has-error' : '' }}">
                 <label for="description" class="col-md-4 control-label">Description Ru</label>
-                <div class="col-md-11">
+                <div class="col-lg-12 col-md-12">
                 <textarea id="description" class="form-control mytextarea"
                           name="description_ru">{{ $pages->description_ru }}</textarea>
                     <input name="image" type="file" id="upload" class="hidden" onchange="">
@@ -87,7 +87,7 @@
 
             <div class="form-group{{ $errors->has('description_am') ? ' has-error' : '' }}">
                 <label for="description_am" class="col-md-4 control-label">Description Am</label>
-                <div class="col-md-11">
+                <div class="col-lg-12 col-md-12">
                 <textarea id="description_am" class="form-control mytextarea"
                           name="description_am">{{ $pages->description_am }}</textarea>
                     <input name="image" type="file" id="upload" class="hidden" onchange="">
@@ -102,7 +102,7 @@
 
             <div class="form-group{{ $errors->has('description_en') ? ' has-error' : '' }}">
                 <label for="description_en" class="col-md-4 control-label">Description En</label>
-                <div class="col-md-11">
+                <div class="col-lg-12 col-md-12">
                 <textarea id="description_en" class="form-control mytextarea"
                           name="description_en">{{ $pages->description_en }}</textarea>
                     <input name="image" type="file" id="upload" class="hidden" onchange="">

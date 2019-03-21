@@ -13,7 +13,6 @@
 @section('page', 'Messages')
 @section('content')
 
-
     @if(isset($mails) && count($mails)>0)
         <div class="col-lg-12 col-md-12 row p-0 m-0">
             <div class="col-lg-12 col-md-12 col-sm-12" style="clear: both">
@@ -42,7 +41,11 @@
                             <p><b>MESSAGE</b> {{$message->message}}</p>
                         </div>
                     @endforeach
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        {{ $mails->links('vendor.pagination.bootstrap-4') }}
+                    </div>
                 </div>
+
                 <div class="col-lg-6 col-md-12  alert  float-right " id="message-form-div">
                     <form id="answer_message_form" method="POST" action="{{route('admin.message.answer', '+id+')}}">
                         {{ csrf_field() }}

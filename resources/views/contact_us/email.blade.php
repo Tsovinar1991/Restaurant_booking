@@ -1,15 +1,12 @@
 
-You received a message from : {{ $name }}
+You received a message from : {{ $email->name }}
 <p>
-    <span> Name:</span> {{ $name }}
+    <span> Name:</span> {{ $email->name }}
 </p>
 <p>
-    <span> Email:</span> {{ $email }}
+    <span> Email:</span> {{ $email->email }}
 </p>
 <p>
-    <span> Message:</span> {{ $user_message }}
+    <span> Message:</span> {{ $email->message }}
 </p>
-
-
-
 

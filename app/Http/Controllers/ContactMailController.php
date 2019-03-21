@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ContactUs;
 use Mail;
-use App\Mail\ContactMail;
+use App\Mail\ContactEmail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -27,22 +27,7 @@ class ContactMailController extends Controller
         ]);
         $mail = ContactUS::create($request->all());
 
-
-        try {
-            Mail::send('contact_us.email',
-                array(
-                    'name' => $request->get('name'),
-                    'email' => $request->get('email'),
-                    'user_message' => $request->get('message')
-                ), function ($message) {
-                    $message->from('tsovinar.nemesida.grigoryan@gmail.com');
-                    $message->to('2019laraveltesting@gmail.com', 'Admin')->subject('Contact Us');
-                });
-
-        } catch (\Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-
+        Mail::to('2019laraveltesting@gmail.com')->send(new ContactEmail($mail));
 
         if (Mail::failures()) {
             return back()->with('error', 'Email is not send!');

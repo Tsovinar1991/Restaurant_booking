@@ -24,11 +24,11 @@
 @section('content')
     <div class="container col-md-12 col-lg-12">
         <div class="row">
-            <div class="col-md-12  col-md-offset-1">
+            <div class=" col-lg-12 col-md-12  col-md-offset-1">
                 <div class="panel panel-default panel-table">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col col-xs-6">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="create"><a class="btn btn-outline-success btn-sm"
                                                        href="{{route('admin.product.create')}}">Add Product</a>
                                 </div>

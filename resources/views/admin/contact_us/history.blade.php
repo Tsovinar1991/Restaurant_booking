@@ -59,8 +59,8 @@
             margin: 0 !important;
         }
 
-        .pad-20{
-            padding:20px;
+        .pad-20 {
+            padding: 20px;
         }
     </style>
 @endsection
