@@ -31,7 +31,9 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="create"><a class="btn btn-outline-success btn-sm"
                                                        href="{{route('admin.product.create')}}">Add Product</a>
+                                    <a class="btn btn-outline-success btn-sm" href="{{route('admin.categories')}}">Add/Edit/View Categories</a>
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -386,16 +386,13 @@
 
                 let id = $(this).parent().attr('data-id');
                 $(`#product-info-${id}`).toggle(
-                    'slow', function() {
+                    'slow', function () {
                         if ($(this).is(':visible')) {
                             $(`#order-show-${id}`).children('i').attr('class', 'fas fa-minus fa-lg');
                         } else {
                             $(`#order-show-${id}`).children('i').attr('class', 'fas fa-plus fa-lg');
                         }
                     }
-
-
-
                 );
 
             });
@@ -403,17 +400,13 @@
                 let id = $(this).parent().attr('data-id');
                 console.log($(`#order-other-show-${id}`));
                 $(`#product-other-info-${id}`).toggle(
-                    'slow', function() {
+                    'slow', function () {
                         if ($(this).is(':visible')) {
                             $(`#order-other-show-${id}`).children('i').attr('class', 'fas fa-minus fa-lg');
                         } else {
                             $(`#order-other-show-${id}`).children('i').attr('class', 'fas fa-plus fa-lg');
                         }
                     }
-
-
-
-
                 );
             });
             if ($("#old_cont").children().length != 0) {

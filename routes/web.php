@@ -69,6 +69,9 @@ Route::group(['prefix' => 'admin',
     Route::get('/product/{id}', 'AdminProductController@show')->name('admin.show.product');
     Route::get('/products/change_status', 'AdminProductController@productStatus'); //ajax
 
+    //Product Category routes
+    Route::get('/product-categories', 'AdminProductController@categories')->name('admin.categories');
+
 
     //restaurant image routes
     Route::get('restaurant-images', 'AdminRestaurantImageController@index')->name('admin.images');

@@ -79,6 +79,8 @@ class AdminMessageController extends Controller
             return back()->with('error', 'Email is not send!');
         }
 
+
+
         if (isset($request->history) && $request->history == 'history') {
             return Redirect::to(URL::previous() . "#here");
         } else {

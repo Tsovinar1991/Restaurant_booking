@@ -73,50 +73,51 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel-body pad-20">
-                        @foreach($emails as $email)
-                            <ul class="chat">
-                                <li class="left clearfix my_form_color">
-                                    <div class="chat-img pull-left pl-5 ">
-                                        <i class="fas fa-user" style="color:#167888"></i>
-                                        {{--{{$last_id->id}}--}}
-                                        {{$email->name}}
-                                        <small class=" text-muted"><span
-                                                    class="glyphicon glyphicon-time"></span>13 mins ago
-                                        </small>
-                                    </div>
-                                    <div class="chat-body clearfix  pl-3">
-                                        <div class="header">
-                                            <strong class="pull-right primary-font">{{$email->email}}</strong>
+                            @foreach($emails as $email)
+                                <ul class="chat">
+                                    <li class="left clearfix alert alert secondary my_form_color">
+                                        <div class="chat-img pull-left pl-5 ">
+                                            <i class="fas fa-user" style="color:#167888"></i>
+                                            {{--{{$last_id->id}}--}}
+                                            {{$email->name}}
+                                            <small class=" text-muted"><span
+                                                        class="glyphicon glyphicon-time"></span>13 mins ago
+                                            </small>
                                         </div>
-                                        <p>
-                                            {{$email->message}}
-                                        </p>
-                                    </div>
-                                </li>
-                                @foreach($email->childs as $key=> $child)
-                                    <ul>
-                                        <li class="right clearfix pl-3">
-                                            <div class="chat-img pull-right pl-5">
-                                                <i class="fas fa-user" style="color: #5ac16f"></i> Us
-                                                <small class=" text-muted"><span
-                                                            class="glyphicon glyphicon-time"></span>13 mins ago
-                                                </small>
+                                        <div class="chat-body clearfix  pl-3">
+                                            <div class="header">
+                                                <strong class="pull-right primary-font">{{$email->email}}</strong>
                                             </div>
-                                            <div class="chat-body clearfix pl-3">
-                                                <div class="header">
-                                                    <strong class="pull-right primary-font">{{$email->childs[$key]->email}}</strong>
+                                            <p>
+                                                {{$email->message}}
+                                            </p>
+                                        </div>
+                                    </li>
+                                    @foreach($email->childs as $key=> $child)
+                                        <ul>
+                                            <li class="right clearfix pl-3 alert alert-dark">
+                                                <div class="chat-img pull-right pl-5">
+                                                    <i class="fas fa-user" style="color: #5ac16f"></i> Us
+                                                    <small class=" text-muted"><span
+                                                                class="glyphicon glyphicon-time"></span>13 mins ago
+                                                    </small>
                                                 </div>
-                                                <p>
-                                                    {{$email->childs[$key]->message}}
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                @endforeach
-                            </ul>
-                            <span id="here"></span>
-                        @endforeach
-                    </div>
+                                                <div class="chat-body clearfix pl-3">
+                                                    <div class="header">
+                                                        <strong class="pull-right primary-font">{{$email->childs[$key]->email}}</strong>
+                                                    </div>
+                                                    <p>
+                                                        {{$email->childs[$key]->message}}
+                                                        <span id="here"></span>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </div>
+
                     <div class="panel-footer col-lg-12 alert p-0">
                         <div class="input-group">
                             <form method="POST" action="{{route('admin.dialog.answer', $last_id->id )}}"
@@ -129,7 +130,7 @@
                                 </div>
                                 <input type="hidden" id="custId" name="history" value="history">
                                 <span class="input-group-btn">
-                            <button class="btn btn-outline-success btn-md" id="btn-chat">
+                            <button class="btn btn-success btn-md" id="btn-chat">
                                 Send</button>
                               </span>
                             </form>
