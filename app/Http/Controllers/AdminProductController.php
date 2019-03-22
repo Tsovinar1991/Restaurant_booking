@@ -228,6 +228,8 @@ class AdminProductController extends Controller
 
     public function storeCategory(Request $request)
     {
+
+        dd($request->hasFile('category_avatar'));
         if ($request->hasFile('avatar')) {
             $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
             //Get just filename

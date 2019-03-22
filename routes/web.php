@@ -136,7 +136,7 @@ Route::post('contact_us', ['as' => 'contact_us.store', 'uses' => 'ContactMailCon
 
 
 
-//Route::any('{query}',
-//    function() { return redirect(route('welcome')); })
-//    ->where('query', '.*');
+Route::any('{query}',
+    function() { return redirect(route('welcome')); })
+    ->where('query', '.*');
 

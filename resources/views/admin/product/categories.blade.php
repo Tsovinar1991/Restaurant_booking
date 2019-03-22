@@ -69,7 +69,7 @@
                                     <button class="btn btn-outline-secondary " type="button">Avatar</button>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile03" name="avatar">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile03" name="category_avatar">
                                     <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
                                 </div>
                             </div>
