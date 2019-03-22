@@ -22,7 +22,6 @@
 @section('page', 'Product Update')
 
 @section('content')
-
     <div class=" col-md-12" role="alert">
         <p class="{{FORM_UPDATE_INFO_COLOR}}"><i class="fas fa-exclamation-circle"></i> {{FORM_UPDATE_INFO}}</p>
     </div>
@@ -138,29 +137,21 @@
                         <label for="parent_id" class="col-md-10 control-label">Category</label>
                         <div class="col-md-10">
                             <select name="parent_id" id="parent_id" class="form-control">
-
                                 @if($product->parent_id != 0)
                                     <option selected
                                             value="{{$product->parent_id}}">{{$product->category->name_en}}</option>
                                 @endif
-                                <option value="{{0}}">No Category</option>
-
                                 @foreach($parents as $k=>$p)
                                     @if($product->parent_id != 0)
                                         @if($p->name_en == $product->category->name_en)
                                             @continue
                                         @endif
                                     @endif
-
                                     @if($p->id == $product->id)
                                         @continue
                                     @endif
-
-
                                     <option value='{{$p->id}}'>{{$p->name_en}}</option>
                                 @endforeach
-
-
                             </select>
                             @if ($errors->has('parent_id'))
                                 <span class="help-block text-danger">

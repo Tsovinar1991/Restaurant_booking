@@ -46,18 +46,15 @@ class AdminUserController extends Controller
             'job_title' => 'required',
             'role' => 'required'
         ]);
-
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
         }
-
         $admin = Admin::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'job_title' => $request['job_title']
         ]);
-
         $id = $request->role;
         $role = AdminRole::create([
             'role_id' => $request->role,
@@ -77,8 +74,6 @@ class AdminUserController extends Controller
      * @return mixed
      */
 
-
-    //Get the guard to authenticate Seller
     protected function guard()
     {
         return Auth::guard('admin');
@@ -87,7 +82,6 @@ class AdminUserController extends Controller
 
     public function settings()
     {
-
         $users = Admin::with('roles')->paginate(8);
         return view('admin.users.settings', compact('users'));
     }
@@ -109,29 +103,24 @@ class AdminUserController extends Controller
         $admin = Admin::where('id', $id)->with('roles')->first();
         $validation = Validator::make($request->all(), [
             'name' => 'required|max:255',
-            'email' => 'required|max:255|unique:admins,email,' . $admin->id,
+            'email' => 'required|email||max:255|unique:admins,email,' . $admin->id,
             'job_title' => 'required',
             'role' => 'required'
         ]);
-
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
         }
-
         $admin->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'job_title' => $request['job_title']
         ]);
-
         $id = $request->role;
         $role = AdminRole::where('admin_id', $admin->id)->first();
-
         $role->update([
             'role_id' => $id,
             'admin_id' => $admin->id
         ]);
-
         if ($admin && $role) {
             return redirect(route('admin.user.settings'))->with('success', 'Admin User Updated Successfully!');
         }
@@ -150,21 +139,23 @@ class AdminUserController extends Controller
 
     public function changePassword($id)
     {
-//        dd($id);
         $admin = Admin::where('id', $id)->first();
         if (!$admin) {
             return redirect()->route('admin.error')->with('error', 'Admin User not found!')->with('status_cod', 404);
         }
-        return view('admin.users.changePassword', compact('admin'));
+        return view('admin.users.changePassword', compact('admin'))->with('success', 'Password is changed Successfully');
     }
 
     public function updatePassword(Request $request, $id)
     {
-
+        $messages = [
+            'password.required' =>'Password field is required.',
+            'password_confirmation.required' => 'Confirm password field is required.',
+        ];
         $validation = Validator::make($request->all(), [
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|same:password_confirmation',
             'password_confirmation' => 'required|min:6|same:password'
-        ]);
+        ], $messages);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
         }

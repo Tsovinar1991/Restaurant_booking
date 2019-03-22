@@ -143,7 +143,7 @@
                         <label for="parent_id" class="col-lg-10 col-md-10 control-label">Category</label>
                         <div class="col-lg-10 col-md-10">
                             <select name="parent_id" id="parent_id" class="form-control">
-                                <option selected="true" value="{{0}}">No Category</option>
+                                {{--<option selected="true" value="{{0}}">No Category</option>--}}
 
                                 @foreach($parents as $k=> $p)
                                     <option value='{{$p->id}}'>{{$p->name_en}}</option>

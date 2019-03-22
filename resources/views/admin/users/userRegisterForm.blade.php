@@ -21,8 +21,15 @@
                 <div class="col-xs-6">
                     <label for="name">Name</label>
                     <div class="input-group">
-                        <input id="name" type="text" class="form-control" name="name" placeholder="Enter Name" value="{{old('name')}}" required>
-
+                        <input id="name" type="text" class="form-control" name="name" placeholder="Enter Name"
+                               value="{{old('name')}}" required>
+                    </div>
+                    <div>
+                        @if ($errors->has('name'))
+                            <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -36,6 +43,13 @@
                                placeholder="Enter Password"
                                required>
                     </div>
+                    <div>
+                        @if ($errors->has('password'))
+                            <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
                 </div>
             </div>
 
@@ -47,7 +61,13 @@
                                value="{{old('email')}}"
                                placeholder="Enter Email"
                                required>
-
+                    </div>
+                    <div>
+                        @if ($errors->has('email'))
+                            <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -61,6 +81,13 @@
                                value="{{old('job_title')}}"
                                name="job_title"
                                placeholder="Enter Job Title" required>
+                    </div>
+                    <div>
+                        @if ($errors->has('job_title'))
+                            <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('job_title') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
             </div>

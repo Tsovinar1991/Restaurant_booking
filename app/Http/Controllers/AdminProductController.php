@@ -31,7 +31,7 @@ class AdminProductController extends Controller
 //        dd($request->user());
 //        if ($request->user()->hasRole('admin')) {
 //        $request->user()->authorizeRoles(['admin', 'manager']); //give access to admin and manager
-        $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
+        $products = RestaurantMenu::sortable()->where('parent_id', '!=', 0)->orderBy('id', 'DESC')->paginate(5);
         return view('admin.product.products', compact('products'));
     }
 
@@ -229,27 +229,11 @@ class AdminProductController extends Controller
     public function storeCategory(Request $request)
     {
 
-        dd($request->hasFile('category_avatar'));
-        if ($request->hasFile('avatar')) {
-            $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
-            //Get just filename
-            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            //Get the extension
-            $extension = $request->file('avatar')->getClientOriginalExtension();
-            //Filename to store
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            //Upload Image
-            $path = $request->file('avatar')->storeAs('public/products', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noimage.jpg';
-        }
-
         $validator = Validator::make($request->all(), [
             'name_en' => 'required',
             'name_ru' => 'required',
             'name_am' => 'required',
             'restaurant_id' => 'required',
-            'avatar' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -264,7 +248,7 @@ class AdminProductController extends Controller
         $product->description_en = 'Category';
         $product->description_ru = 'Category';
         $product->description_am = 'Category';
-        $product->avatar = '/storage/products/' . $fileNameToStore;
+        $product->avatar = '/storage/products/' . 'noimage.jpg';
         $product->parent_id = 0;
         $product->restaurant_id = $request->restaurant_id;
         $product->price = 0;
@@ -273,6 +257,9 @@ class AdminProductController extends Controller
         $product->save();
         if ($product) {
             return redirect(route('admin.categories'))->with('success', "Category Created Successfully");
+        }
+        else{
+            return redirect()->back()->with('Error', "Something went wrong");
         }
     }
 

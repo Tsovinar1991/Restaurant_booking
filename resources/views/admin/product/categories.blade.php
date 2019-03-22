@@ -6,7 +6,6 @@
 
 @section('page', 'Product Categories')
 @section('content')
-
     <div class="col-lg-12 row">
         <div class="create col-lg-6">
             <form method="POST" action="{{route('admin.productCategory.store')}}">
@@ -63,27 +62,8 @@
 
                             {{--End Category Name Part--}}
 
-                            {{--Avatar Part--}}
-                            <div class="input-group mb-3 mt-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary " type="button">Avatar</button>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile03" name="category_avatar">
-                                    <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
-                                </div>
-                            </div>
-                            <div>
-                                @if ($errors->has('avatar'))
-                                    <span class="help-block text-danger">
-                                        <strong>{{ $errors->first('avatar') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            {{--EndAvatar--}}
-
                             {{--Restaurant Part--}}
-                            <div class="input-group mb-3 mt-3">
+                            <div class="input-group mb-3 mt-1">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary " type="button">Restaurant</button>
                                 </div>
@@ -160,7 +140,7 @@
                                 {{ $categories->links('vendor.pagination.simple-bootstrap-4') }}
                             @else
                                 <div class="alert text-info col-md-12 p-0" role="alert">
-                                    <p class="pl-5">No Menu yet</p>
+                                    <p class="pl-5">No Category yet</p>
                                 </div>
                             @endif
                         </div>
@@ -169,7 +149,4 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection

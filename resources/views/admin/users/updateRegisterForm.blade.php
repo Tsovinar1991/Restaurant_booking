@@ -28,6 +28,13 @@
                                placeholder="Enter Name"
                                required>
                     </div>
+                    <div>
+                        @if ($errors->has('name'))
+                            <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
                 </div>
             </div>
             {{--<div class="form-group">--}}
@@ -50,6 +57,13 @@
                                required>
 
                     </div>
+                    <div>
+                        @if ($errors->has('email'))
+                            <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
                 </div>
             </div>
 
@@ -61,6 +75,13 @@
                         <input id="job_title" value="{{$adminUser->job_title}}" type="text" class="form-control"
                                name="job_title"
                                placeholder="Enter Job Title" required>
+                    </div>
+                    <div>
+                        @if ($errors->has('job_title'))
+                            <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('job_title') }}</strong>
+                                    </span>
+                        @endif
                     </div>
                 </div>
             </div>
