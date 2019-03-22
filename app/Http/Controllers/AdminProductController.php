@@ -221,12 +221,13 @@ class AdminProductController extends Controller
 
     public function categories()
     {
+        $restaurants = Restaurant::select('id', 'name')->get();
         $categories = RestaurantMenu::select('id', 'name_en as name')->where('parent_id', 0)->paginate(6);
-        return view('admin.product.categories', compact('categories'));
-
+        return view('admin.product.categories', compact(['categories', 'restaurants']));
     }
 
-    public function storeCategory(Request $request){
+    public function storeCategory(Request $request)
+    {
         if ($request->hasFile('avatar')) {
             $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
             //Get just filename
@@ -245,15 +246,8 @@ class AdminProductController extends Controller
             'name_en' => 'required',
             'name_ru' => 'required',
             'name_am' => 'required',
-            'description_en' => 'required',
-            'description_ru' => 'required',
-            'description_am' => 'required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'parent_id' => 'required|numeric',
-            'restaurant_id' => 'required|numeric',
-            'price' => 'required|numeric',
-            'weight' => 'required'
-
+            'restaurant_id' => 'required',
+            'avatar' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -265,19 +259,18 @@ class AdminProductController extends Controller
         $product->name_en = $request->name_en;
         $product->name_ru = $request->name_ru;
         $product->name_am = $request->name_am;
-        $product->description_en = $request->description_en;
-        $product->description_ru = $request->description_ru;
-        $product->description_am = $request->description_am;
+        $product->description_en = 'Category';
+        $product->description_ru = 'Category';
+        $product->description_am = 'Category';
         $product->avatar = '/storage/products/' . $fileNameToStore;
-        $product->parent_id = $request->parent_id;
+        $product->parent_id = 0;
         $product->restaurant_id = $request->restaurant_id;
-        $product->price = $request->price;
-        $product->weight = $request->weight;
-        $product->status = $request->status;
+        $product->price = 0;
+        $product->weight = 0;
         $product->created_by = $id;
         $product->save();
         if ($product) {
-            return redirect(route('admin.products'))->with('success', "Product Created Successfully");
+            return redirect(route('admin.categories'))->with('success', "Category Created Successfully");
         }
     }
 

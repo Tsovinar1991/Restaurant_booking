@@ -9,7 +9,7 @@
 
     <div class="col-lg-12 row">
         <div class="create col-lg-6">
-            <form method="POST" action="">
+            <form method="POST" action="{{route('admin.productCategory.store')}}">
                 {{ csrf_field() }}
                 <div class="col-lg-12 row mt-3">
                     <div class="form-row col-lg-12 alert alert-dark pb-0 ml-3">
@@ -22,6 +22,8 @@
                                 <input name="name_en" type="text" class="form-control"
                                        placeholder="Insert Category Name" aria-describedby="inputGroupPrepend3"
                                        required>
+                            </div>
+                            <div>
                                 @if ($errors->has('name_en'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('name_en') }}</strong>
@@ -35,6 +37,8 @@
                                 <input name="name_am" type="text" class="form-control"
                                        placeholder="Insert Category Name" aria-describedby="inputGroupPrepend2"
                                        required>
+                            </div>
+                            <div>
                                 @if ($errors->has('name_am'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('name_am') }}</strong>
@@ -48,6 +52,8 @@
                                 <input name="name_ru" type="text" class="form-control"
                                        placeholder="Insert Category Name" aria-describedby="inputGroupPrepend2"
                                        required>
+                            </div>
+                            <div>
                                 @if ($errors->has('name_ru'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('name_ru') }}</strong>
@@ -60,12 +66,14 @@
                             {{--Avatar Part--}}
                             <div class="input-group mb-3 mt-3">
                                 <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary " type="button">Button</button>
+                                    <button class="btn btn-outline-secondary " type="button">Avatar</button>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile03" name="image">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile03" name="avatar">
                                     <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
                                 </div>
+                            </div>
+                            <div>
                                 @if ($errors->has('avatar'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('avatar') }}</strong>
@@ -73,6 +81,27 @@
                                 @endif
                             </div>
                             {{--EndAvatar--}}
+
+                            {{--Restaurant Part--}}
+                            <div class="input-group mb-3 mt-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary " type="button">Restaurant</button>
+                                </div>
+                                <div class="custom-file">
+                                    <select name="restaurant_id" id="restaurant_id" class="form-control">
+                                        {{--<option selected="true" disabled="disabled">Choose Restaurant</option>--}}
+                                        @foreach($restaurants as $k=>$r)
+                                            <option value="{{$r->id}}">{{$r->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>   @if ($errors->has('name_ru'))
+                                        <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('name_ru') }}</strong>
+                                    </span>
+                                    @endif</div>
+                            </div>
+                            {{--End Restaurant Part --}}
                             <button type="submit" class="btn btn-success ml-2 btn-sm" href="">Add Category</button>
                         </div>
                     </div>

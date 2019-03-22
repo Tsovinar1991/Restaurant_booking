@@ -175,7 +175,6 @@
                         </div>
                     </div>
 
-
                     <div class="col-lg-12 col-md-12  col-sm-12 pl-0 pr-0 form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
                         <label for="weight" class="col-lg-12 col-md-12 col-sm-12 control-label">Weight</label>
                         <div class=" col-lg-10 col-md-10 col-sm-12">
